@@ -5,219 +5,507 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>BioLearn - Học Sinh học</title>
+    <meta name="description"
+        content="Quiz Sinh Học lớp 7, 8, 9 - học Sinh học, luyện tập và kiểm tra kiến thức.">
+
+    <title>🧬 Quiz Sinh Học 7 - 8 - 9</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- PHẦN ĐẦU TRANG -->
-    <header>
+    <!-- HEADER -->
+    <header class="header">
 
-        <h1>🧬 BioLearn</h1>
+        <div class="logo">
+            <span>🧬</span>
+            <div>
+                <strong>Quiz Sinh Học</strong>
+                <small>Học • Luyện • Tiến bộ</small>
+            </div>
+        </div>
 
-        <p>
-            Học Sinh học dễ dàng và thú vị
-        </p>
+        <nav>
+            <button onclick="showHome()">🏠 Trang chủ</button>
+            <button onclick="showAI()">🤖 Trợ lý AI</button>
+            <button onclick="scrollToQuiz()">📚 Quiz</button>
+            <button onclick="shareQuiz()">📤 Chia sẻ</button>
+        </nav>
 
     </header>
 
 
-    <!-- THANH MENU -->
-    <nav>
+    <!-- HERO -->
+    <section class="hero">
 
-        <a href="#">🏠 Trang chủ</a>
+        <div class="hero-content">
 
-        <a href="#lessons">
-            📚 Bài học
-        </a>
+            <div class="hero-badge">
+                🌿 Học Sinh học thật dễ
+            </div>
 
-        <a href="#quiz">
-            🧠 Trắc nghiệm
-        </a>
-
-    </nav>
-
-
-    <main>
-
-        <!-- GIỚI THIỆU -->
-        <section class="welcome">
-
-            <h2>
-                Chào mừng đến với BioLearn! 👋
-            </h2>
+            <h1>
+                🧬 Quiz Sinh Học
+                <span>7 • 8 • 9</span>
+            </h1>
 
             <p>
-                Cùng khám phá thế giới Sinh học
-                qua các bài học và câu hỏi trắc nghiệm.
+                Học kiến thức Sinh học qua những câu hỏi thú vị,
+                luyện tập mỗi ngày và kiểm tra sự tiến bộ của bạn.
             </p>
 
-            <button onclick="startLearning()">
-                🚀 Bắt đầu học
+            <div class="hero-buttons">
+
+                <button class="primary-btn" onclick="scrollToQuiz()">
+                    🚀 Bắt đầu học
+                </button>
+
+                <button class="secondary-btn" onclick="showAI()">
+                    🤖 Hỏi trợ lý Sinh học
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+            🧬
+            <div class="floating-cell">🔬</div>
+            <div class="floating-dna">🌱</div>
+        </div>
+
+    </section>
+
+
+    <!-- STATS -->
+    <section class="stats">
+
+        <div class="stat-card">
+            <span>📚</span>
+            <strong>3</strong>
+            <p>Khối lớp</p>
+        </div>
+
+        <div class="stat-card">
+            <span>🧠</span>
+            <strong>15+</strong>
+            <p>Câu hỏi</p>
+        </div>
+
+        <div class="stat-card">
+            <span>🤖</span>
+            <strong>AI</strong>
+            <p>Trợ lý Sinh học</p>
+        </div>
+
+        <div class="stat-card">
+            <span>📱</span>
+            <strong>100%</strong>
+            <p>Responsive</p>
+        </div>
+
+    </section>
+
+
+    <!-- AI -->
+    <section class="section ai-section" id="aiSection">
+
+        <div class="section-title">
+
+            <div class="section-icon">🤖</div>
+
+            <div>
+                <h2>Trợ lý Sinh học</h2>
+                <p>Nói hoặc nhập câu hỏi để tìm hiểu Sinh học</p>
+            </div>
+
+        </div>
+
+
+        <div class="ai-container">
+
+            <div class="ai-top">
+
+                <div class="ai-avatar">
+                    🤖
+                </div>
+
+                <div>
+                    <strong>Trợ lý Sinh học</strong>
+                    <span>🟢 Sẵn sàng hỗ trợ</span>
+                </div>
+
+            </div>
+
+
+            <div class="chat-box" id="chatBox">
+
+                <div class="chat-message ai-message">
+
+                    <div class="message-avatar">
+                        🤖
+                    </div>
+
+                    <div class="bubble">
+                        Chào bạn! 👋<br><br>
+                        Mình có thể giúp bạn tìm hiểu các kiến thức
+                        Sinh học. Bạn có thể <b>nói bằng micro</b>
+                        hoặc nhập câu hỏi bên dưới nhé! 🌿
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- VOICE -->
+            <div class="voice-panel">
+
+                <button
+                    class="mic-button"
+                    id="micButton"
+                    onclick="startListening()">
+
+                    🎤
+                </button>
+
+                <div>
+
+                    <strong>Nhấn micro để nói</strong>
+
+                    <span id="voiceStatus">
+                        Bạn có thể hỏi bằng tiếng Việt
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- INPUT -->
+            <div class="chat-input">
+
+                <input
+                    type="text"
+                    id="userInput"
+                    placeholder="Ví dụ: ADN là gì?"
+                    onkeydown="handleEnter(event)">
+
+                <button onclick="sendText()">
+                    ➤
+                </button>
+
+            </div>
+
+
+            <!-- QUICK QUESTIONS -->
+            <div class="quick-questions">
+
+                <span>💡 Câu hỏi nhanh:</span>
+
+                <button onclick="quickAsk('ADN là gì?')">
+                    ADN là gì?
+                </button>
+
+                <button onclick="quickAsk('Gen là gì?')">
+                    Gen là gì?
+                </button>
+
+                <button onclick="quickAsk('Quang hợp là gì?')">
+                    Quang hợp
+                </button>
+
+                <button onclick="quickAsk('Nguyên phân là gì?')">
+                    Nguyên phân
+                </button>
+
+                <button onclick="quickAsk('Hệ tuần hoàn là gì?')">
+                    Tuần hoàn
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUIZ -->
+    <section class="section quiz-section" id="quizSection">
+
+        <div class="section-title">
+
+            <div class="section-icon">📚</div>
+
+            <div>
+                <h2>Quiz Sinh Học</h2>
+                <p>Chọn lớp và bắt đầu luyện tập</p>
+            </div>
+
+        </div>
+
+
+        <!-- CLASS -->
+        <div id="classSelection">
+
+            <h3 class="sub-title">
+                🎓 Chọn lớp
+            </h3>
+
+            <div class="class-grid">
+
+                <button
+                    class="class-card"
+                    onclick="selectClass(7)">
+
+                    <span>🌱</span>
+                    <strong>Sinh học 7</strong>
+                    <small>Kiến thức lớp 7</small>
+
+                </button>
+
+
+                <button
+                    class="class-card"
+                    onclick="selectClass(8)">
+
+                    <span>🫀</span>
+                    <strong>Sinh học 8</strong>
+                    <small>Kiến thức lớp 8</small>
+
+                </button>
+
+
+                <button
+                    class="class-card"
+                    onclick="selectClass(9)">
+
+                    <span>🧬</span>
+                    <strong>Sinh học 9</strong>
+                    <small>Kiến thức lớp 9</small>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- TOPICS -->
+        <div
+            id="topicSelection"
+            class="hidden">
+
+            <button
+                class="back-btn"
+                onclick="backToClasses()">
+
+                ← Chọn lớp khác
+
             </button>
 
-        </section>
+            <h3
+                class="sub-title"
+                id="topicTitle">
 
+                🔬 Chọn chủ đề
 
-        <!-- BÀI HỌC -->
-        <section id="lessons">
+            </h3>
 
-            <h2>📚 Bài học</h2>
-
-            <div class="lessons">
-
-
-                <div class="lesson">
-
-                    <h3>
-                        🔬 Tế bào
-                    </h3>
-
-                    <p>
-                        Tìm hiểu về đơn vị cơ bản
-                        của sự sống.
-                    </p>
-
-                </div>
-
-
-                <div class="lesson">
-
-                    <h3>
-                        🧬 ADN và Gen
-                    </h3>
-
-                    <p>
-                        Khám phá vật chất di truyền
-                        và gen.
-                    </p>
-
-                </div>
-
-
-                <div class="lesson">
-
-                    <h3>
-                        🫀 Cơ thể người
-                    </h3>
-
-                    <p>
-                        Tìm hiểu các cơ quan
-                        và hệ cơ quan.
-                    </p>
-
-                </div>
-
-
-            </div>
-
-        </section>
-
-
-        <!-- QUIZ -->
-        <section id="quiz">
-
-            <h2>
-                🧠 BioLearn Quiz
-            </h2>
-
-
-            <div id="quiz-box">
-
-
-                <!-- THÔNG TIN QUIZ -->
-                <div class="quiz-top">
-
-                    <span id="question-number">
-                        Câu 1/10
-                    </span>
-
-                    <span>
-                        ⏱️
-                        <span id="timer">
-                            30
-                        </span>
-                        s
-                    </span>
-
-                </div>
-
-
-                <!-- THANH TIẾN TRÌNH -->
-                <div class="progress-container">
-
-                    <div id="progress-bar"></div>
-
-                </div>
-
-
-                <!-- CÂU HỎI -->
-                <h3 id="question">
-
-                    Nhấn "Bắt đầu"
-                    để làm bài.
-
-                </h3>
-
-
-                <!-- ĐÁP ÁN -->
-                <div id="answers"></div>
-
-
-                <!-- NÚT BẮT ĐẦU -->
-                <button
-                    id="start-button"
-                    onclick="startQuiz()">
-
-                    🚀 Bắt đầu
-
-                </button>
-
-
-                <!-- NÚT TIẾP THEO -->
-                <button
-                    id="next-button"
-                    onclick="nextQuestion()"
-                    style="display: none;">
-
-                    ➡️ Câu tiếp theo
-
-                </button>
-
-
-            </div>
-
-
-            <!-- KẾT QUẢ -->
             <div
-                id="result"
-                style="display: none;">
+                class="topic-grid"
+                id="topicGrid">
+            </div>
+
+        </div>
+
+
+        <!-- QUIZ AREA -->
+        <div
+            id="quizArea"
+            class="hidden">
+
+            <div class="quiz-header">
+
+                <button
+                    class="back-btn"
+                    onclick="backToTopics()">
+
+                    ← Chọn bài khác
+
+                </button>
+
+                <div class="quiz-title">
+
+                    <span id="currentTopic">
+                        Quiz
+                    </span>
+
+                    <div
+                        class="timer"
+                        id="timer">
+
+                        ⏱️ 00:00
+
+                    </div>
+
+                </div>
 
             </div>
 
 
-        </section>
+            <!-- PROGRESS -->
+            <div class="progress-info">
 
-    </main>
+                <span id="questionNumber">
+                    Câu 1/5
+                </span>
+
+                <span id="scoreText">
+                    Điểm: 0
+                </span>
+
+            </div>
 
 
-    <!-- CHÂN TRANG -->
+            <div class="progress-bar">
+
+                <div
+                    class="progress"
+                    id="progress">
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTION -->
+            <div class="question-card">
+
+                <div
+                    class="question-number"
+                    id="questionBadge">
+
+                    Câu 1
+
+                </div>
+
+                <h2 id="questionText">
+                    Câu hỏi
+                </h2>
+
+                <div
+                    class="answers"
+                    id="answers">
+
+                </div>
+
+
+                <div
+                    class="explanation hidden"
+                    id="explanation">
+
+                </div>
+
+
+                <button
+                    class="next-btn hidden"
+                    id="nextButton"
+                    onclick="nextQuestion()">
+
+                    Câu tiếp theo →
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESULT -->
+        <div
+            id="resultArea"
+            class="hidden">
+
+            <div class="result-card">
+
+                <div class="trophy">
+                    🏆
+                </div>
+
+                <h2>
+                    Hoàn thành!
+                </h2>
+
+                <p>
+                    Kết quả của bạn
+                </p>
+
+                <div
+                    class="result-score"
+                    id="resultScore">
+
+                    0/5
+
+                </div>
+
+                <div
+                    id="resultMessage"
+                    class="result-message">
+
+                </div>
+
+
+                <div class="result-buttons">
+
+                    <button
+                        class="primary-btn"
+                        onclick="restartQuiz()">
+
+                        🔄 Làm lại
+
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        onclick="backToClasses()">
+
+                        📚 Chọn bài khác
+
+                    </button>
+
+                    <button
+                        class="share-btn"
+                        onclick="shareQuiz()">
+
+                        📤 Chia sẻ
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
     <footer>
 
-        <p>
-            © 2026 BioLearn
-        </p>
+        <div>
+            🧬 <strong>Quiz Sinh Học</strong>
+        </div>
 
         <p>
-            🧬 Học Sinh học mỗi ngày
+            Học Sinh học mỗi ngày • Tiến bộ từng bước 🌿
         </p>
 
     </footer>
 
 
-    <!-- JAVASCRIPT -->
     <script src="script.js"></script>
 
 </body>
