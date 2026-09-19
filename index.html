@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BioLearn - Học Sinh học</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- PHẦN ĐẦU TRANG -->
+    <header>
+
+        <h1>🧬 BioLearn</h1>
+
+        <p>
+            Học Sinh học dễ dàng và thú vị
+        </p>
+
+    </header>
+
+
+    <!-- THANH MENU -->
+    <nav>
+
+        <a href="#">🏠 Trang chủ</a>
+
+        <a href="#lessons">
+            📚 Bài học
+        </a>
+
+        <a href="#quiz">
+            🧠 Trắc nghiệm
+        </a>
+
+    </nav>
+
+
+    <main>
+
+        <!-- GIỚI THIỆU -->
+        <section class="welcome">
+
+            <h2>
+                Chào mừng đến với BioLearn! 👋
+            </h2>
+
+            <p>
+                Cùng khám phá thế giới Sinh học
+                qua các bài học và câu hỏi trắc nghiệm.
+            </p>
+
+            <button onclick="startLearning()">
+                🚀 Bắt đầu học
+            </button>
+
+        </section>
+
+
+        <!-- BÀI HỌC -->
+        <section id="lessons">
+
+            <h2>📚 Bài học</h2>
+
+            <div class="lessons">
+
+
+                <div class="lesson">
+
+                    <h3>
+                        🔬 Tế bào
+                    </h3>
+
+                    <p>
+                        Tìm hiểu về đơn vị cơ bản
+                        của sự sống.
+                    </p>
+
+                </div>
+
+
+                <div class="lesson">
+
+                    <h3>
+                        🧬 ADN và Gen
+                    </h3>
+
+                    <p>
+                        Khám phá vật chất di truyền
+                        và gen.
+                    </p>
+
+                </div>
+
+
+                <div class="lesson">
+
+                    <h3>
+                        🫀 Cơ thể người
+                    </h3>
+
+                    <p>
+                        Tìm hiểu các cơ quan
+                        và hệ cơ quan.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- QUIZ -->
+        <section id="quiz">
+
+            <h2>
+                🧠 BioLearn Quiz
+            </h2>
+
+
+            <div id="quiz-box">
+
+
+                <!-- THÔNG TIN QUIZ -->
+                <div class="quiz-top">
+
+                    <span id="question-number">
+                        Câu 1/10
+                    </span>
+
+                    <span>
+                        ⏱️
+                        <span id="timer">
+                            30
+                        </span>
+                        s
+                    </span>
+
+                </div>
+
+
+                <!-- THANH TIẾN TRÌNH -->
+                <div class="progress-container">
+
+                    <div id="progress-bar"></div>
+
+                </div>
+
+
+                <!-- CÂU HỎI -->
+                <h3 id="question">
+
+                    Nhấn "Bắt đầu"
+                    để làm bài.
+
+                </h3>
+
+
+                <!-- ĐÁP ÁN -->
+                <div id="answers"></div>
+
+
+                <!-- NÚT BẮT ĐẦU -->
+                <button
+                    id="start-button"
+                    onclick="startQuiz()">
+
+                    🚀 Bắt đầu
+
+                </button>
+
+
+                <!-- NÚT TIẾP THEO -->
+                <button
+                    id="next-button"
+                    onclick="nextQuestion()"
+                    style="display: none;">
+
+                    ➡️ Câu tiếp theo
+
+                </button>
+
+
+            </div>
+
+
+            <!-- KẾT QUẢ -->
+            <div
+                id="result"
+                style="display: none;">
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- CHÂN TRANG -->
+    <footer>
+
+        <p>
+            © 2026 BioLearn
+        </p>
+
+        <p>
+            🧬 Học Sinh học mỗi ngày
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
