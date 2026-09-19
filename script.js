@@ -1,1063 +1,1347 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4fbf6;
-    color: #173b2b;
-    line-height: 1.6;
-}
-
-button,
-input {
-    font-family: inherit;
-}
-
-button {
-    cursor: pointer;
-}
+/* =========================================
+   QUIZ SINH HỌC
+   ========================================= */
 
 
-/* HEADER */
+/* =========================
+   DỮ LIỆU QUIZ
+   ========================= */
 
-.header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+const quizData = {
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    7: {
 
-    padding: 14px 7%;
+        "Tế bào": [
+            {
+                question: "Đơn vị cấu tạo cơ bản của cơ thể sống là gì?",
+                answers: [
+                    "Tế bào",
+                    "Mô",
+                    "Cơ quan",
+                    "Hệ cơ quan"
+                ],
+                correct: 0,
+                explanation: "Tế bào là đơn vị cấu tạo và chức năng cơ bản của cơ thể sống."
+            },
 
-    background: rgba(255,255,255,0.96);
-    backdrop-filter: blur(12px);
+            {
+                question: "Bộ phận nào điều khiển các hoạt động của tế bào nhân thực?",
+                answers: [
+                    "Màng tế bào",
+                    "Nhân",
+                    "Ribosome",
+                    "Không bào"
+                ],
+                correct: 1,
+                explanation: "Nhân chứa vật chất di truyền và điều khiển nhiều hoạt động của tế bào."
+            },
 
-    border-bottom: 1px solid #dceee2;
+            {
+                question: "Tế bào thực vật có bào quan nào mà tế bào động vật thường không có?",
+                answers: [
+                    "Nhân",
+                    "Ti thể",
+                    "Lục lạp",
+                    "Ribosome"
+                ],
+                correct: 2,
+                explanation: "Lục lạp chứa diệp lục và là nơi diễn ra quá trình quang hợp."
+            },
 
-    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
-}
+            {
+                question: "Màng tế bào có vai trò chính nào?",
+                answers: [
+                    "Điều khiển trao đổi chất với môi trường",
+                    "Tạo ADN",
+                    "Tạo xương",
+                    "Tiêu hóa thức ăn"
+                ],
+                correct: 0,
+                explanation: "Màng tế bào giúp kiểm soát sự trao đổi chất giữa tế bào và môi trường."
+            },
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo > span {
-    font-size: 34px;
-}
-
-.logo strong {
-    display: block;
-    color: #15803d;
-    font-size: 19px;
-}
-
-.logo small {
-    color: #71907d;
-    font-size: 11px;
-}
-
-.header nav {
-    display: flex;
-    gap: 8px;
-}
-
-.header nav button {
-    border: none;
-    background: transparent;
-    color: #315342;
-    padding: 9px 12px;
-    border-radius: 10px;
-    font-weight: 600;
-}
-
-.header nav button:hover {
-    background: #e9f8ed;
-    color: #15803d;
-}
-
-
-/* HERO */
-
-.hero {
-    min-height: 570px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 70px 9%;
-
-    background:
-        radial-gradient(circle at 85% 30%, #d9f7e1 0, transparent 30%),
-        linear-gradient(135deg, #ffffff, #effbf3);
-}
-
-.hero-content {
-    max-width: 650px;
-}
-
-.hero-badge {
-    display: inline-block;
-
-    background: #e4f8e9;
-    color: #16803c;
-
-    padding: 8px 16px;
-    border-radius: 999px;
-
-    font-weight: bold;
-    margin-bottom: 18px;
-}
-
-.hero h1 {
-    font-size: clamp(42px, 6vw, 72px);
-    line-height: 1.05;
-    margin-bottom: 22px;
-}
-
-.hero h1 span {
-    display: block;
-    color: #20a653;
-}
-
-.hero p {
-    color: #587264;
-    font-size: 18px;
-    max-width: 600px;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 12px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-}
-
-.primary-btn,
-.secondary-btn,
-.share-btn {
-    border: none;
-    border-radius: 14px;
-
-    padding: 13px 20px;
-
-    font-weight: bold;
-    transition: 0.25s;
-}
-
-.primary-btn {
-    background: #16a34a;
-    color: white;
-
-    box-shadow: 0 8px 22px rgba(22,163,74,0.22);
-}
-
-.primary-btn:hover {
-    transform: translateY(-2px);
-    background: #12833c;
-}
-
-.secondary-btn {
-    background: white;
-    color: #15803d;
-    border: 1px solid #cfe7d7;
-}
-
-.secondary-btn:hover {
-    transform: translateY(-2px);
-    background: #effaf2;
-}
-
-.share-btn {
-    background: #eaf7ee;
-    color: #15803d;
-}
-
-.share-btn:hover {
-    transform: translateY(-2px);
-    background: #d9f1df;
-}
+            {
+                question: "Nhiều tế bào có cấu tạo và chức năng giống nhau tập hợp thành?",
+                answers: [
+                    "Cơ quan",
+                    "Mô",
+                    "Hệ cơ quan",
+                    "Cơ thể"
+                ],
+                correct: 1,
+                explanation: "Các tế bào giống nhau về cấu tạo và chức năng thường tạo thành mô."
+            }
+        ],
 
 
-/* HERO IMAGE */
+        "Thực vật": [
+            {
+                question: "Cơ quan chủ yếu thực hiện quang hợp ở cây là?",
+                answers: [
+                    "Rễ",
+                    "Thân",
+                    "Lá",
+                    "Hoa"
+                ],
+                correct: 2,
+                explanation: "Lá chứa nhiều lục lạp nên là cơ quan quang hợp chủ yếu."
+            },
 
-.hero-image {
-    position: relative;
+            {
+                question: "Rễ cây có chức năng chủ yếu nào?",
+                answers: [
+                    "Hấp thụ nước và muối khoáng",
+                    "Tạo hạt",
+                    "Quang hợp",
+                    "Thụ phấn"
+                ],
+                correct: 0,
+                explanation: "Rễ giúp cây hút nước và muối khoáng từ đất."
+            },
 
-    width: 310px;
-    height: 310px;
+            {
+                question: "Quang hợp sử dụng khí nào từ môi trường?",
+                answers: [
+                    "Oxygen",
+                    "Nitrogen",
+                    "Carbon dioxide",
+                    "Hydrogen"
+                ],
+                correct: 2,
+                explanation: "Cây sử dụng carbon dioxide (CO₂), nước và năng lượng ánh sáng để quang hợp."
+            },
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            {
+                question: "Sản phẩm quan trọng của quang hợp là?",
+                answers: [
+                    "Glucose và oxygen",
+                    "Protein và nitrogen",
+                    "Nước và nitrogen",
+                    "Carbon dioxide"
+                ],
+                correct: 0,
+                explanation: "Quang hợp tạo chất hữu cơ như glucose và giải phóng oxygen."
+            },
 
-    border-radius: 50%;
+            {
+                question: "Thoát hơi nước ở cây chủ yếu diễn ra qua?",
+                answers: [
+                    "Rễ",
+                    "Khí khổng",
+                    "Hạt",
+                    "Hoa"
+                ],
+                correct: 1,
+                explanation: "Phần lớn nước thoát ra ngoài qua khí khổng trên lá."
+            }
+        ]
 
-    background: #dff7e7;
+    },
 
-    font-size: 145px;
 
-    animation: float 4s ease-in-out infinite;
-}
+    8: {
 
-.floating-cell,
-.floating-dna {
-    position: absolute;
-    font-size: 45px;
+        "Cơ thể người": [
+            {
+                question: "Bộ phận nào bơm máu đi khắp cơ thể?",
+                answers: [
+                    "Phổi",
+                    "Tim",
+                    "Gan",
+                    "Thận"
+                ],
+                correct: 1,
+                explanation: "Tim co bóp để đẩy máu lưu thông trong hệ tuần hoàn."
+            },
 
-    background: white;
-    border-radius: 50%;
+            {
+                question: "Cơ quan trao đổi khí chủ yếu ở người là?",
+                answers: [
+                    "Tim",
+                    "Phổi",
+                    "Dạ dày",
+                    "Gan"
+                ],
+                correct: 1,
+                explanation: "Phổi là cơ quan chính thực hiện trao đổi khí ở người."
+            },
 
-    width: 75px;
-    height: 75px;
+            {
+                question: "Xương và cơ phối hợp với nhau chủ yếu giúp?",
+                answers: [
+                    "Vận động",
+                    "Tiêu hóa",
+                    "Hô hấp tế bào",
+                    "Lọc máu"
+                ],
+                correct: 0,
+                explanation: "Hệ vận động gồm xương và cơ, giúp cơ thể thực hiện các hoạt động vận động."
+            },
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            {
+                question: "Máu thuộc loại mô nào?",
+                answers: [
+                    "Mô biểu bì",
+                    "Mô cơ",
+                    "Mô liên kết",
+                    "Mô thần kinh"
+                ],
+                correct: 2,
+                explanation: "Máu được xếp vào mô liên kết vì các tế bào nằm trong chất nền lỏng là huyết tương."
+            },
 
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-}
+            {
+                question: "Hệ thần kinh có vai trò quan trọng nào?",
+                answers: [
+                    "Điều khiển và phối hợp hoạt động cơ thể",
+                    "Tạo xương",
+                    "Tiêu hóa thức ăn",
+                    "Hấp thụ nước"
+                ],
+                correct: 0,
+                explanation: "Hệ thần kinh tiếp nhận thông tin và điều khiển, phối hợp nhiều hoạt động của cơ thể."
+            }
+        ]
 
-.floating-cell {
-    top: 20px;
-    right: 5px;
-}
+    },
 
-.floating-dna {
-    bottom: 20px;
-    left: 5px;
-}
 
-@keyframes float {
+    9: {
 
-    0%,100% {
-        transform: translateY(0);
+        "Di truyền": [
+            {
+                question: "ADN là viết tắt của?",
+                answers: [
+                    "Axit đêoxiribônuclêic",
+                    "Axit amin",
+                    "Axit ribônuclêic",
+                    "Protein"
+                ],
+                correct: 0,
+                explanation: "ADN là axit đêoxiribônuclêic, phân tử mang thông tin di truyền."
+            },
+
+            {
+                question: "Trong ADN, A liên kết bổ sung với?",
+                answers: [
+                    "G",
+                    "C",
+                    "T",
+                    "U"
+                ],
+                correct: 2,
+                explanation: "Trong ADN: A liên kết với T, G liên kết với C."
+            },
+
+            {
+                question: "Gen là một đoạn của?",
+                answers: [
+                    "Protein",
+                    "ADN",
+                    "Lipid",
+                    "Tinh bột"
+                ],
+                correct: 1,
+                explanation: "Gen là một đoạn của phân tử ADN mang thông tin quy định sản phẩm nhất định."
+            },
+
+            {
+                question: "ARN khác ADN ở loại base nào?",
+                answers: [
+                    "A",
+                    "G",
+                    "C",
+                    "U"
+                ],
+                correct: 3,
+                explanation: "ARN sử dụng U (uracil) thay cho T (thymine) của ADN."
+            },
+
+            {
+                question: "Quá trình tạo ARN dựa trên khuôn ADN được gọi là?",
+                answers: [
+                    "Dịch mã",
+                    "Phiên mã",
+                    "Nguyên phân",
+                    "Thụ tinh"
+                ],
+                correct: 1,
+                explanation: "Phiên mã là quá trình tổng hợp ARN dựa trên một mạch khuôn của ADN."
+            }
+        ]
+
     }
 
-    50% {
-        transform: translateY(-10px);
+};
+
+
+/* =========================
+   BIẾN QUIZ
+   ========================= */
+
+let currentClass = null;
+let currentTopic = null;
+
+let currentQuestion = 0;
+let score = 0;
+
+let quizQuestions = [];
+
+let timerInterval = null;
+let timeLeft = 0;
+
+
+/* =========================
+   CHỌN LỚP
+   ========================= */
+
+function selectClass(classNumber) {
+
+    currentClass = classNumber;
+
+    document
+        .getElementById("classSelection")
+        .classList.add("hidden");
+
+    document
+        .getElementById("topicSelection")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("topicTitle")
+        .textContent =
+        "🔬 Sinh học " + classNumber + " – Chọn chủ đề";
+
+    const grid =
+        document.getElementById("topicGrid");
+
+    grid.innerHTML = "";
+
+    const topics =
+        quizData[classNumber];
+
+    Object.keys(topics).forEach((topic, index) => {
+
+        const icons = [
+            "🧬",
+            "🌱",
+            "🫀",
+            "🔬",
+            "🌿",
+            "🧠"
+        ];
+
+        const button =
+            document.createElement("button");
+
+        button.className = "topic-card";
+
+        button.innerHTML = `
+            <span class="topic-icon">
+                ${icons[index % icons.length]}
+            </span>
+
+            <strong>${topic}</strong>
+
+            <small>
+                ${topics[topic].length} câu hỏi
+            </small>
+        `;
+
+        button.onclick = () =>
+            startQuiz(topic);
+
+        grid.appendChild(button);
+
+    });
+
+    document
+        .getElementById("quizSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+/* =========================
+   BẮT ĐẦU QUIZ
+   ========================= */
+
+function startQuiz(topic) {
+
+    currentTopic = topic;
+
+    quizQuestions =
+        [...quizData[currentClass][topic]];
+
+    currentQuestion = 0;
+    score = 0;
+
+    clearInterval(timerInterval);
+
+    timeLeft = quizQuestions.length * 30;
+
+    document
+        .getElementById("topicSelection")
+        .classList.add("hidden");
+
+    document
+        .getElementById("quizArea")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("resultArea")
+        .classList.add("hidden");
+
+    document
+        .getElementById("currentTopic")
+        .textContent =
+        "🧬 " + topic;
+
+    startTimer();
+
+    loadQuestion();
+}
+
+
+/* =========================
+   LOAD QUESTION
+   ========================= */
+
+function loadQuestion() {
+
+    const q =
+        quizQuestions[currentQuestion];
+
+    document
+        .getElementById("questionNumber")
+        .textContent =
+        `Câu ${currentQuestion + 1}/${quizQuestions.length}`;
+
+    document
+        .getElementById("questionBadge")
+        .textContent =
+        `Câu ${currentQuestion + 1}`;
+
+    document
+        .getElementById("questionText")
+        .textContent =
+        q.question;
+
+    document
+        .getElementById("scoreText")
+        .textContent =
+        `Điểm: ${score}`;
+
+    const progress =
+        ((currentQuestion) / quizQuestions.length) * 100;
+
+    document
+        .getElementById("progress")
+        .style.width =
+        progress + "%";
+
+
+    const answers =
+        document.getElementById("answers");
+
+    answers.innerHTML = "";
+
+
+    q.answers.forEach((answer, index) => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "answer";
+
+        button.textContent =
+            `${String.fromCharCode(65 + index)}. ${answer}`;
+
+        button.onclick = () =>
+            checkAnswer(index, button);
+
+        answers.appendChild(button);
+
+    });
+
+
+    document
+        .getElementById("explanation")
+        .classList.add("hidden");
+
+    document
+        .getElementById("nextButton")
+        .classList.add("hidden");
+
+}
+
+
+/* =========================
+   KIỂM TRA ĐÁP ÁN
+   ========================= */
+
+function checkAnswer(index, clickedButton) {
+
+    const q =
+        quizQuestions[currentQuestion];
+
+    const buttons =
+        document.querySelectorAll(".answer");
+
+
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
+
+
+    if (index === q.correct) {
+
+        clickedButton.classList.add("correct");
+
+        score++;
+
+    } else {
+
+        clickedButton.classList.add("wrong");
+
+        buttons[q.correct]
+            .classList.add("correct");
+
     }
 
+
+    document
+        .getElementById("scoreText")
+        .textContent =
+        `Điểm: ${score}`;
+
+
+    const explanation =
+        document.getElementById("explanation");
+
+    explanation.innerHTML =
+        `<strong>💡 Giải thích:</strong><br>${q.explanation}`;
+
+    explanation.classList.remove("hidden");
+
+
+    document
+        .getElementById("nextButton")
+        .classList.remove("hidden");
+
 }
 
 
-/* STATS */
+/* =========================
+   CÂU TIẾP
+   ========================= */
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 18px;
+function nextQuestion() {
 
-    padding: 30px 8%;
+    currentQuestion++;
 
-    background: white;
-}
+    if (
+        currentQuestion >=
+        quizQuestions.length
+    ) {
 
-.stat-card {
-    text-align: center;
+        finishQuiz();
 
-    padding: 24px;
-
-    border-radius: 18px;
-
-    background: #f8fcf9;
-
-    border: 1px solid #e1f0e5;
-
-    transition: 0.25s;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-}
-
-.stat-card span {
-    display: block;
-    font-size: 30px;
-}
-
-.stat-card strong {
-    display: block;
-
-    color: #16803c;
-
-    font-size: 28px;
-}
-
-.stat-card p {
-    color: #6c8274;
-}
-
-
-/* SECTION */
-
-.section {
-    padding: 75px 8%;
-    max-width: 1250px;
-    margin: auto;
-}
-
-.section-title {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-
-    margin-bottom: 30px;
-}
-
-.section-icon {
-    width: 58px;
-    height: 58px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #e2f7e8;
-
-    border-radius: 16px;
-
-    font-size: 30px;
-}
-
-.section-title h2 {
-    font-size: 30px;
-}
-
-.section-title p {
-    color: #71877a;
-}
-
-
-/* AI */
-
-.ai-container {
-    background: white;
-
-    border: 1px solid #dceee1;
-
-    border-radius: 24px;
-
-    padding: 22px;
-
-    box-shadow: 0 15px 40px rgba(30,100,55,0.07);
-}
-
-.ai-top {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    padding-bottom: 18px;
-
-    border-bottom: 1px solid #edf4ef;
-}
-
-.ai-avatar {
-    width: 48px;
-    height: 48px;
-
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #dff7e6;
-
-    font-size: 25px;
-}
-
-.ai-top strong {
-    display: block;
-}
-
-.ai-top span {
-    display: block;
-    color: #42a365;
-    font-size: 13px;
-}
-
-
-/* CHAT */
-
-.chat-box {
-    height: 300px;
-
-    overflow-y: auto;
-
-    padding: 20px 5px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.chat-message {
-    display: flex;
-    align-items: flex-start;
-    gap: 9px;
-}
-
-.message-avatar {
-    width: 35px;
-    height: 35px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #e5f7ea;
-
-    border-radius: 50%;
-
-    flex-shrink: 0;
-}
-
-.bubble {
-    max-width: 75%;
-
-    padding: 12px 15px;
-
-    border-radius: 15px;
-
-    background: #eff9f1;
-}
-
-.user-message {
-    justify-content: flex-end;
-}
-
-.user-message .bubble {
-    background: #16a34a;
-    color: white;
-}
-
-.user-message .message-avatar {
-    display: none;
-}
-
-
-/* VOICE */
-
-.voice-panel {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-
-    margin: 10px 0 15px;
-
-    padding: 14px;
-
-    border-radius: 16px;
-
-    background: #f3fbf5;
-}
-
-.mic-button {
-    width: 58px;
-    height: 58px;
-
-    border: none;
-    border-radius: 50%;
-
-    background: #16a34a;
-    color: white;
-
-    font-size: 25px;
-
-    box-shadow: 0 6px 18px rgba(22,163,74,0.25);
-}
-
-.mic-button:hover {
-    transform: scale(1.05);
-}
-
-.mic-button.listening {
-    background: #dc2626;
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-
-    0% {
-        box-shadow: 0 0 0 0 rgba(220,38,38,.4);
+        return;
     }
 
-    70% {
-        box-shadow: 0 0 0 15px rgba(220,38,38,0);
+    loadQuestion();
+}
+
+
+/* =========================
+   TIMER
+   ========================= */
+
+function startTimer() {
+
+    updateTimer();
+
+    timerInterval =
+        setInterval(() => {
+
+            timeLeft--;
+
+            updateTimer();
+
+            if (timeLeft <= 0) {
+
+                clearInterval(timerInterval);
+
+                finishQuiz();
+
+            }
+
+        }, 1000);
+
+}
+
+
+function updateTimer() {
+
+    const minutes =
+        Math.floor(timeLeft / 60);
+
+    const seconds =
+        timeLeft % 60;
+
+    document
+        .getElementById("timer")
+        .textContent =
+        `⏱️ ${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+}
+
+
+/* =========================
+   KẾT QUẢ
+   ========================= */
+
+function finishQuiz() {
+
+    clearInterval(timerInterval);
+
+    document
+        .getElementById("quizArea")
+        .classList.add("hidden");
+
+    document
+        .getElementById("resultArea")
+        .classList.remove("hidden");
+
+
+    const total =
+        quizQuestions.length;
+
+    document
+        .getElementById("resultScore")
+        .textContent =
+        `${score}/${total}`;
+
+
+    let message = "";
+
+    const percent =
+        score / total;
+
+
+    if (percent === 1) {
+
+        message =
+            "🎉 Xuất sắc! Bạn trả lời đúng tất cả!";
+
+    } else if (percent >= 0.8) {
+
+        message =
+            "🌟 Rất tốt! Bạn nắm kiến thức khá chắc.";
+
+    } else if (percent >= 0.5) {
+
+        message =
+            "👍 Khá tốt! Hãy luyện thêm một chút nhé.";
+
+    } else {
+
+        message =
+            "💪 Đừng nản! Làm lại một lần nữa và bạn sẽ tiến bộ.";
+
     }
 
-    100% {
-        box-shadow: 0 0 0 0 rgba(220,38,38,0);
+
+    document
+        .getElementById("resultMessage")
+        .textContent =
+        message;
+
+
+    document
+        .getElementById("resultArea")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* =========================
+   LÀM LẠI
+   ========================= */
+
+function restartQuiz() {
+
+    startQuiz(currentTopic);
+
+}
+
+
+/* =========================
+   QUAY LẠI
+   ========================= */
+
+function backToClasses() {
+
+    clearInterval(timerInterval);
+
+    document
+        .getElementById("quizArea")
+        .classList.add("hidden");
+
+    document
+        .getElementById("topicSelection")
+        .classList.add("hidden");
+
+    document
+        .getElementById("resultArea")
+        .classList.add("hidden");
+
+    document
+        .getElementById("classSelection")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("quizSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+function backToTopics() {
+
+    clearInterval(timerInterval);
+
+    document
+        .getElementById("quizArea")
+        .classList.add("hidden");
+
+    document
+        .getElementById("resultArea")
+        .classList.add("hidden");
+
+    document
+        .getElementById("topicSelection")
+        .classList.remove("hidden");
+
+}
+
+
+/* =========================
+   ĐIỀU HƯỚNG
+   ========================= */
+
+function scrollToQuiz() {
+
+    document
+        .getElementById("quizSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+function showAI() {
+
+    document
+        .getElementById("aiSection")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+function showHome() {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* ==================================================
+   CHIA SẺ
+   ================================================== */
+
+async function shareQuiz() {
+
+    const url =
+        window.location.href;
+
+    const text =
+        "🧬 Mình vừa làm Quiz Sinh Học! Bạn thử làm xem nhé 🌿";
+
+
+    /*
+       📱 Nếu trình duyệt hỗ trợ Web Share
+       thì sử dụng bảng chia sẻ của thiết bị.
+    */
+
+    if (navigator.share) {
+
+        try {
+
+            await navigator.share({
+
+                title: "Quiz Sinh Học",
+
+                text: text,
+
+                url: url
+
+            });
+
+            return;
+
+        } catch (error) {
+
+            /*
+               Người dùng bấm Hủy thì không cần
+               hiện lỗi.
+            */
+
+            console.log(
+                "Share cancelled:",
+                error
+            );
+
+        }
+
     }
 
-}
 
-.voice-panel strong {
-    display: block;
-}
+    /*
+       💻 Edge trên máy tính:
+       sao chép link.
+    */
 
-.voice-panel span {
-    color: #789080;
-    font-size: 13px;
-}
+    try {
 
+        await navigator.clipboard.writeText(url);
 
-/* INPUT */
+        alert(
+            "📋 Đã sao chép link Quiz Sinh Học!\n\n" +
+            "Bạn có thể dán link vào Messenger, Zalo, Facebook hoặc gửi cho bạn bè."
+        );
 
-.chat-input {
-    display: flex;
-    gap: 10px;
-}
+    } catch (error) {
 
-.chat-input input {
-    flex: 1;
+        /*
+           Cách dự phòng nếu clipboard bị chặn.
+        */
 
-    border: 1px solid #cfe3d5;
+        const input =
+            document.createElement("input");
 
-    border-radius: 13px;
+        input.value = url;
 
-    padding: 14px;
+        document.body.appendChild(input);
 
-    outline: none;
+        input.select();
 
-    font-size: 15px;
-}
+        document.execCommand("copy");
 
-.chat-input input:focus {
-    border-color: #38a85c;
-}
+        document.body.removeChild(input);
 
-.chat-input button {
-    width: 52px;
+        alert(
+            "📋 Đã sao chép link website!"
+        );
 
-    border: none;
-
-    border-radius: 13px;
-
-    background: #16a34a;
-    color: white;
-
-    font-size: 20px;
-}
-
-
-/* QUICK */
-
-.quick-questions {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-
-    margin-top: 14px;
-}
-
-.quick-questions span {
-    font-size: 13px;
-    color: #6b8173;
-}
-
-.quick-questions button {
-    border: 1px solid #d7e9dc;
-
-    background: white;
-
-    padding: 7px 10px;
-
-    border-radius: 999px;
-
-    color: #287244;
-
-    font-size: 13px;
-}
-
-.quick-questions button:hover {
-    background: #eaf7ee;
-}
-
-
-/* QUIZ */
-
-.quiz-section {
-    background: #f4fbf6;
-}
-
-.sub-title {
-    margin: 20px 0 15px;
-    font-size: 21px;
-}
-
-.class-grid {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 18px;
-}
-
-.class-card {
-    border: 1px solid #d7eadc;
-
-    background: white;
-
-    border-radius: 22px;
-
-    padding: 30px 20px;
-
-    text-align: center;
-
-    transition: 0.25s;
-
-    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
-}
-
-.class-card:hover {
-    transform: translateY(-7px);
-    border-color: #68c583;
-    box-shadow: 0 15px 30px rgba(30,100,55,0.1);
-}
-
-.class-card span {
-    display: block;
-    font-size: 48px;
-}
-
-.class-card strong {
-    display: block;
-    color: #15803d;
-    font-size: 20px;
-}
-
-.class-card small {
-    color: #789080;
-}
-
-
-/* TOPICS */
-
-.topic-grid {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 16px;
-}
-
-.topic-card {
-    border: 1px solid #d8eadc;
-
-    background: white;
-
-    border-radius: 18px;
-
-    padding: 20px;
-
-    text-align: left;
-
-    transition: .25s;
-}
-
-.topic-card:hover {
-    transform: translateY(-5px);
-    border-color: #5dbd78;
-    background: #fafffb;
-}
-
-.topic-card .topic-icon {
-    font-size: 35px;
-    display: block;
-    margin-bottom: 8px;
-}
-
-.topic-card strong {
-    display: block;
-    color: #176d38;
-}
-
-.topic-card small {
-    color: #718477;
-}
-
-
-/* BACK */
-
-.back-btn {
-    border: none;
-    background: transparent;
-
-    color: #238044;
-
-    font-weight: bold;
-
-    margin-bottom: 15px;
-}
-
-
-/* QUIZ HEADER */
-
-.quiz-header {
-    margin-top: 25px;
-}
-
-.quiz-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    margin-bottom: 15px;
-}
-
-.quiz-title > span {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.timer {
-    background: #fff4d7;
-    color: #a66b00;
-
-    padding: 9px 15px;
-
-    border-radius: 12px;
-
-    font-weight: bold;
-}
-
-
-/* PROGRESS */
-
-.progress-info {
-    display: flex;
-    justify-content: space-between;
-
-    color: #668071;
-
-    font-size: 14px;
-
-    margin-bottom: 7px;
-}
-
-.progress-bar {
-    height: 9px;
-
-    background: #dfeee3;
-
-    border-radius: 99px;
-
-    overflow: hidden;
-
-    margin-bottom: 25px;
-}
-
-.progress {
-    height: 100%;
-    width: 0%;
-
-    background: #16a34a;
-
-    transition: width .3s;
-}
-
-
-/* QUESTION */
-
-.question-card {
-    background: white;
-
-    border: 1px solid #dcece0;
-
-    border-radius: 24px;
-
-    padding: 30px;
-
-    box-shadow: 0 12px 35px rgba(30,100,55,0.06);
-}
-
-.question-number {
-    display: inline-block;
-
-    padding: 6px 12px;
-
-    border-radius: 999px;
-
-    background: #e5f7ea;
-
-    color: #16803c;
-
-    font-weight: bold;
-
-    margin-bottom: 15px;
-}
-
-.question-card h2 {
-    margin-bottom: 22px;
-}
-
-.answers {
-    display: grid;
-    gap: 12px;
-}
-
-.answer {
-    width: 100%;
-
-    padding: 15px;
-
-    text-align: left;
-
-    border-radius: 13px;
-
-    border: 2px solid #e0ebe3;
-
-    background: white;
-
-    transition: .2s;
-
-    font-size: 15px;
-}
-
-.answer:hover {
-    border-color: #55b974;
-    background: #f4fcf6;
-}
-
-.answer.correct {
-    background: #dcfce7;
-    border-color: #22c55e;
-    color: #166534;
-}
-
-.answer.wrong {
-    background: #fee2e2;
-    border-color: #ef4444;
-    color: #991b1b;
-}
-
-.answer:disabled {
-    cursor: default;
-}
-
-
-/* EXPLANATION */
-
-.explanation {
-    margin-top: 18px;
-
-    padding: 15px;
-
-    background: #f0f8f2;
-
-    border-left: 4px solid #22a653;
-
-    border-radius: 10px;
-}
-
-
-/* NEXT */
-
-.next-btn {
-    display: block;
-
-    margin: 20px 0 0 auto;
-
-    border: none;
-
-    background: #16a34a;
-    color: white;
-
-    padding: 12px 18px;
-
-    border-radius: 12px;
-
-    font-weight: bold;
-}
-
-
-/* RESULT */
-
-.result-card {
-    background: white;
-
-    text-align: center;
-
-    border-radius: 25px;
-
-    padding: 45px 25px;
-
-    margin-top: 25px;
-
-    border: 1px solid #dceee1;
-
-    box-shadow: 0 15px 40px rgba(30,100,55,.08);
-}
-
-.trophy {
-    font-size: 70px;
-}
-
-.result-card h2 {
-    font-size: 32px;
-}
-
-.result-score {
-    font-size: 55px;
-
-    font-weight: bold;
-
-    color: #16a34a;
-
-    margin: 15px;
-}
-
-.result-message {
-    color: #60786a;
-
-    margin-bottom: 25px;
-}
-
-.result-buttons {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-
-/* FOOTER */
-
-footer {
-    background: #123524;
-
-    color: white;
-
-    text-align: center;
-
-    padding: 35px 20px;
-}
-
-footer p {
-    color: #b7d2bf;
-    margin-top: 5px;
-}
-
-
-/* HIDDEN */
-
-.hidden {
-    display: none !important;
-}
-
-
-/* MOBILE */
-
-@media (max-width: 800px) {
-
-    .header {
-        padding: 12px 4%;
-    }
-
-    .header nav {
-        gap: 2px;
-    }
-
-    .header nav button {
-        font-size: 12px;
-        padding: 7px;
-    }
-
-    .logo small {
-        display: none;
-    }
-
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 55px 6%;
-    }
-
-    .hero-buttons {
-        justify-content: center;
-    }
-
-    .hero-image {
-        width: 220px;
-        height: 220px;
-        font-size: 100px;
-        margin-top: 35px;
-    }
-
-    .stats {
-        grid-template-columns: repeat(2,1fr);
-        padding: 20px 5%;
-    }
-
-    .class-grid,
-    .topic-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .section {
-        padding: 55px 5%;
-    }
-
-    .question-card {
-        padding: 20px;
-    }
-
-    .quiz-title {
-        gap: 10px;
-        align-items: flex-start;
-    }
-
-    .quiz-title > span {
-        font-size: 19px;
-    }
-
-    .timer {
-        font-size: 13px;
-        white-space: nowrap;
     }
 
 }
 
-@media (max-width: 500px) {
 
-    .header nav button:nth-child(1),
-    .header nav button:nth-child(2) {
-        display: none;
+/* ==================================================
+   TRỢ LÝ SINH HỌC
+   ================================================== */
+
+
+/* =========================
+   VOICE RECOGNITION
+   ========================= */
+
+let recognition = null;
+
+const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+
+if (SpeechRecognition) {
+
+    recognition =
+        new SpeechRecognition();
+
+    recognition.lang =
+        "vi-VN";
+
+    recognition.continuous =
+        false;
+
+    recognition.interimResults =
+        false;
+
+
+    recognition.onstart = function () {
+
+        document
+            .getElementById("micButton")
+            .classList.add("listening");
+
+        document
+            .getElementById("voiceStatus")
+            .textContent =
+            "🎙️ Đang nghe... Hãy nói câu hỏi của bạn";
+
+    };
+
+
+    recognition.onresult = function (event) {
+
+        const text =
+            event.results[0][0].transcript;
+
+        document
+            .getElementById("voiceStatus")
+            .textContent =
+            "✅ Đã nhận: " + text;
+
+        addUserMessage(text);
+
+        const answer =
+            generateAIAnswer(text);
+
+        addAIMessage(answer);
+
+        speak(answer);
+
+    };
+
+
+    recognition.onerror = function (event) {
+
+        console.log(
+            "Speech error:",
+            event.error
+        );
+
+        document
+            .getElementById("voiceStatus")
+            .textContent =
+            "❌ Không nhận được giọng nói. Bạn thử lại nhé.";
+
+        document
+            .getElementById("micButton")
+            .classList.remove("listening");
+
+    };
+
+
+    recognition.onend = function () {
+
+        document
+            .getElementById("micButton")
+            .classList.remove("listening");
+
+    };
+
+}
+
+
+/* =========================
+   BẮT ĐẦU NGHE
+   ========================= */
+
+function startListening() {
+
+    if (!recognition) {
+
+        alert(
+            "⚠️ Trình duyệt này chưa hỗ trợ nhận diện giọng nói.\n\n" +
+            "Bạn có thể nhập câu hỏi bằng bàn phím."
+        );
+
+        return;
     }
 
-    .header nav button {
-        font-size: 13px;
+
+    try {
+
+        recognition.start();
+
+    } catch (error) {
+
+        console.log(error);
+
     }
 
-    .stats {
-        gap: 8px;
+}
+
+
+/* =========================
+   GỬI TEXT
+   ========================= */
+
+function sendText() {
+
+    const input =
+        document.getElementById("userInput");
+
+    const text =
+        input.value.trim();
+
+
+    if (!text) return;
+
+
+    addUserMessage(text);
+
+    const answer =
+        generateAIAnswer(text);
+
+    addAIMessage(answer);
+
+    speak(answer);
+
+    input.value = "";
+
+}
+
+
+function handleEnter(event) {
+
+    if (event.key === "Enter") {
+
+        sendText();
+
     }
 
-    .stat-card {
-        padding: 15px 5px;
+}
+
+
+/* =========================
+   QUICK QUESTION
+   ========================= */
+
+function quickAsk(text) {
+
+    document
+        .getElementById("userInput")
+        .value = text;
+
+    sendText();
+
+}
+
+
+/* =========================
+   CHAT USER
+   ========================= */
+
+function addUserMessage(text) {
+
+    const chat =
+        document.getElementById("chatBox");
+
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        "chat-message user-message";
+
+
+    message.innerHTML = `
+
+        <div class="bubble">
+            ${escapeHTML(text)}
+        </div>
+
+    `;
+
+
+    chat.appendChild(message);
+
+    chat.scrollTop =
+        chat.scrollHeight;
+
+}
+
+
+/* =========================
+   CHAT AI
+   ========================= */
+
+function addAIMessage(html) {
+
+    const chat =
+        document.getElementById("chatBox");
+
+
+    const message =
+        document.createElement("div");
+
+    message.className =
+        "chat-message ai-message";
+
+
+    message.innerHTML = `
+
+        <div class="message-avatar">
+            🤖
+        </div>
+
+        <div class="bubble">
+            ${html}
+        </div>
+
+    `;
+
+
+    chat.appendChild(message);
+
+    chat.scrollTop =
+        chat.scrollHeight;
+
+}
+
+
+/* =========================
+   AI SINH HỌC
+   ========================= */
+
+function generateAIAnswer(question) {
+
+    const q =
+        question
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+
+
+    if (
+        q.includes("adn") ||
+        q.includes("dna")
+    ) {
+
+        return `
+            🧬 <b>ADN</b> là phân tử mang thông tin di truyền
+            của sinh vật.<br><br>
+
+            ADN gồm các nucleotide với 4 loại base:
+            <b>A, T, G, C</b>.<br><br>
+
+            Nguyên tắc bổ sung:
+            <b>A liên kết với T</b>,
+            <b>G liên kết với C</b>.
+        `;
+
     }
 
-    .stat-card strong {
-        font-size: 23px;
+
+    if (
+        q.includes("gen")
+    ) {
+
+        return `
+            🧬 <b>Gen</b> là một đoạn của ADN
+            mang thông tin quy định một sản phẩm
+            nhất định.<br><br>
+
+            Có thể hiểu đơn giản:
+            <b>ADN là vật chất di truyền,
+            còn gen là một đoạn thông tin trên ADN.</b>
+        `;
+
     }
 
-    .chat-box {
-        height: 260px;
+
+    if (
+        q.includes("quang hop")
+    ) {
+
+        return `
+            🌱 <b>Quang hợp</b> là quá trình cây xanh
+            sử dụng năng lượng ánh sáng để tổng hợp
+            chất hữu cơ từ CO₂ và nước.<br><br>
+
+            Quá trình này đồng thời giải phóng
+            <b>oxygen (O₂)</b>.
+        `;
+
     }
 
-    .bubble {
-        max-width: 88%;
+
+    if (
+        q.includes("nguyen phan")
+    ) {
+
+        return `
+            🔬 <b>Nguyên phân</b> là hình thức phân chia
+            tế bào tạo ra các tế bào con có bộ nhiễm sắc thể
+            giống tế bào mẹ về cơ bản.<br><br>
+
+            Nguyên phân giúp cơ thể
+            <b>sinh trưởng và thay thế tế bào</b>.
+        `;
+
     }
+
+
+    if (
+        q.includes("tuan hoan") ||
+        q.includes("tim") ||
+        q.includes("mau")
+    ) {
+
+        return `
+            🫀 <b>Hệ tuần hoàn</b> gồm tim và hệ mạch,
+            có vai trò vận chuyển máu và các chất
+            cần thiết trong cơ thể.<br><br>
+
+            <b>Tim</b> co bóp để tạo lực đẩy giúp máu
+            lưu thông.
+        `;
+
+    }
+
+
+    if (
+        q.includes("arn") ||
+        q.includes("rna")
+    ) {
+
+        return `
+            🧬 <b>ARN</b> là axit ribonucleic.
+            ARN thường có cấu trúc một mạch.<br><br>
+
+            ARN có các loại base:
+            <b>A, U, G, C</b>.<br><br>
+
+            Điểm dễ nhớ:
+            <b>ARN dùng U thay cho T của ADN.</b>
+        `;
+
+    }
+
+
+    if (
+        q.includes("ti the") ||
+        q.includes("mitochondria")
+    ) {
+
+        return `
+            ⚡ <b>Ti thể</b> là bào quan tham gia
+            quá trình hô hấp tế bào và tạo năng lượng
+            cho hoạt động của tế bào.
+        `;
+
+    }
+
+
+    if (
+        q.includes("te bao")
+    ) {
+
+        return `
+            🔬 <b>Tế bào</b> là đơn vị cấu tạo và chức năng
+            cơ bản của cơ thể sống.<br><br>
+
+            Cơ thể đa bào được tạo thành từ rất nhiều tế bào
+            phối hợp với nhau.
+        `;
+
+    }
+
+
+    return `
+        🤔 Câu hỏi này hơi ngoài phần kiến thức
+        mình đang có trong trợ lý.<br><br>
+
+        Bạn thử hỏi mình về:
+        <br>🧬 ADN
+        <br>🧬 Gen
+        <br>🧬 ARN
+        <br>🌱 Quang hợp
+        <br>🔬 Nguyên phân
+        <br>🫀 Hệ tuần hoàn
+        <br>⚡ Ti thể
+    `;
+
+}
+
+
+/* =========================
+   ĐỌC CÂU TRẢ LỜI
+   ========================= */
+
+function speak(htmlText) {
+
+    if (!("speechSynthesis" in window)) {
+
+        return;
+    }
+
+
+    const temp =
+        document.createElement("div");
+
+    temp.innerHTML =
+        htmlText;
+
+
+    const text =
+        temp.textContent ||
+        temp.innerText ||
+        "";
+
+
+    speechSynthesis.cancel();
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+
+    utterance.lang =
+        "vi-VN";
+
+    utterance.rate =
+        0.95;
+
+    utterance.pitch =
+        1;
+
+
+    speechSynthesis.speak(
+        utterance
+    );
+
+}
+
+
+/* =========================
+   BẢO VỆ HTML
+   ========================= */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text;
+
+    return div.innerHTML;
 
 }
