@@ -1,7 +1,3 @@
-/* ==============================
-   CÀI ĐẶT CHUNG
-============================== */
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -13,529 +9,1055 @@ html {
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #f0f7ff;
-    color: #1e293b;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4fbf6;
+    color: #173b2b;
     line-height: 1.6;
 }
 
-
-/* ==============================
-   HEADER
-============================== */
-
-header {
-    text-align: center;
-    padding: 55px 20px;
-    background: linear-gradient(135deg, #2563eb, #06b6d4);
-    color: white;
+button,
+input {
+    font-family: inherit;
 }
 
-header h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-}
-
-header p {
-    font-size: 20px;
-    opacity: 0.95;
+button {
+    cursor: pointer;
 }
 
 
-/* ==============================
-   MENU
-============================== */
+/* HEADER */
 
-nav {
+.header {
     position: sticky;
     top: 0;
     z-index: 1000;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 35px;
 
-    padding: 16px 20px;
+    padding: 14px 7%;
 
-    background: white;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(12px);
 
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid #dceee2;
+
+    box-shadow: 0 4px 18px rgba(0,0,0,0.05);
 }
 
-nav a {
-    text-decoration: none;
-    color: #2563eb;
-    font-weight: bold;
-    font-size: 16px;
-
-    transition: 0.2s;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-nav a:hover {
-    color: #0891b2;
-    transform: translateY(-2px);
+.logo > span {
+    font-size: 34px;
 }
 
-
-/* ==============================
-   NỘI DUNG CHÍNH
-============================== */
-
-main {
-    width: 90%;
-    max-width: 1100px;
-    margin: auto;
-    padding: 45px 0;
+.logo strong {
+    display: block;
+    color: #15803d;
+    font-size: 19px;
 }
 
-section {
-    margin-bottom: 60px;
+.logo small {
+    color: #71907d;
+    font-size: 11px;
 }
 
-section > h2 {
-    text-align: center;
-    font-size: 32px;
-    margin-bottom: 25px;
-    color: #1d4ed8;
+.header nav {
+    display: flex;
+    gap: 8px;
 }
 
-
-/* ==============================
-   TRANG CHÀO MỪNG
-============================== */
-
-.welcome {
-    text-align: center;
-
-    background: white;
-
-    padding: 60px 30px;
-
-    border-radius: 25px;
-
-    box-shadow:
-        0 10px 30px rgba(37, 99, 235, 0.12);
-}
-
-.welcome h2 {
-    font-size: 32px;
-    color: #1d4ed8;
-    margin-bottom: 15px;
-}
-
-.welcome p {
-    max-width: 650px;
-    margin: 0 auto 25px;
-
-    font-size: 18px;
-    color: #64748b;
-}
-
-
-/* ==============================
-   NÚT
-============================== */
-
-button {
+.header nav button {
     border: none;
+    background: transparent;
+    color: #315342;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-weight: 600;
+}
 
-    padding: 13px 23px;
+.header nav button:hover {
+    background: #e9f8ed;
+    color: #15803d;
+}
 
-    border-radius: 12px;
 
-    background: linear-gradient(
-        135deg,
-        #2563eb,
-        #0891b2
-    );
+/* HERO */
 
+.hero {
+    min-height: 570px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 70px 9%;
+
+    background:
+        radial-gradient(circle at 85% 30%, #d9f7e1 0, transparent 30%),
+        linear-gradient(135deg, #ffffff, #effbf3);
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero-badge {
+    display: inline-block;
+
+    background: #e4f8e9;
+    color: #16803c;
+
+    padding: 8px 16px;
+    border-radius: 999px;
+
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.05;
+    margin-bottom: 22px;
+}
+
+.hero h1 span {
+    display: block;
+    color: #20a653;
+}
+
+.hero p {
+    color: #587264;
+    font-size: 18px;
+    max-width: 600px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn,
+.share-btn {
+    border: none;
+    border-radius: 14px;
+
+    padding: 13px 20px;
+
+    font-weight: bold;
+    transition: 0.25s;
+}
+
+.primary-btn {
+    background: #16a34a;
     color: white;
 
-    font-size: 16px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-
-    box-shadow:
-        0 5px 15px rgba(37, 99, 235, 0.2);
+    box-shadow: 0 8px 22px rgba(22,163,74,0.22);
 }
 
-button:hover {
+.primary-btn:hover {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 20px rgba(37, 99, 235, 0.3);
+    background: #12833c;
 }
 
-button:active {
-    transform: translateY(0);
-}
-
-
-/* ==============================
-   BÀI HỌC
-============================== */
-
-.lessons {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 25px;
-}
-
-.lesson {
+.secondary-btn {
     background: white;
+    color: #15803d;
+    border: 1px solid #cfe7d7;
+}
 
-    padding: 30px;
+.secondary-btn:hover {
+    transform: translateY(-2px);
+    background: #effaf2;
+}
 
-    border-radius: 20px;
+.share-btn {
+    background: #eaf7ee;
+    color: #15803d;
+}
 
-    border: 1px solid #e2e8f0;
+.share-btn:hover {
+    transform: translateY(-2px);
+    background: #d9f1df;
+}
 
-    box-shadow:
-        0 8px 25px rgba(15, 23, 42, 0.07);
+
+/* HERO IMAGE */
+
+.hero-image {
+    position: relative;
+
+    width: 310px;
+    height: 310px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #dff7e7;
+
+    font-size: 145px;
+
+    animation: float 4s ease-in-out infinite;
+}
+
+.floating-cell,
+.floating-dna {
+    position: absolute;
+    font-size: 45px;
+
+    background: white;
+    border-radius: 50%;
+
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.floating-cell {
+    top: 20px;
+    right: 5px;
+}
+
+.floating-dna {
+    bottom: 20px;
+    left: 5px;
+}
+
+@keyframes float {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+}
+
+
+/* STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 18px;
+
+    padding: 30px 8%;
+
+    background: white;
+}
+
+.stat-card {
+    text-align: center;
+
+    padding: 24px;
+
+    border-radius: 18px;
+
+    background: #f8fcf9;
+
+    border: 1px solid #e1f0e5;
 
     transition: 0.25s;
 }
 
-.lesson:hover {
-    transform: translateY(-6px);
-
-    box-shadow:
-        0 15px 30px rgba(37, 99, 235, 0.15);
+.stat-card:hover {
+    transform: translateY(-5px);
 }
 
-.lesson h3 {
-    color: #2563eb;
-
-    font-size: 22px;
-
-    margin-bottom: 10px;
+.stat-card span {
+    display: block;
+    font-size: 30px;
 }
 
-.lesson p {
-    color: #64748b;
+.stat-card strong {
+    display: block;
+
+    color: #16803c;
+
+    font-size: 28px;
+}
+
+.stat-card p {
+    color: #6c8274;
 }
 
 
-/* ==============================
-   QUIZ
-============================== */
+/* SECTION */
 
-#quiz {
-    background: white;
-
-    padding: 35px;
-
-    border-radius: 25px;
-
-    box-shadow:
-        0 10px 30px rgba(15, 23, 42, 0.08);
+.section {
+    padding: 75px 8%;
+    max-width: 1250px;
+    margin: auto;
 }
 
-#quiz > h2 {
-    text-align: center;
-
-    color: #1d4ed8;
-
-    font-size: 32px;
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 
     margin-bottom: 30px;
 }
 
+.section-icon {
+    width: 58px;
+    height: 58px;
 
-/* ==============================
-   THÔNG TIN QUIZ
-============================== */
-
-.quiz-top {
     display: flex;
-
-    justify-content: space-between;
-
     align-items: center;
+    justify-content: center;
 
-    margin-bottom: 15px;
+    background: #e2f7e8;
 
-    font-size: 17px;
+    border-radius: 16px;
+
+    font-size: 30px;
+}
+
+.section-title h2 {
+    font-size: 30px;
+}
+
+.section-title p {
+    color: #71877a;
+}
+
+
+/* AI */
+
+.ai-container {
+    background: white;
+
+    border: 1px solid #dceee1;
+
+    border-radius: 24px;
+
+    padding: 22px;
+
+    box-shadow: 0 15px 40px rgba(30,100,55,0.07);
+}
+
+.ai-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid #edf4ef;
+}
+
+.ai-avatar {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #dff7e6;
+
+    font-size: 25px;
+}
+
+.ai-top strong {
+    display: block;
+}
+
+.ai-top span {
+    display: block;
+    color: #42a365;
+    font-size: 13px;
+}
+
+
+/* CHAT */
+
+.chat-box {
+    height: 300px;
+
+    overflow-y: auto;
+
+    padding: 20px 5px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chat-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+}
+
+.message-avatar {
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e5f7ea;
+
+    border-radius: 50%;
+
+    flex-shrink: 0;
+}
+
+.bubble {
+    max-width: 75%;
+
+    padding: 12px 15px;
+
+    border-radius: 15px;
+
+    background: #eff9f1;
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.user-message .bubble {
+    background: #16a34a;
+    color: white;
+}
+
+.user-message .message-avatar {
+    display: none;
+}
+
+
+/* VOICE */
+
+.voice-panel {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    margin: 10px 0 15px;
+
+    padding: 14px;
+
+    border-radius: 16px;
+
+    background: #f3fbf5;
+}
+
+.mic-button {
+    width: 58px;
+    height: 58px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #16a34a;
+    color: white;
+
+    font-size: 25px;
+
+    box-shadow: 0 6px 18px rgba(22,163,74,0.25);
+}
+
+.mic-button:hover {
+    transform: scale(1.05);
+}
+
+.mic-button.listening {
+    background: #dc2626;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+
+    0% {
+        box-shadow: 0 0 0 0 rgba(220,38,38,.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(220,38,38,0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(220,38,38,0);
+    }
+
+}
+
+.voice-panel strong {
+    display: block;
+}
+
+.voice-panel span {
+    color: #789080;
+    font-size: 13px;
+}
+
+
+/* INPUT */
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+
+    border: 1px solid #cfe3d5;
+
+    border-radius: 13px;
+
+    padding: 14px;
+
+    outline: none;
+
+    font-size: 15px;
+}
+
+.chat-input input:focus {
+    border-color: #38a85c;
+}
+
+.chat-input button {
+    width: 52px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background: #16a34a;
+    color: white;
+
+    font-size: 20px;
+}
+
+
+/* QUICK */
+
+.quick-questions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 14px;
+}
+
+.quick-questions span {
+    font-size: 13px;
+    color: #6b8173;
+}
+
+.quick-questions button {
+    border: 1px solid #d7e9dc;
+
+    background: white;
+
+    padding: 7px 10px;
+
+    border-radius: 999px;
+
+    color: #287244;
+
+    font-size: 13px;
+}
+
+.quick-questions button:hover {
+    background: #eaf7ee;
+}
+
+
+/* QUIZ */
+
+.quiz-section {
+    background: #f4fbf6;
+}
+
+.sub-title {
+    margin: 20px 0 15px;
+    font-size: 21px;
+}
+
+.class-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+}
+
+.class-card {
+    border: 1px solid #d7eadc;
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 30px 20px;
+
+    text-align: center;
+
+    transition: 0.25s;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+}
+
+.class-card:hover {
+    transform: translateY(-7px);
+    border-color: #68c583;
+    box-shadow: 0 15px 30px rgba(30,100,55,0.1);
+}
+
+.class-card span {
+    display: block;
+    font-size: 48px;
+}
+
+.class-card strong {
+    display: block;
+    color: #15803d;
+    font-size: 20px;
+}
+
+.class-card small {
+    color: #789080;
+}
+
+
+/* TOPICS */
+
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 16px;
+}
+
+.topic-card {
+    border: 1px solid #d8eadc;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    text-align: left;
+
+    transition: .25s;
+}
+
+.topic-card:hover {
+    transform: translateY(-5px);
+    border-color: #5dbd78;
+    background: #fafffb;
+}
+
+.topic-card .topic-icon {
+    font-size: 35px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.topic-card strong {
+    display: block;
+    color: #176d38;
+}
+
+.topic-card small {
+    color: #718477;
+}
+
+
+/* BACK */
+
+.back-btn {
+    border: none;
+    background: transparent;
+
+    color: #238044;
 
     font-weight: bold;
 
-    color: #475569;
+    margin-bottom: 15px;
 }
 
 
-/* ==============================
-   THANH TIẾN TRÌNH
-============================== */
+/* QUIZ HEADER */
 
-.progress-container {
-    width: 100%;
+.quiz-header {
+    margin-top: 25px;
+}
 
-    height: 12px;
+.quiz-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    background: #e2e8f0;
+    margin-bottom: 15px;
+}
 
-    border-radius: 20px;
+.quiz-title > span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.timer {
+    background: #fff4d7;
+    color: #a66b00;
+
+    padding: 9px 15px;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+}
+
+
+/* PROGRESS */
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+
+    color: #668071;
+
+    font-size: 14px;
+
+    margin-bottom: 7px;
+}
+
+.progress-bar {
+    height: 9px;
+
+    background: #dfeee3;
+
+    border-radius: 99px;
 
     overflow: hidden;
-
-    margin-bottom: 30px;
-}
-
-#progress-bar {
-    width: 0%;
-
-    height: 100%;
-
-    background: linear-gradient(
-        90deg,
-        #2563eb,
-        #06b6d4
-    );
-
-    border-radius: 20px;
-
-    transition: width 0.3s;
-}
-
-
-/* ==============================
-   CÂU HỎI
-============================== */
-
-#question {
-    font-size: 24px;
-
-    color: #1e293b;
 
     margin-bottom: 25px;
 }
 
+.progress {
+    height: 100%;
+    width: 0%;
 
-/* ==============================
-   ĐÁP ÁN
-============================== */
+    background: #16a34a;
 
-#answers {
-    display: flex;
+    transition: width .3s;
+}
 
-    flex-direction: column;
 
+/* QUESTION */
+
+.question-card {
+    background: white;
+
+    border: 1px solid #dcece0;
+
+    border-radius: 24px;
+
+    padding: 30px;
+
+    box-shadow: 0 12px 35px rgba(30,100,55,0.06);
+}
+
+.question-number {
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 999px;
+
+    background: #e5f7ea;
+
+    color: #16803c;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+.question-card h2 {
+    margin-bottom: 22px;
+}
+
+.answers {
+    display: grid;
     gap: 12px;
-
-    margin-bottom: 20px;
 }
 
 .answer {
     width: 100%;
 
-    background: #f8fafc;
-
-    color: #334155;
-
-    border: 2px solid #e2e8f0;
+    padding: 15px;
 
     text-align: left;
 
-    box-shadow: none;
+    border-radius: 13px;
 
-    transition: 0.2s;
+    border: 2px solid #e0ebe3;
+
+    background: white;
+
+    transition: .2s;
+
+    font-size: 15px;
 }
 
-.answer:hover:not(:disabled) {
-    background: #eff6ff;
+.answer:hover {
+    border-color: #55b974;
+    background: #f4fcf6;
+}
 
-    border-color: #2563eb;
+.answer.correct {
+    background: #dcfce7;
+    border-color: #22c55e;
+    color: #166534;
+}
 
-    transform: translateX(4px);
-
-    box-shadow: none;
+.answer.wrong {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #991b1b;
 }
 
 .answer:disabled {
-    cursor: not-allowed;
-
-    opacity: 1;
+    cursor: default;
 }
 
 
-/* ĐÁP ÁN ĐÚNG */
+/* EXPLANATION */
 
-.answer.correct {
-    background: #22c55e;
+.explanation {
+    margin-top: 18px;
 
-    border-color: #16a34a;
+    padding: 15px;
 
-    color: white;
+    background: #f0f8f2;
+
+    border-left: 4px solid #22a653;
+
+    border-radius: 10px;
 }
 
 
-/* ĐÁP ÁN SAI */
+/* NEXT */
 
-.answer.wrong {
-    background: #ef4444;
-
-    border-color: #dc2626;
-
-    color: white;
-}
-
-
-/* ==============================
-   NÚT CÂU TIẾP
-============================== */
-
-#next-button {
-    margin-top: 5px;
-}
-
-
-/* ==============================
-   KẾT QUẢ
-============================== */
-
-#result {
-    text-align: center;
-
-    padding: 35px;
-
-    margin-top: 25px;
-
-    background: #f8fafc;
-
-    border-radius: 20px;
-
-    border: 2px solid #e2e8f0;
-}
-
-#result h2 {
-    color: #2563eb;
-
-    margin-bottom: 15px;
-
-    font-size: 30px;
-}
-
-#result p {
-    font-size: 18px;
-
-    color: #64748b;
-
-    margin-bottom: 10px;
-}
-
-#result strong {
+.next-btn {
     display: block;
 
-    font-size: 48px;
+    margin: 20px 0 0 auto;
 
-    color: #0891b2;
+    border: none;
 
-    margin: 10px 0 15px;
-}
-
-
-/* ==============================
-   FOOTER
-============================== */
-
-footer {
-    text-align: center;
-
-    padding: 35px 20px;
-
-    background: #172554;
-
+    background: #16a34a;
     color: white;
-}
 
-footer p {
-    margin: 5px;
-}
+    padding: 12px 18px;
 
-footer p:first-child {
+    border-radius: 12px;
+
     font-weight: bold;
 }
 
 
-/* ==============================
-   ĐIỆN THOẠI
-============================== */
+/* RESULT */
+
+.result-card {
+    background: white;
+
+    text-align: center;
+
+    border-radius: 25px;
+
+    padding: 45px 25px;
+
+    margin-top: 25px;
+
+    border: 1px solid #dceee1;
+
+    box-shadow: 0 15px 40px rgba(30,100,55,.08);
+}
+
+.trophy {
+    font-size: 70px;
+}
+
+.result-card h2 {
+    font-size: 32px;
+}
+
+.result-score {
+    font-size: 55px;
+
+    font-weight: bold;
+
+    color: #16a34a;
+
+    margin: 15px;
+}
+
+.result-message {
+    color: #60786a;
+
+    margin-bottom: 25px;
+}
+
+.result-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+/* FOOTER */
+
+footer {
+    background: #123524;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 35px 20px;
+}
+
+footer p {
+    color: #b7d2bf;
+    margin-top: 5px;
+}
+
+
+/* HIDDEN */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* MOBILE */
 
 @media (max-width: 800px) {
 
-    header h1 {
-        font-size: 38px;
+    .header {
+        padding: 12px 4%;
     }
 
-    nav {
-        gap: 15px;
-
-        flex-wrap: wrap;
+    .header nav {
+        gap: 2px;
     }
 
-    .lessons {
+    .header nav button {
+        font-size: 12px;
+        padding: 7px;
+    }
+
+    .logo small {
+        display: none;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 55px 6%;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-image {
+        width: 220px;
+        height: 220px;
+        font-size: 100px;
+        margin-top: 35px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2,1fr);
+        padding: 20px 5%;
+    }
+
+    .class-grid,
+    .topic-grid {
         grid-template-columns: 1fr;
     }
 
-    #quiz {
-        padding: 25px 18px;
+    .section {
+        padding: 55px 5%;
     }
 
-    #question {
-        font-size: 20px;
+    .question-card {
+        padding: 20px;
+    }
+
+    .quiz-title {
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .quiz-title > span {
+        font-size: 19px;
+    }
+
+    .timer {
+        font-size: 13px;
+        white-space: nowrap;
     }
 
 }
 
-
-/* ==============================
-   ĐIỆN THOẠI NHỎ
-============================== */
-
 @media (max-width: 500px) {
 
-    header {
-        padding: 40px 15px;
+    .header nav button:nth-child(1),
+    .header nav button:nth-child(2) {
+        display: none;
     }
 
-    header h1 {
-        font-size: 32px;
+    .header nav button {
+        font-size: 13px;
     }
 
-    header p {
-        font-size: 16px;
+    .stats {
+        gap: 8px;
     }
 
-    nav a {
-        font-size: 14px;
+    .stat-card {
+        padding: 15px 5px;
     }
 
-    main {
-        width: 94%;
+    .stat-card strong {
+        font-size: 23px;
     }
 
-    .welcome {
-        padding: 40px 20px;
+    .chat-box {
+        height: 260px;
     }
 
-    .welcome h2 {
-        font-size: 25px;
-    }
-
-    section > h2 {
-        font-size: 27px;
-    }
-
-    .quiz-top {
-        font-size: 14px;
+    .bubble {
+        max-width: 88%;
     }
 
 }
