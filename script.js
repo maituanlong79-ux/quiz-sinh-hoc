@@ -1,28 +1,31 @@
 "use strict";
 
-/* =====================================================
+/* =========================================================
    BIO QUIZ
-   ===================================================== */
+   ========================================================= */
 
 
-/* =====================================================
+/* =========================
    HELPER
-   ===================================================== */
+   ========================= */
 
 function $(id) {
     return document.getElementById(id);
 }
 
 function escapeHTML(text) {
-    const div = document.createElement("div");
-    div.textContent = text;
-    return div.innerHTML;
+    return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 }
 
 
-/* =====================================================
+/* =========================================================
    QUIZ DATA
-   ===================================================== */
+   ========================================================= */
 
 const quizData = {
 
@@ -31,7 +34,8 @@ const quizData = {
         {
             icon: "🔬",
             title: "Tế bào",
-            description: "Đơn vị cơ bản của cơ thể sống.",
+            description:
+                "Tìm hiểu đơn vị cấu tạo cơ bản của cơ thể sống.",
 
             questions: [
 
@@ -39,15 +43,15 @@ const quizData = {
                     q: "Tế bào được xem là gì của cơ thể sống?",
                     answers: [
                         "Đơn vị cấu tạo và chức năng cơ bản",
-                        "Một cơ quan",
-                        "Một hệ cơ quan",
-                        "Một mô"
+                        "Một loại mô",
+                        "Một loại cơ quan",
+                        "Một hệ cơ quan"
                     ],
                     correct: 0
                 },
 
                 {
-                    q: "Bộ phận nào điều khiển hoạt động của tế bào nhân thực?",
+                    q: "Bộ phận nào chứa vật chất di truyền ở tế bào nhân thực?",
                     answers: [
                         "Màng tế bào",
                         "Nhân",
@@ -61,33 +65,33 @@ const quizData = {
                     q: "Bộ phận nào bao bọc tế bào?",
                     answers: [
                         "Nhân",
-                        "Màng tế bào",
                         "Ribosome",
-                        "Nhiễm sắc thể"
-                    ],
-                    correct: 1
-                },
-
-                {
-                    q: "Tế bào thực vật có bào quan nào thực hiện quang hợp?",
-                    answers: [
-                        "Ti thể",
-                        "Nhân",
-                        "Lục lạp",
-                        "Không bào"
+                        "Màng tế bào",
+                        "Ti thể"
                     ],
                     correct: 2
                 },
 
                 {
-                    q: "Tế bào nào sau đây là tế bào nhân thực?",
+                    q: "Tế bào thực vật có cấu trúc nào mà tế bào động vật không có?",
                     answers: [
-                        "Tế bào vi khuẩn",
-                        "Tế bào người",
-                        "Virus",
-                        "Không có tế bào"
+                        "Nhân",
+                        "Màng tế bào",
+                        "Lục lạp",
+                        "Tế bào chất"
                     ],
-                    correct: 1
+                    correct: 2
+                },
+
+                {
+                    q: "Nhiều tế bào giống nhau cùng thực hiện một chức năng tạo thành?",
+                    answers: [
+                        "Mô",
+                        "Cơ quan",
+                        "Hệ cơ quan",
+                        "Cơ thể"
+                    ],
+                    correct: 0
                 }
 
             ]
@@ -97,12 +101,13 @@ const quizData = {
         {
             icon: "🌱",
             title: "Quang hợp",
-            description: "Thực vật tạo chất hữu cơ nhờ ánh sáng.",
+            description:
+                "Khám phá cách thực vật tạo chất hữu cơ.",
 
             questions: [
 
                 {
-                    q: "Quang hợp chủ yếu diễn ra ở đâu?",
+                    q: "Quang hợp chủ yếu diễn ra ở bào quan nào?",
                     answers: [
                         "Ti thể",
                         "Lục lạp",
@@ -113,47 +118,47 @@ const quizData = {
                 },
 
                 {
-                    q: "Quang hợp cần năng lượng từ đâu?",
+                    q: "Quang hợp cần năng lượng chủ yếu từ đâu?",
                     answers: [
                         "Ánh sáng",
                         "Âm thanh",
                         "Gió",
-                        "Nhiệt độ cơ thể"
+                        "Nhiệt độ"
                     ],
                     correct: 0
                 },
 
                 {
-                    q: "Nguyên liệu quan trọng của quang hợp là gì?",
+                    q: "Trong quang hợp, cây hấp thụ khí nào?",
                     answers: [
-                        "Oxygen và glucose",
-                        "Carbon dioxide và nước",
-                        "Protein và lipid",
-                        "Nitrogen và oxygen"
-                    ],
-                    correct: 1
-                },
-
-                {
-                    q: "Sản phẩm khí được giải phóng trong quang hợp là?",
-                    answers: [
-                        "Carbon dioxide",
-                        "Nitrogen",
                         "Oxygen",
+                        "Nitrogen",
+                        "Carbon dioxide",
                         "Hydrogen"
                     ],
                     correct: 2
                 },
 
                 {
-                    q: "Sắc tố quang hợp quan trọng ở cây xanh là?",
+                    q: "Sản phẩm hữu cơ quan trọng đầu tiên của quang hợp là?",
                     answers: [
-                        "Hemoglobin",
-                        "Chlorophyll",
-                        "Keratin",
-                        "Insulin"
+                        "Glucose",
+                        "Oxygen",
+                        "Nitrogen",
+                        "Nước"
                     ],
-                    correct: 1
+                    correct: 0
+                },
+
+                {
+                    q: "Chất diệp lục có vai trò gì?",
+                    answers: [
+                        "Hấp thụ năng lượng ánh sáng",
+                        "Tạo nước",
+                        "Thải carbon dioxide",
+                        "Tạo nitrogen"
+                    ],
+                    correct: 0
                 }
 
             ]
@@ -161,65 +166,66 @@ const quizData = {
 
 
         {
-            icon: "🌎",
+            icon: "🌍",
             title: "Sinh thái",
-            description: "Quần thể, quần xã và chuỗi thức ăn.",
+            description:
+                "Tìm hiểu quần thể, quần xã và chuỗi thức ăn.",
 
             questions: [
 
                 {
-                    q: "Tập hợp các cá thể cùng loài sống trong một khu vực là?",
+                    q: "Quần thể là tập hợp các cá thể như thế nào?",
                     answers: [
-                        "Quần thể",
-                        "Quần xã",
-                        "Hệ sinh thái",
-                        "Sinh quyển"
+                        "Khác loài, khác nơi sống",
+                        "Cùng loài, sống trong một khu vực nhất định",
+                        "Bất kỳ sinh vật nào",
+                        "Chỉ gồm thực vật"
                     ],
-                    correct: 0
+                    correct: 1
                 },
 
                 {
-                    q: "Trong chuỗi thức ăn, thực vật thường là?",
+                    q: "Sinh vật nào thường là sinh vật sản xuất?",
                     answers: [
-                        "Sinh vật tiêu thụ",
-                        "Sinh vật sản xuất",
-                        "Sinh vật phân giải",
-                        "Động vật ăn thịt"
+                        "Động vật ăn thịt",
+                        "Thực vật",
+                        "Nấm",
+                        "Vi khuẩn gây bệnh"
                     ],
                     correct: 1
+                },
+
+                {
+                    q: "Chuỗi thức ăn thường bắt đầu bằng?",
+                    answers: [
+                        "Sinh vật phân giải",
+                        "Động vật ăn thịt",
+                        "Sinh vật sản xuất",
+                        "Con người"
+                    ],
+                    correct: 2
                 },
 
                 {
                     q: "Sinh vật phân giải có vai trò gì?",
                     answers: [
-                        "Tạo ánh sáng",
                         "Phân giải chất hữu cơ",
+                        "Tạo ánh sáng",
                         "Ăn tất cả động vật",
                         "Tạo oxygen"
                     ],
-                    correct: 1
-                },
-
-                {
-                    q: "Ví dụ nào là một quần thể?",
-                    answers: [
-                        "Tất cả sinh vật trong rừng",
-                        "Một đàn cá cùng loài trong hồ",
-                        "Rừng và đất",
-                        "Toàn bộ Trái Đất"
-                    ],
-                    correct: 1
-                },
-
-                {
-                    q: "Chuỗi thức ăn thể hiện chủ yếu điều gì?",
-                    answers: [
-                        "Quan hệ dinh dưỡng",
-                        "Màu sắc sinh vật",
-                        "Kích thước cơ thể",
-                        "Tuổi thọ"
-                    ],
                     correct: 0
+                },
+
+                {
+                    q: "Quần xã gồm các quần thể thuộc?",
+                    answers: [
+                        "Một loài",
+                        "Nhiều loài",
+                        "Chỉ thực vật",
+                        "Chỉ động vật"
+                    ],
+                    correct: 1
                 }
 
             ]
@@ -233,28 +239,18 @@ const quizData = {
         {
             icon: "🦴",
             title: "Hệ vận động",
-            description: "Xương, cơ và sự vận động của cơ thể.",
+            description:
+                "Tìm hiểu xương, cơ và sự vận động.",
 
             questions: [
 
                 {
-                    q: "Hệ vận động gồm những thành phần chính nào?",
+                    q: "Hệ vận động gồm những bộ phận chính nào?",
                     answers: [
                         "Xương và cơ",
                         "Tim và phổi",
-                        "Não và tủy sống",
-                        "Thận và gan"
-                    ],
-                    correct: 0
-                },
-
-                {
-                    q: "Cơ bám vào xương nhờ?",
-                    answers: [
-                        "Gân",
-                        "Mạch máu",
-                        "Thần kinh",
-                        "Da"
+                        "Não và tim",
+                        "Da và tóc"
                     ],
                     correct: 0
                 },
@@ -271,23 +267,34 @@ const quizData = {
                 },
 
                 {
-                    q: "Khi cơ co, cơ thường?",
+                    q: "Cơ co giúp cơ thể?",
                     answers: [
-                        "Ngắn lại",
-                        "Dài ra",
-                        "Biến mất",
-                        "Không thay đổi"
+                        "Vận động",
+                        "Tiêu hóa",
+                        "Nghe",
+                        "Nhìn"
                     ],
                     correct: 0
                 },
 
                 {
-                    q: "Cơ và xương phối hợp giúp cơ thể?",
+                    q: "Khớp có vai trò gì?",
                     answers: [
-                        "Vận động",
-                        "Tiêu hóa",
-                        "Lọc máu",
-                        "Trao đổi khí"
+                        "Nối các xương",
+                        "Tạo máu duy nhất",
+                        "Trao đổi khí",
+                        "Tạo hormone"
+                    ],
+                    correct: 0
+                },
+
+                {
+                    q: "Cơ bám vào xương nhờ?",
+                    answers: [
+                        "Gân",
+                        "Máu",
+                        "Da",
+                        "Sụn"
                     ],
                     correct: 0
                 }
@@ -299,7 +306,8 @@ const quizData = {
         {
             icon: "❤️",
             title: "Tuần hoàn",
-            description: "Tim, máu và hệ mạch.",
+            description:
+                "Tìm hiểu tim, máu và hệ tuần hoàn.",
 
             questions: [
 
@@ -315,47 +323,47 @@ const quizData = {
                 },
 
                 {
-                    q: "Máu có chức năng nào?",
+                    q: "Máu có nhiệm vụ vận chuyển?",
                     answers: [
-                        "Vận chuyển các chất",
-                        "Nghiền thức ăn",
-                        "Tạo xương",
-                        "Lọc nước tiểu"
+                        "Oxygen và chất dinh dưỡng",
+                        "Chỉ nước",
+                        "Chỉ carbon dioxide",
+                        "Chỉ hormone"
                     ],
                     correct: 0
                 },
 
                 {
-                    q: "Tim co bóp giúp?",
+                    q: "Động mạch đưa máu?",
+                    answers: [
+                        "Về tim",
+                        "Ra khỏi tim",
+                        "Vào phổi בלבד",
+                        "Vào dạ dày"
+                    ],
+                    correct: 1
+                },
+
+                {
+                    q: "Tế bào máu nào vận chuyển oxygen chủ yếu?",
+                    answers: [
+                        "Hồng cầu",
+                        "Bạch cầu",
+                        "Tiểu cầu",
+                        "Tế bào thần kinh"
+                    ],
+                    correct: 0
+                },
+
+                {
+                    q: "Tim co bóp để?",
                     answers: [
                         "Đẩy máu đi",
-                        "Tạo oxygen",
-                        "Tiêu hóa thức ăn",
+                        "Tạo thức ăn",
+                        "Lọc nước",
                         "Tạo xương"
                     ],
                     correct: 0
-                },
-
-                {
-                    q: "Mạch máu đưa máu từ tim đi là?",
-                    answers: [
-                        "Động mạch",
-                        "Tĩnh mạch",
-                        "Mao mạch",
-                        "Phế quản"
-                    ],
-                    correct: 0
-                },
-
-                {
-                    q: "Trao đổi chất giữa máu và tế bào chủ yếu qua?",
-                    answers: [
-                        "Động mạch",
-                        "Tĩnh mạch",
-                        "Mao mạch",
-                        "Tim"
-                    ],
-                    correct: 2
                 }
 
             ]
@@ -365,7 +373,8 @@ const quizData = {
         {
             icon: "🫁",
             title: "Hô hấp",
-            description: "Trao đổi oxygen và carbon dioxide.",
+            description:
+                "Khám phá quá trình trao đổi khí.",
 
             questions: [
 
@@ -375,35 +384,35 @@ const quizData = {
                         "Phổi",
                         "Tim",
                         "Gan",
-                        "Dạ dày"
+                        "Thận"
                     ],
                     correct: 0
                 },
 
                 {
-                    q: "Trao đổi khí chủ yếu xảy ra tại?",
+                    q: "Trao đổi khí chủ yếu diễn ra ở?",
                     answers: [
-                        "Khí quản",
                         "Phế nang",
-                        "Thanh quản",
-                        "Mũi"
+                        "Khí quản",
+                        "Mũi",
+                        "Thanh quản"
                     ],
-                    correct: 1
+                    correct: 0
                 },
 
                 {
-                    q: "Khi hít vào, cơ thể nhận chủ yếu khí?",
+                    q: "Cơ thể hấp thụ khí nào để hô hấp?",
                     answers: [
                         "Oxygen",
                         "Carbon dioxide",
-                        "Nitrogen tinh khiết",
+                        "Nitrogen",
                         "Hydrogen"
                     ],
                     correct: 0
                 },
 
                 {
-                    q: "Khi thở ra, cơ thể thải nhiều hơn khí?",
+                    q: "Hô hấp thải ra khí?",
                     answers: [
                         "Oxygen",
                         "Carbon dioxide",
@@ -414,12 +423,12 @@ const quizData = {
                 },
 
                 {
-                    q: "Phổi nằm trong?",
+                    q: "Cơ quan giúp dẫn không khí xuống phổi là?",
                     answers: [
-                        "Khoang ngực",
-                        "Khoang bụng",
-                        "Hộp sọ",
-                        "Xương chậu"
+                        "Khí quản",
+                        "Dạ dày",
+                        "Thận",
+                        "Ruột"
                     ],
                     correct: 0
                 }
@@ -435,30 +444,20 @@ const quizData = {
         {
             icon: "🧬",
             title: "ADN",
-            description: "Cấu trúc và nguyên tắc di truyền.",
+            description:
+                "Tìm hiểu vật chất di truyền và cấu trúc ADN.",
 
             questions: [
 
                 {
-                    q: "ADN là viết tắt của?",
+                    q: "ADN có mấy loại nucleotide?",
                     answers: [
-                        "Axit deoxyribonucleic",
-                        "Axit ribonucleic",
-                        "Protein",
-                        "Lipid"
+                        "2",
+                        "3",
+                        "4",
+                        "5"
                     ],
-                    correct: 0
-                },
-
-                {
-                    q: "ADN có những loại base nào?",
-                    answers: [
-                        "A, T, G, X",
-                        "A, U, G, X",
-                        "A, C, U, G",
-                        "T, U, G, X"
-                    ],
-                    correct: 0
+                    correct: 2
                 },
 
                 {
@@ -484,12 +483,23 @@ const quizData = {
                 },
 
                 {
-                    q: "ADN có vai trò chủ yếu là?",
+                    q: "ADN có chức năng quan trọng nào?",
                     answers: [
                         "Lưu giữ thông tin di truyền",
                         "Tiêu hóa thức ăn",
-                        "Vận chuyển oxygen",
-                        "Co cơ"
+                        "Bơm máu",
+                        "Trao đổi khí"
+                    ],
+                    correct: 0
+                },
+
+                {
+                    q: "Hai mạch ADN liên kết với nhau chủ yếu nhờ?",
+                    answers: [
+                        "Liên kết bổ sung giữa các base",
+                        "Chất béo",
+                        "Protein cơ",
+                        "Nước"
                     ],
                     correct: 0
                 }
@@ -501,23 +511,13 @@ const quizData = {
         {
             icon: "🧬",
             title: "ARN",
-            description: "Các loại ARN và chức năng.",
+            description:
+                "Khám phá ARN và vai trò trong tế bào.",
 
             questions: [
 
                 {
-                    q: "ARN thường có mấy mạch?",
-                    answers: [
-                        "Một mạch",
-                        "Hai mạch",
-                        "Ba mạch",
-                        "Không có mạch"
-                    ],
-                    correct: 0
-                },
-
-                {
-                    q: "Trong ARN, base nào thay cho T?",
+                    q: "ARN có loại base nào thay cho T của ADN?",
                     answers: [
                         "A",
                         "U",
@@ -528,34 +528,45 @@ const quizData = {
                 },
 
                 {
-                    q: "mRNA có chức năng?",
+                    q: "ARN thường có?",
                     answers: [
-                        "Mang thông tin di truyền đến ribosome",
-                        "Tạo xương",
+                        "Một mạch",
+                        "Ba mạch",
+                        "Bốn mạch",
+                        "Không có mạch"
+                    ],
+                    correct: 0
+                },
+
+                {
+                    q: "mARN có vai trò gì?",
+                    answers: [
+                        "Mang thông tin mã hóa protein",
+                        "Co cơ",
                         "Vận chuyển oxygen",
-                        "Tiêu hóa"
+                        "Tạo xương"
                     ],
                     correct: 0
                 },
 
                 {
-                    q: "tRNA có vai trò?",
+                    q: "Quá trình tổng hợp ARN dựa trên khuôn ADN gọi là?",
                     answers: [
-                        "Mang amino acid",
-                        "Tạo DNA",
-                        "Tạo oxygen",
-                        "Tạo lipid"
+                        "Phiên mã",
+                        "Dịch mã",
+                        "Nguyên phân",
+                        "Thụ tinh"
                     ],
                     correct: 0
                 },
 
                 {
-                    q: "ARN tham gia trực tiếp vào quá trình?",
+                    q: "Protein được tổng hợp dựa trên thông tin từ?",
                     answers: [
-                        "Tổng hợp protein",
-                        "Tạo xương",
-                        "Tuần hoàn",
-                        "Hô hấp ngoài"
+                        "mARN",
+                        "Nước",
+                        "Oxygen",
+                        "Lipid"
                     ],
                     correct: 0
                 }
@@ -567,12 +578,13 @@ const quizData = {
         {
             icon: "🧫",
             title: "Nguyên phân",
-            description: "Sự phân chia của tế bào.",
+            description:
+                "Tìm hiểu quá trình phân chia tế bào.",
 
             questions: [
 
                 {
-                    q: "Một tế bào mẹ nguyên phân thường tạo ra?",
+                    q: "Một tế bào mẹ nguyên phân tạo ra?",
                     answers: [
                         "2 tế bào con",
                         "3 tế bào con",
@@ -583,45 +595,45 @@ const quizData = {
                 },
 
                 {
-                    q: "Nguyên phân giúp cơ thể?",
+                    q: "Các tế bào con sau nguyên phân thường có?",
+                    answers: [
+                        "Bộ NST giống tế bào mẹ",
+                        "Một nửa NST",
+                        "Gấp đôi NST",
+                        "Không có NST"
+                    ],
+                    correct: 0
+                },
+
+                {
+                    q: "Nguyên phân có vai trò quan trọng trong?",
                     answers: [
                         "Sinh trưởng và sửa chữa mô",
-                        "Tạo ánh sáng",
                         "Tiêu hóa",
-                        "Trao đổi khí"
+                        "Trao đổi khí",
+                        "Lọc máu"
                     ],
                     correct: 0
                 },
 
                 {
-                    q: "Sau nguyên phân, số lượng NST của tế bào con thường?",
+                    q: "Trước khi tế bào phân chia, ADN?",
                     answers: [
-                        "Giống tế bào mẹ",
-                        "Gấp đôi",
-                        "Giảm một nửa",
-                        "Bằng 0"
+                        "Nhân đôi",
+                        "Biến mất",
+                        "Không thay đổi",
+                        "Bị phân hủy hoàn toàn"
                     ],
                     correct: 0
                 },
 
                 {
-                    q: "Nguyên phân xảy ra ở?",
+                    q: "Nguyên phân xảy ra chủ yếu ở?",
                     answers: [
                         "Tế bào sinh dưỡng",
-                        "Chỉ giao tử",
-                        "Chỉ virus",
+                        "Chỉ tinh trùng",
+                        "Chỉ trứng",
                         "Chỉ vi khuẩn"
-                    ],
-                    correct: 0
-                },
-
-                {
-                    q: "Kết quả của nguyên phân là các tế bào con?",
-                    answers: [
-                        "Gần như giống nhau về bộ NST",
-                        "Luôn khác nhau hoàn toàn",
-                        "Không có NST",
-                        "Luôn là giao tử"
                     ],
                     correct: 0
                 }
@@ -634,9 +646,9 @@ const quizData = {
 };
 
 
-/* =====================================================
-   STATE
-   ===================================================== */
+/* =========================================================
+   GAME STATE
+   ========================================================= */
 
 let currentClass = 7;
 let currentTopic = 0;
@@ -646,92 +658,118 @@ let score = 0;
 let correctAnswers = 0;
 let wrongAnswers = 0;
 
+let correctStreak = 0;
+
 let selectedAnswer = false;
 
 let timeLeft = 30;
 let timerInterval = null;
 
-let correctStreak = 0;
-
 let quizEarnedXP = 0;
-
-let streak = Number(localStorage.getItem("bioStreak")) || 0;
-let xp = Number(localStorage.getItem("bioXP")) || 0;
-
-let lastStudyDate =
-    localStorage.getItem("bioLastStudyDate") || "";
-
-let achievements =
-    JSON.parse(localStorage.getItem("bioAchievements") || "[]");
 
 let lastAIQuestion = "";
 let lastAIAnswer = "";
 
 
-/* =====================================================
-   SCREENS
-   ===================================================== */
+/* =========================================================
+   LOCAL STORAGE
+   ========================================================= */
+
+let streak =
+    Number(localStorage.getItem("bioStreak")) || 0;
+
+let lastStudyDate =
+    localStorage.getItem("bioLastStudyDate") || "";
+
+let xp =
+    Number(localStorage.getItem("bioXP")) || 0;
+
+let achievements;
+
+try {
+
+    achievements =
+        JSON.parse(
+            localStorage.getItem("bioAchievements")
+        ) || [];
+
+    if (!Array.isArray(achievements)) {
+        achievements = [];
+    }
+
+} catch {
+
+    achievements = [];
+}
+
+
+/* =========================================================
+   SCREEN
+   ========================================================= */
 
 function showScreen(id) {
 
-    document.querySelectorAll(".screen").forEach(screen => {
-        screen.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
 
-    const screen = $(id);
+            screen.classList.remove("active");
 
-    if (screen) {
-        screen.classList.add("active");
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
         });
+
+    const target = $(id);
+
+    if (target) {
+        target.classList.add("active");
     }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
-/* =====================================================
-   HOME / CLASS
-   ===================================================== */
+function goHome() {
 
-function showClasses() {
+    stopTimer();
+
     showScreen("homeScreen");
 
-    const section =
-        document.querySelector(".class-grid");
-
-    if (section) {
-        section.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-    }
+    updateDashboard();
 }
 
+
+function showClasses() {
+
+    stopTimer();
+
+    showScreen("classScreen");
+
+}
+
+
+/* =========================================================
+   SELECT CLASS
+   ========================================================= */
 
 function selectClass(classNumber) {
 
+    if (!quizData[classNumber]) {
+        return;
+    }
+
     currentClass = classNumber;
-
-    const titles = {
-        7: "🌱 Sinh học 7",
-        8: "🫀 Sinh học 8",
-        9: "🧬 Sinh học 9"
-    };
-
-    $("selectedClassTitle").textContent =
-        titles[classNumber];
 
     renderTopics();
 
-    showScreen("classScreen");
+    showScreen("topicScreen");
 }
 
 
-/* =====================================================
+/* =========================================================
    TOPICS
-   ===================================================== */
+   ========================================================= */
 
 function renderTopics() {
 
@@ -741,38 +779,60 @@ function renderTopics() {
 
     grid.innerHTML = "";
 
-    quizData[currentClass].forEach((topic, index) => {
+    const topics = quizData[currentClass];
 
-        const button = document.createElement("button");
+    $("selectedClassBadge").textContent =
+        `SINH HỌC ${currentClass}`;
+
+    $("topicTitle").textContent =
+        `Chủ đề Sinh học ${currentClass}`;
+
+
+    topics.forEach((topic, index) => {
+
+        const button =
+            document.createElement("button");
 
         button.type = "button";
 
         button.className = "topic-card";
 
         button.innerHTML = `
-            <div class="topic-icon">${topic.icon}</div>
 
-            <h3>${escapeHTML(topic.title)}</h3>
+            <div class="topic-icon">
+                ${topic.icon}
+            </div>
 
-            <p>${escapeHTML(topic.description)}</p>
+            <h3>
+                ${escapeHTML(topic.title)}
+            </h3>
 
-            <span class="question-count">
-                📝 ${topic.questions.length} câu · Làm ngay →
-            </span>
+            <p>
+                ${escapeHTML(topic.description)}
+            </p>
+
+            <div class="topic-meta">
+                📝 ${topic.questions.length} câu
+                &nbsp;&nbsp; →
+            </div>
+
         `;
 
-        button.addEventListener("click", () => {
-            startQuiz(index);
-        });
+        button.addEventListener(
+            "click",
+            () => startQuiz(index)
+        );
 
         grid.appendChild(button);
+
     });
+
 }
 
 
-/* =====================================================
+/* =========================================================
    START QUIZ
-   ===================================================== */
+   ========================================================= */
 
 function startQuiz(topicIndex) {
 
@@ -781,7 +841,9 @@ function startQuiz(topicIndex) {
     currentQuestion = 0;
 
     score = 0;
+
     correctAnswers = 0;
+
     wrongAnswers = 0;
 
     correctStreak = 0;
@@ -792,6 +854,7 @@ function startQuiz(topicIndex) {
 
     const topic =
         quizData[currentClass][currentTopic];
+
 
     $("quizTopic").textContent =
         `${topic.icon} ${topic.title}`;
@@ -804,9 +867,9 @@ function startQuiz(topicIndex) {
 }
 
 
-/* =====================================================
+/* =========================================================
    LOAD QUESTION
-   ===================================================== */
+   ========================================================= */
 
 function loadQuestion() {
 
@@ -820,7 +883,11 @@ function loadQuestion() {
     const question =
         topic.questions[currentQuestion];
 
-    if (!question) return;
+
+    if (!question) {
+        return;
+    }
+
 
     $("questionNumber").textContent =
         `Câu ${currentQuestion + 1}/${topic.questions.length}`;
@@ -834,29 +901,39 @@ function loadQuestion() {
     $("scoreDisplay").textContent =
         `Điểm: ${score}`;
 
-    const answers = $("answers");
+
+    const answers =
+        $("answers");
 
     answers.innerHTML = "";
 
-    question.answers.forEach((answer, index) => {
 
-        const button =
-            document.createElement("button");
+    question.answers.forEach(
+        (answer, index) => {
 
-        button.type = "button";
+            const button =
+                document.createElement("button");
 
-        button.className = "answer-btn";
+            button.type = "button";
 
-        button.innerHTML =
-            `<b>${String.fromCharCode(65 + index)}.</b>
-             ${escapeHTML(answer)}`;
+            button.className =
+                "answer-btn";
 
-        button.addEventListener("click", () => {
-            checkAnswer(index, button);
-        });
+            button.innerHTML =
+                `${String.fromCharCode(65 + index)}. ${escapeHTML(answer)}`;
 
-        answers.appendChild(button);
-    });
+
+            button.addEventListener(
+                "click",
+                () => checkAnswer(index, button)
+            );
+
+
+            answers.appendChild(button);
+
+        }
+    );
+
 
     $("nextButton").style.display = "none";
 
@@ -866,9 +943,9 @@ function loadQuestion() {
 }
 
 
-/* =====================================================
-   QUIZ PROGRESS
-   ===================================================== */
+/* =========================================================
+   PROGRESS
+   ========================================================= */
 
 function updateQuizProgress() {
 
@@ -876,16 +953,18 @@ function updateQuizProgress() {
         quizData[currentClass][currentTopic];
 
     const percent =
-        ((currentQuestion + 1) / topic.questions.length) * 100;
+        ((currentQuestion + 1) /
+            topic.questions.length) * 100;
+
 
     $("quizProgress").style.width =
         percent + "%";
 }
 
 
-/* =====================================================
+/* =========================================================
    TIMER
-   ===================================================== */
+   ========================================================= */
 
 function startTimer() {
 
@@ -895,20 +974,24 @@ function startTimer() {
 
     updateTimer();
 
-    timerInterval = setInterval(() => {
 
-        timeLeft--;
+    timerInterval =
+        setInterval(() => {
 
-        updateTimer();
+            timeLeft--;
 
-        if (timeLeft <= 0) {
+            updateTimer();
 
-            stopTimer();
 
-            timeOut();
-        }
+            if (timeLeft <= 0) {
 
-    }, 1000);
+                stopTimer();
+
+                timeOut();
+
+            }
+
+        }, 1000);
 }
 
 
@@ -919,6 +1002,7 @@ function stopTimer() {
         clearInterval(timerInterval);
 
         timerInterval = null;
+
     }
 }
 
@@ -927,27 +1011,47 @@ function updateTimer() {
 
     const timer = $("timer");
 
+    if (!timer) return;
+
+
     timer.textContent =
         `⏱️ ${timeLeft}s`;
+
 
     timer.classList.remove(
         "timer-warning",
         "timer-danger"
     );
 
+
     if (timeLeft <= 10) {
-        timer.classList.add("timer-warning");
+
+        timer.classList.add(
+            "timer-warning"
+        );
+
     }
 
+
     if (timeLeft <= 5) {
-        timer.classList.add("timer-danger");
+
+        timer.classList.add(
+            "timer-danger"
+        );
+
     }
 }
 
 
+/* =========================================================
+   TIME OUT
+   ========================================================= */
+
 function timeOut() {
 
-    if (selectedAnswer) return;
+    if (selectedAnswer) {
+        return;
+    }
 
     selectedAnswer = true;
 
@@ -955,29 +1059,15 @@ function timeOut() {
 
     correctStreak = 0;
 
-    document.querySelectorAll(".answer-btn")
+
+    document
+        .querySelectorAll(".answer-btn")
         .forEach(button => {
+
             button.disabled = true;
+
         });
 
-    showToast("⏰", "Hết giờ!");
-
-    $("nextButton").style.display =
-        "block";
-}
-
-
-/* =====================================================
-   CHECK ANSWER
-   ===================================================== */
-
-function checkAnswer(index, clickedButton) {
-
-    if (selectedAnswer) return;
-
-    selectedAnswer = true;
-
-    stopTimer();
 
     const topic =
         quizData[currentClass][currentTopic];
@@ -985,28 +1075,88 @@ function checkAnswer(index, clickedButton) {
     const question =
         topic.questions[currentQuestion];
 
+
     const buttons =
-        document.querySelectorAll(".answer-btn");
+        document.querySelectorAll(
+            ".answer-btn"
+        );
+
+
+    if (buttons[question.correct]) {
+
+        buttons[
+            question.correct
+        ].classList.add("correct");
+
+    }
+
+
+    showToast(
+        "⏰",
+        "Hết giờ! Đáp án đúng đã được đánh dấu."
+    );
+
+
+    $("nextButton").style.display =
+        "block";
+}
+
+
+/* =========================================================
+   CHECK ANSWER
+   ========================================================= */
+
+function checkAnswer(
+    index,
+    clickedButton
+) {
+
+    if (selectedAnswer) {
+        return;
+    }
+
+    selectedAnswer = true;
+
+    stopTimer();
+
+
+    const topic =
+        quizData[currentClass][currentTopic];
+
+    const question =
+        topic.questions[currentQuestion];
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".answer-btn"
+        );
+
 
     buttons.forEach(button => {
+
         button.disabled = true;
+
     });
 
 
     if (index === question.correct) {
 
-        clickedButton.classList.add("correct");
+        clickedButton.classList.add(
+            "correct"
+        );
 
         score++;
+
         correctAnswers++;
 
         correctStreak++;
+
 
         addXP(20);
 
         quizEarnedXP += 20;
 
-        unlockAchievement("first");
 
         showToast(
             "🎉",
@@ -1014,31 +1164,43 @@ function checkAnswer(index, clickedButton) {
         );
 
 
+        unlockAchievement("first");
+
+
         if (correctStreak >= 10) {
 
-            unlockAchievement("memory");
+            unlockAchievement(
+                "memory"
+            );
 
         }
 
     } else {
 
-        clickedButton.classList.add("wrong");
+        clickedButton.classList.add(
+            "wrong"
+        );
+
 
         if (buttons[question.correct]) {
 
-            buttons[question.correct]
-                .classList.add("correct");
+            buttons[
+                question.correct
+            ].classList.add("correct");
 
         }
+
 
         wrongAnswers++;
 
         correctStreak = 0;
 
+
         showToast(
             "💡",
-            "Chưa đúng! Hãy xem lại nhé."
+            "Chưa đúng! Hãy xem đáp án đúng nhé."
         );
+
     }
 
 
@@ -1050,14 +1212,15 @@ function checkAnswer(index, clickedButton) {
 }
 
 
-/* =====================================================
-   NEXT
-   ===================================================== */
+/* =========================================================
+   NEXT QUESTION
+   ========================================================= */
 
 function nextQuestion() {
 
     const topic =
         quizData[currentClass][currentTopic];
+
 
     if (
         currentQuestion <
@@ -1071,23 +1234,26 @@ function nextQuestion() {
     } else {
 
         finishQuiz();
+
     }
 }
 
 
-/* =====================================================
-   FINISH
-   ===================================================== */
+/* =========================================================
+   FINISH QUIZ
+   ========================================================= */
 
 function finishQuiz() {
 
     stopTimer();
+
 
     const topic =
         quizData[currentClass][currentTopic];
 
     const total =
         topic.questions.length;
+
 
     updateStreak();
 
@@ -1098,17 +1264,23 @@ function finishQuiz() {
 
         quizEarnedXP += 30;
 
-        unlockAchievement("perfect");
+        unlockAchievement(
+            "grade9"
+        );
+
     }
 
 
     if (
         currentClass === 9 &&
         currentTopic === 0 &&
-        correctAnswers >= 2
+        correctAnswers >= 3
     ) {
 
-        unlockAchievement("dna");
+        unlockAchievement(
+            "dna"
+        );
+
     }
 
 
@@ -1127,11 +1299,14 @@ function finishQuiz() {
 
     const percent =
         Math.round(
-            correctAnswers / total * 100
+            correctAnswers /
+            total *
+            100
         );
 
 
     let message;
+
 
     if (percent === 100) {
 
@@ -1152,11 +1327,13 @@ function finishQuiz() {
 
         message =
             "📚 Đừng nản! Học lại rồi thử lại nhé!";
+
     }
 
 
     $("resultMessage").textContent =
         message;
+
 
     updateDashboard();
 
@@ -1166,13 +1343,14 @@ function finishQuiz() {
 }
 
 
-/* =====================================================
+/* =========================================================
    RESTART / QUIT
-   ===================================================== */
+   ========================================================= */
 
 function restartQuiz() {
 
     startQuiz(currentTopic);
+
 }
 
 
@@ -1180,13 +1358,16 @@ function quitQuiz() {
 
     stopTimer();
 
-    showScreen("classScreen");
+    renderTopics();
+
+    showScreen("topicScreen");
+
 }
 
 
-/* =====================================================
+/* =========================================================
    DATE
-   ===================================================== */
+   ========================================================= */
 
 function getToday() {
 
@@ -1194,8 +1375,12 @@ function getToday() {
 
     return [
         d.getFullYear(),
-        String(d.getMonth() + 1).padStart(2, "0"),
-        String(d.getDate()).padStart(2, "0")
+        String(
+            d.getMonth() + 1
+        ).padStart(2, "0"),
+        String(
+            d.getDate()
+        ).padStart(2, "0")
     ].join("-");
 }
 
@@ -1204,48 +1389,64 @@ function getYesterday() {
 
     const d = new Date();
 
-    d.setDate(d.getDate() - 1);
+    d.setDate(
+        d.getDate() - 1
+    );
 
     return [
         d.getFullYear(),
-        String(d.getMonth() + 1).padStart(2, "0"),
-        String(d.getDate()).padStart(2, "0")
+        String(
+            d.getMonth() + 1
+        ).padStart(2, "0"),
+        String(
+            d.getDate()
+        ).padStart(2, "0")
     ].join("-");
 }
 
 
-/* =====================================================
+/* =========================================================
    STREAK
-   ===================================================== */
+   ========================================================= */
 
 function updateStreak() {
 
-    const today = getToday();
+    const today =
+        getToday();
+
 
     if (!lastStudyDate) {
 
         streak = 1;
 
-    } else if (lastStudyDate === today) {
+    } else if (
+        lastStudyDate === today
+    ) {
 
         return;
 
-    } else if (lastStudyDate === getYesterday()) {
+    } else if (
+        lastStudyDate ===
+        getYesterday()
+    ) {
 
         streak++;
 
     } else {
 
         streak = 1;
+
     }
 
 
     lastStudyDate = today;
 
+
     localStorage.setItem(
         "bioStreak",
         String(streak)
     );
+
 
     localStorage.setItem(
         "bioLastStudyDate",
@@ -1259,12 +1460,15 @@ function updateStreak() {
 
         quizEarnedXP += 50;
 
-        unlockAchievement("streak");
+        unlockAchievement(
+            "streak"
+        );
 
         showToast(
             "🔥",
             "3 ngày liên tiếp! +50 XP"
         );
+
     }
 
 
@@ -1272,9 +1476,9 @@ function updateStreak() {
 }
 
 
-/* =====================================================
+/* =========================================================
    XP
-   ===================================================== */
+   ========================================================= */
 
 function addXP(amount) {
 
@@ -1289,9 +1493,9 @@ function addXP(amount) {
 }
 
 
-/* =====================================================
+/* =========================================================
    LEVEL
-   ===================================================== */
+   ========================================================= */
 
 function getLevel() {
 
@@ -1304,7 +1508,10 @@ function getLevel() {
             max: 100
         };
 
-    } else if (xp < 300) {
+    }
+
+
+    if (xp < 300) {
 
         return {
             level: 2,
@@ -1313,7 +1520,10 @@ function getLevel() {
             max: 300
         };
 
-    } else if (xp < 700) {
+    }
+
+
+    if (xp < 700) {
 
         return {
             level: 3,
@@ -1322,7 +1532,10 @@ function getLevel() {
             max: 700
         };
 
-    } else if (xp < 1200) {
+    }
+
+
+    if (xp < 1200) {
 
         return {
             level: 4,
@@ -1331,7 +1544,10 @@ function getLevel() {
             max: 1200
         };
 
-    } else if (xp < 2500) {
+    }
+
+
+    if (xp < 2500) {
 
         return {
             level: 5,
@@ -1342,75 +1558,139 @@ function getLevel() {
 
     }
 
+
     return {
         level: 6,
         name: "Bậc thầy Sinh học",
         min: 2500,
         max: 2500
     };
+
 }
 
 
-/* =====================================================
+/* =========================================================
    DASHBOARD
-   ===================================================== */
+   ========================================================= */
 
 function updateDashboard() {
 
-    const level = getLevel();
+    const level =
+        getLevel();
+
 
     let progress = 100;
 
-    if (level.max !== level.min) {
+
+    if (
+        level.max !==
+        level.min
+    ) {
 
         progress =
-            ((xp - level.min) /
-                (level.max - level.min)) * 100;
+            (
+                (xp - level.min) /
+                (level.max - level.min)
+            ) * 100;
+
     }
 
 
-    $("headerStreak").textContent =
-        streak;
+    if ($("headerStreak")) {
 
-    $("headerXP").textContent =
-        `${xp} XP`;
+        $("headerStreak").textContent =
+            streak;
 
-    $("streakNumber").textContent =
-        streak;
+    }
 
-    $("streakText").textContent =
-        streak > 0
-            ? `Bạn đã học ${streak} ngày liên tiếp`
-            : "Bắt đầu học hôm nay!";
 
-    $("xpNumber").textContent =
-        xp;
+    if ($("headerXP")) {
 
-    $("levelText").textContent =
-        `Level ${level.level}`;
+        $("headerXP").textContent =
+            `${xp} XP`;
 
-    $("levelName").textContent =
-        level.name;
+    }
 
-    $("levelXP").textContent =
-        level.max === level.min
-            ? `${xp} XP`
-            : `${xp} / ${level.max} XP`;
 
-    $("levelProgress").style.width =
-        Math.min(
-            100,
-            Math.max(0, progress)
-        ) + "%";
+    if ($("streakNumber")) {
 
-    $("achievementNumber").textContent =
-        achievements.length;
+        $("streakNumber").textContent =
+            streak;
+
+    }
+
+
+    if ($("streakText")) {
+
+        $("streakText").textContent =
+            streak > 0
+                ? `Bạn đã học ${streak} ngày liên tiếp`
+                : "Bắt đầu học hôm nay!";
+
+    }
+
+
+    if ($("xpNumber")) {
+
+        $("xpNumber").textContent =
+            xp;
+
+    }
+
+
+    if ($("levelText")) {
+
+        $("levelText").textContent =
+            `Level ${level.level}`;
+
+    }
+
+
+    if ($("levelName")) {
+
+        $("levelName").textContent =
+            level.name;
+
+    }
+
+
+    if ($("levelXP")) {
+
+        $("levelXP").textContent =
+            level.max === level.min
+                ? `${xp} XP`
+                : `${xp} / ${level.max} XP`;
+
+    }
+
+
+    if ($("levelProgress")) {
+
+        $("levelProgress").style.width =
+            Math.min(
+                100,
+                Math.max(
+                    0,
+                    progress
+                )
+            ) + "%";
+
+    }
+
+
+    if ($("achievementNumber")) {
+
+        $("achievementNumber").textContent =
+            achievements.length;
+
+    }
+
 }
 
 
-/* =====================================================
+/* =========================================================
    ACHIEVEMENTS
-   ===================================================== */
+   ========================================================= */
 
 const achievementData = {
 
@@ -1434,9 +1714,9 @@ const achievementData = {
         title: "Siêu trí nhớ"
     },
 
-    perfect: {
+    grade9: {
         icon: "🏆",
-        title: "Hoàn hảo"
+        title: "Xuất sắc"
     }
 
 };
@@ -1444,20 +1724,30 @@ const achievementData = {
 
 function unlockAchievement(id) {
 
-    if (achievements.includes(id)) {
+    if (
+        achievements.includes(id)
+    ) {
         return;
     }
 
-    if (!achievementData[id]) {
+
+    if (
+        !achievementData[id]
+    ) {
         return;
     }
+
 
     achievements.push(id);
 
+
     localStorage.setItem(
         "bioAchievements",
-        JSON.stringify(achievements)
+        JSON.stringify(
+            achievements
+        )
     );
+
 
     showToast(
         achievementData[id].icon,
@@ -1465,703 +1755,120 @@ function unlockAchievement(id) {
         achievementData[id].title
     );
 
+
     updateAchievements();
+
 }
 
 
 function updateAchievements() {
 
-    Object.keys(achievementData)
-        .forEach(id => {
+    Object.keys(
+        achievementData
+    ).forEach(id => {
 
-            const element =
-                $("achievement-" + id);
+        const element =
+            $(
+                "achievement-" +
+                id
+            );
 
-            if (!element) return;
 
-            if (achievements.includes(id)) {
+        if (!element) {
+            return;
+        }
 
-                element.classList.add("unlocked");
 
-            } else {
+        if (
+            achievements.includes(id)
+        ) {
 
-                element.classList.remove("unlocked");
-            }
+            element.classList.add(
+                "unlocked"
+            );
 
-        });
+        } else {
 
-    $("achievementNumber").textContent =
-        achievements.length;
+            element.classList.remove(
+                "unlocked"
+            );
+
+        }
+
+    });
+
+
+    if ($("achievementNumber")) {
+
+        $("achievementNumber").textContent =
+            achievements.length;
+
+    }
+
 }
 
 
-/* =====================================================
-   ================= 3D LAB =============================
-   ===================================================== */
+/* =========================================================
+   3D ENGINE
+   ========================================================= */
 
 let scene;
 let camera;
 let renderer;
 
-let bioObject = null;
+let current3DObject;
 
-let rotationX = 0.25;
-let rotationY = 0.5;
+let targetRotationX = 0;
+let targetRotationY = 0;
 
-let zoom = 1;
+let rotationX = 0;
+let rotationY = 0;
 
-let dragging = false;
+let cameraDistance = 7;
 
-let lastPointerX = 0;
-let lastPointerY = 0;
+let isDragging = false;
 
-let currentModel = "microscope";
+let previousPointerX = 0;
+let previousPointerY = 0;
 
 
-/* ---------- MATERIALS ---------- */
-
-function material(color, metalness = 0.2, roughness = 0.45) {
-
-    return new THREE.MeshStandardMaterial({
-
-        color: color,
-
-        metalness: metalness,
-
-        roughness: roughness
-    });
-}
-
-
-/* ---------- BOX ---------- */
-
-function makeBox(
-    x,
-    y,
-    z,
-    color,
-    scaleX,
-    scaleY,
-    scaleZ
-) {
-
-    const geometry =
-        new THREE.BoxGeometry(
-            scaleX,
-            scaleY,
-            scaleZ
-        );
-
-    const mesh =
-        new THREE.Mesh(
-            geometry,
-            material(color)
-        );
-
-    mesh.position.set(x, y, z);
-
-    return mesh;
-}
-
-
-/* ---------- CYLINDER ---------- */
-
-function makeCylinder(
-    radius,
-    height,
-    color,
-    x,
-    y,
-    z
-) {
-
-    const geometry =
-        new THREE.CylinderGeometry(
-            radius,
-            radius,
-            height,
-            32
-        );
-
-    const mesh =
-        new THREE.Mesh(
-            geometry,
-            material(color, .5, .3)
-        );
-
-    mesh.position.set(x, y, z);
-
-    return mesh;
-}
-
-
-/* =====================================================
-   MICROSCOPE
-   ===================================================== */
-
-function createMicroscope() {
-
-    const group =
-        new THREE.Group();
-
-
-    /* BASE */
-
-    const base =
-        makeBox(
-            0,
-            -2.3,
-            0,
-            0x27332d,
-            5,
-            .7,
-            3.3
-        );
-
-    group.add(base);
-
-
-    /* BASE TOP */
-
-    const baseTop =
-        makeBox(
-            0,
-            -1.9,
-            0,
-            0x53665b,
-            4.2,
-            .25,
-            2.6
-        );
-
-    group.add(baseTop);
-
-
-    /* ARM */
-
-    const arm =
-        makeBox(
-            -1.5,
-            .3,
-            0,
-            0x36483e,
-            .65,
-            4.4,
-            1.25
-        );
-
-    group.add(arm);
-
-
-    /* ARM TOP */
-
-    const topArm =
-        makeBox(
-            -.7,
-            2.1,
-            0,
-            0x36483e,
-            2.3,
-            .65,
-            1.25
-        );
-
-    topArm.rotation.z =
-        THREE.MathUtils.degToRad(-15);
-
-    group.add(topArm);
-
-
-    /* STAGE */
-
-    const stage =
-        makeBox(
-            .25,
-            -.8,
-            0,
-            0x1e2823,
-            2.7,
-            .3,
-            2
-        );
-
-    group.add(stage);
-
-
-    /* SLIDE */
-
-    const slide =
-        makeBox(
-            .25,
-            -.6,
-            0,
-            0xd9e8df,
-            1.3,
-            .08,
-            .7
-        );
-
-    group.add(slide);
-
-
-    /* OBJECTIVES */
-
-    const objective1 =
-        makeCylinder(
-            .18,
-            1.2,
-            0x9ca3a0,
-            .45,
-            .05,
-            0
-        );
-
-    objective1.rotation.z =
-        THREE.MathUtils.degToRad(90);
-
-    group.add(objective1);
-
-
-    const objective2 =
-        makeCylinder(
-            .15,
-            1,
-            0xb6beb9,
-            .9,
-            .15,
-            0
-        );
-
-    objective2.rotation.z =
-        THREE.MathUtils.degToRad(80);
-
-    group.add(objective2);
-
-
-    /* EYEPIECE */
-
-    const eyepiece =
-        makeCylinder(
-            .35,
-            1.5,
-            0x202b25,
-            -.25,
-            2.65,
-            0
-        );
-
-    eyepiece.rotation.z =
-        THREE.MathUtils.degToRad(70);
-
-    group.add(eyepiece);
-
-
-    /* FOCUS KNOBS */
-
-    const knob1 =
-        makeCylinder(
-            .45,
-            .35,
-            0x111714,
-            -1.15,
-            .65,
-            .75
-        );
-
-    knob1.rotation.x =
-        Math.PI / 2;
-
-    group.add(knob1);
-
-
-    const knob2 =
-        makeCylinder(
-            .28,
-            .4,
-            0x68766f,
-            -1.15,
-            .65,
-            -.75
-        );
-
-    knob2.rotation.x =
-        Math.PI / 2;
-
-    group.add(knob2);
-
-
-    /* LIGHT */
-
-    const light =
-        makeCylinder(
-            .55,
-            .15,
-            0xe8fff0,
-            .25,
-            -1.65,
-            0
-        );
-
-    group.add(light);
-
-
-    group.scale.setScalar(1.1);
-
-    return group;
-}
-
-
-/* =====================================================
-   CELL
-   ===================================================== */
-
-function createCell() {
-
-    const group =
-        new THREE.Group();
-
-
-    /* CYTOPLASM */
-
-    const cytoplasm =
-        new THREE.Mesh(
-
-            new THREE.SphereGeometry(
-                2.5,
-                64,
-                64
-            ),
-
-            new THREE.MeshPhysicalMaterial({
-
-                color: 0x79d99b,
-
-                transparent: true,
-
-                opacity: .35,
-
-                roughness: .15,
-
-                transmission: .1
-
-            })
-        );
-
-    group.add(cytoplasm);
-
-
-    /* MEMBRANE */
-
-    const membrane =
-        new THREE.Mesh(
-
-            new THREE.SphereGeometry(
-                2.55,
-                64,
-                64
-            ),
-
-            new THREE.MeshPhysicalMaterial({
-
-                color: 0xb9ffd0,
-
-                transparent: true,
-
-                opacity: .22,
-
-                wireframe: false,
-
-                side: THREE.DoubleSide
-
-            })
-        );
-
-    group.add(membrane);
-
-
-    /* NUCLEUS */
-
-    const nucleus =
-        new THREE.Mesh(
-
-            new THREE.SphereGeometry(
-                .85,
-                48,
-                48
-            ),
-
-            material(
-                0x8b5cf6,
-                .2,
-                .25
-            )
-        );
-
-    nucleus.position.set(
-        -.2,
-        .2,
-        .2
-    );
-
-    group.add(nucleus);
-
-
-    /* NUCLEOLUS */
-
-    const nucleolus =
-        new THREE.Mesh(
-
-            new THREE.SphereGeometry(
-                .25,
-                32,
-                32
-            ),
-
-            material(0x4c1d95)
-        )
-    ;
-
-    nucleolus.position.set(
-        -.35,
-        .45,
-        .8
-    );
-
-    group.add(nucleolus);
-
-
-    /* MITOCHONDRIA */
-
-    for (let i = 0; i < 7; i++) {
-
-        const mitochondria =
-            new THREE.Mesh(
-
-                new THREE.TorusGeometry(
-                    .35,
-                    .12,
-                    16,
-                    32
-                ),
-
-                material(
-                    0xf97316,
-                    .1,
-                    .35
-                )
-            );
-
-
-        const angle =
-            (i / 7) * Math.PI * 2;
-
-        mitochondria.position.set(
-
-            Math.cos(angle) * 1.45,
-
-            Math.sin(angle * 1.7) * .9,
-
-            Math.sin(angle) * 1.35
-
-        );
-
-
-        mitochondria.rotation.set(
-            angle,
-            angle * .7,
-            angle * .4
-        );
-
-
-        group.add(mitochondria);
-    }
-
-
-    /* SMALL VACUOLES */
-
-    for (let i = 0; i < 5; i++) {
-
-        const vacuole =
-            new THREE.Mesh(
-
-                new THREE.SphereGeometry(
-                    .2 + Math.random() * .15,
-                    24,
-                    24
-                ),
-
-                new THREE.MeshStandardMaterial({
-
-                    color: 0xdbeafe,
-
-                    transparent: true,
-
-                    opacity: .55
-                })
-            );
-
-
-        vacuole.position.set(
-
-            (Math.random() - .5) * 3,
-
-            (Math.random() - .5) * 2.5,
-
-            (Math.random() - .5) * 3
-
-        );
-
-
-        group.add(vacuole);
-    }
-
-
-    return group;
-}
-
-
-/* =====================================================
-   DNA
-   ===================================================== */
-
-function createDNA() {
-
-    const group =
-        new THREE.Group();
-
-
-    const radius = 1.5;
-
-    const height = 5;
-
-    const steps = 30;
-
-
-    for (let i = 0; i < steps; i++) {
-
-        const t = i / (steps - 1);
-
-        const y =
-            -height / 2 + t * height;
-
-        const angle =
-            t * Math.PI * 4;
-
-
-        const x1 =
-            Math.cos(angle) * radius;
-
-        const z1 =
-            Math.sin(angle) * radius;
-
-
-        const x2 =
-            -x1;
-
-        const z2 =
-            -z1;
-
-
-        const sphere1 =
-            new THREE.Mesh(
-
-                new THREE.SphereGeometry(
-                    .14,
-                    20,
-                    20
-                ),
-
-                material(0x60a5fa)
-            );
-
-
-        sphere1.position.set(
-            x1,
-            y,
-            z1
-        );
-
-
-        group.add(sphere1);
-
-
-        const sphere2 =
-            new THREE.Mesh(
-
-                new THREE.SphereGeometry(
-                    .14,
-                    20,
-                    20
-                ),
-
-                material(0xf472b6)
-            );
-
-
-        sphere2.position.set(
-            x2,
-            y,
-            z2
-        );
-
-
-        group.add(sphere2);
-
-
-        if (i % 2 === 0) {
-
-            const middle =
-                new THREE.Mesh(
-
-                    new THREE.CylinderGeometry(
-                        .055,
-                        .055,
-                        3,
-                        12
-                    ),
-
-                    material(0xe5e7eb)
-                );
-
-
-            middle.position.set(
-                0,
-                y,
-                0
-            );
-
-
-            middle.rotation.z =
-                Math.PI / 2;
-
-
-            middle.rotation.y =
-                -angle;
-
-
-            group.add(middle);
-        }
-    }
-
-
-    return group;
-}
-
-
-/* =====================================================
-   3D SETUP
-   ===================================================== */
+/* =========================================================
+   3D INIT
+   ========================================================= */
 
 function init3D() {
 
     const canvas =
-        $("bio3dCanvas");
+        $("threeCanvas");
 
-    if (!canvas) return;
+
+    if (!canvas) {
+        return;
+    }
+
+
+    if (
+        typeof THREE ===
+        "undefined"
+    ) {
+
+        console.error(
+            "Three.js chưa tải được."
+        );
+
+        return;
+
+    }
 
 
     scene =
         new THREE.Scene();
+
+
+    scene.background =
+        new THREE.Color(
+            0x052e16
+        );
 
 
     camera =
@@ -2169,27 +1876,23 @@ function init3D() {
             45,
             canvas.clientWidth /
                 canvas.clientHeight,
-            .1,
+            0.1,
             100
         );
 
 
     camera.position.set(
-        7,
-        4,
-        8
+        0,
+        1.3,
+        cameraDistance
     );
 
 
     renderer =
         new THREE.WebGLRenderer({
-
-            canvas: canvas,
-
+            canvas,
             antialias: true,
-
-            alpha: true
-
+            alpha: false
         });
 
 
@@ -2208,49 +1911,60 @@ function init3D() {
     );
 
 
+    renderer.shadowMap.enabled =
+        true;
+
+
+    renderer.shadowMap.type =
+        THREE.PCFSoftShadowMap;
+
+
     /* LIGHT */
 
     const ambient =
-        new THREE.AmbientLight(
+        new THREE.HemisphereLight(
             0xffffff,
-            2
+            0x14532d,
+            2.2
         );
 
     scene.add(ambient);
 
 
-    const keyLight =
+    const light =
         new THREE.DirectionalLight(
             0xffffff,
-            4
+            3
         );
 
-    keyLight.position.set(
-        5,
-        8,
-        6
-    );
-
-    scene.add(keyLight);
-
-
-    const greenLight =
-        new THREE.PointLight(
-            0x4ade80,
-            25,
-            20
-        );
-
-    greenLight.position.set(
-        -5,
-        3,
+    light.position.set(
+        4,
+        7,
         5
     );
 
-    scene.add(greenLight);
+    light.castShadow = true;
+
+    scene.add(light);
 
 
-    load3DModel("microscope");
+    const fill =
+        new THREE.PointLight(
+            0x86efac,
+            25,
+            15
+        );
+
+    fill.position.set(
+        -4,
+        2,
+        3
+    );
+
+    scene.add(fill);
+
+
+    createMicroscope();
 
 
     setup3DControls();
@@ -2263,153 +1977,854 @@ function init3D() {
 
 
     animate3D();
+
 }
 
 
-/* =====================================================
-   CHANGE 3D MODEL
-   ===================================================== */
+/* =========================================================
+   CREATE MICROSCOPE
+   ========================================================= */
 
-function load3DModel(type) {
+function createMicroscope() {
 
-    currentModel = type;
+    clear3DObject();
 
 
-    if (bioObject) {
+    current3DObject =
+        new THREE.Group();
 
-        scene.remove(bioObject);
 
-        bioObject = null;
+    /* BASE */
+
+    const base =
+        new THREE.Mesh(
+            new THREE.BoxGeometry(
+                3.8,
+                0.45,
+                2.5
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0x263238,
+                metalness: 0.8,
+                roughness: 0.25
+            })
+        );
+
+
+    base.position.y = -1.65;
+
+    base.castShadow = true;
+
+    base.receiveShadow = true;
+
+    current3DObject.add(base);
+
+
+    /* BASE TOP */
+
+    const baseTop =
+        new THREE.Mesh(
+            new THREE.BoxGeometry(
+                3.2,
+                0.2,
+                2
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0x455a64,
+                metalness: 0.7,
+                roughness: 0.3
+            })
+        );
+
+
+    baseTop.position.y =
+        -1.38;
+
+    current3DObject.add(baseTop);
+
+
+    /* STAND */
+
+    const stand =
+        new THREE.Mesh(
+            new THREE.BoxGeometry(
+                0.65,
+                4,
+                0.65
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0x37474f,
+                metalness: 0.75,
+                roughness: 0.3
+            })
+        );
+
+
+    stand.position.set(
+        -1.2,
+        0.2,
+        0
+    );
+
+
+    stand.rotation.z =
+        -0.18;
+
+
+    stand.castShadow = true;
+
+    current3DObject.add(stand);
+
+
+    /* ARM */
+
+    const arm =
+        new THREE.Mesh(
+            new THREE.BoxGeometry(
+                0.65,
+                2.7,
+                0.65
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0x546e7a,
+                metalness: 0.75,
+                roughness: 0.25
+            })
+        );
+
+
+    arm.position.set(
+        -0.35,
+        1.25,
+        0
+    );
+
+
+    arm.rotation.z =
+        -0.55;
+
+
+    arm.castShadow = true;
+
+    current3DObject.add(arm);
+
+
+    /* HEAD */
+
+    const head =
+        new THREE.Mesh(
+            new THREE.CylinderGeometry(
+                0.75,
+                0.8,
+                1.1,
+                32
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0x607d8b,
+                metalness: 0.8,
+                roughness: 0.25
+            })
+        );
+
+
+    head.position.set(
+        0.6,
+        2.25,
+        0
+    );
+
+
+    head.rotation.z =
+        -0.55;
+
+
+    head.castShadow = true;
+
+    current3DObject.add(head);
+
+
+    /* EYEPIECE */
+
+    const eyepiece =
+        new THREE.Mesh(
+            new THREE.CylinderGeometry(
+                0.32,
+                0.38,
+                1.2,
+                32
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0x111827,
+                metalness: 0.8,
+                roughness: 0.2
+            })
+        );
+
+
+    eyepiece.position.set(
+        1.1,
+        2.9,
+        0
+    );
+
+
+    eyepiece.rotation.z =
+        -0.55;
+
+
+    current3DObject.add(
+        eyepiece
+    );
+
+
+    /* STAGE */
+
+    const stage =
+        new THREE.Mesh(
+            new THREE.BoxGeometry(
+                2.1,
+                0.18,
+                1.7
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0x212121,
+                metalness: 0.7,
+                roughness: 0.35
+            })
+        );
+
+
+    stage.position.set(
+        0,
+        -0.55,
+        0
+    );
+
+
+    stage.castShadow = true;
+
+    current3DObject.add(stage);
+
+
+    /* STAGE GLASS */
+
+    const glass =
+        new THREE.Mesh(
+            new THREE.CylinderGeometry(
+                0.45,
+                0.45,
+                0.03,
+                32
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0x93c5fd,
+                transparent: true,
+                opacity: 0.65,
+                roughness: 0.1
+            })
+        );
+
+
+    glass.position.set(
+        0,
+        -0.42,
+        0
+    );
+
+
+    current3DObject.add(
+        glass
+    );
+
+
+    /* OBJECTIVE HOLDER */
+
+    const holder =
+        new THREE.Mesh(
+            new THREE.CylinderGeometry(
+                0.4,
+                0.5,
+                0.35,
+                32
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0x263238,
+                metalness: 0.8,
+                roughness: 0.2
+            })
+        );
+
+
+    holder.position.set(
+        0,
+        -0.1,
+        0
+    );
+
+
+    current3DObject.add(
+        holder
+    );
+
+
+    /* OBJECTIVES */
+
+    for (
+        let i = -1;
+        i <= 1;
+        i++
+    ) {
+
+        const objective =
+            new THREE.Mesh(
+                new THREE.CylinderGeometry(
+                    0.13,
+                    0.2,
+                    0.8,
+                    24
+                ),
+
+                new THREE.MeshStandardMaterial({
+                    color:
+                        i === 0
+                            ? 0xef4444
+                            : 0xd1d5db,
+
+                    metalness: 0.8,
+                    roughness: 0.2
+                })
+            );
+
+
+        objective.position.set(
+            i * 0.25,
+            -0.55,
+            0
+        );
+
+
+        current3DObject.add(
+            objective
+        );
+
     }
 
 
-    if (type === "microscope") {
+    /* FOCUS KNOBS */
 
-        bioObject =
-            createMicroscope();
+    createKnob(
+        -0.7,
+        0.3,
+        0.5
+    );
 
-        $("modelEmoji").textContent =
-            "🔬";
+    createKnob(
+        -0.7,
+        0.3,
+        -0.5
+    );
 
-        $("modelTitle").textContent =
-            "Kính hiển vi 3D";
 
-        $("modelDescription").textContent =
-            "Mô hình kính hiển vi. Kéo chuột hoặc chạm để xoay.";
+    /* LAMP */
 
+    const lamp =
+        new THREE.Mesh(
+            new THREE.CylinderGeometry(
+                0.45,
+                0.55,
+                0.25,
+                32
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0xfbbf24,
+                emissive: 0xf59e0b,
+                emissiveIntensity: 0.8
+            })
+        );
+
+
+    lamp.position.set(
+        0,
+        -1.05,
+        0
+    );
+
+
+    current3DObject.add(lamp);
+
+
+    /* LAMP LIGHT */
+
+    const lampLight =
+        new THREE.PointLight(
+            0xfbbf24,
+            5,
+            4
+        );
+
+
+    lampLight.position.set(
+        0,
+        -0.8,
+        0
+    );
+
+
+    current3DObject.add(
+        lampLight
+    );
+
+
+    scene.add(
+        current3DObject
+    );
+
+
+    reset3D();
+
+}
+
+
+function createKnob(
+    x,
+    y,
+    z
+) {
+
+    const knob =
+        new THREE.Mesh(
+            new THREE.CylinderGeometry(
+                0.38,
+                0.38,
+                0.18,
+                32
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0x90a4ae,
+                metalness: 0.8,
+                roughness: 0.25
+            })
+        );
+
+
+    knob.position.set(
+        x,
+        y,
+        z
+    );
+
+
+    knob.rotation.x =
+        Math.PI / 2;
+
+
+    current3DObject.add(
+        knob
+    );
+
+}
+
+
+/* =========================================================
+   CREATE CELL
+   ========================================================= */
+
+function createCell() {
+
+    clear3DObject();
+
+
+    current3DObject =
+        new THREE.Group();
+
+
+    /* CYTOPLASM */
+
+    const cytoplasm =
+        new THREE.Mesh(
+            new THREE.SphereGeometry(
+                2.15,
+                64,
+                64
+            ),
+
+            new THREE.MeshPhysicalMaterial({
+                color: 0x86efac,
+                transparent: true,
+                opacity: 0.38,
+                roughness: 0.2,
+                transmission: 0.1,
+                thickness: 0.5
+            })
+        );
+
+
+    cytoplasm.scale.set(
+        1.15,
+        0.95,
+        0.9
+    );
+
+
+    current3DObject.add(
+        cytoplasm
+    );
+
+
+    /* CELL MEMBRANE */
+
+    const membrane =
+        new THREE.Mesh(
+            new THREE.SphereGeometry(
+                2.18,
+                64,
+                64
+            ),
+
+            new THREE.MeshPhysicalMaterial({
+                color: 0x22c55e,
+                transparent: true,
+                opacity: 0.2,
+                roughness: 0.15,
+                metalness: 0.05,
+                transmission: 0.2,
+                side: THREE.DoubleSide
+            })
+        );
+
+
+    membrane.scale.set(
+        1.15,
+        0.95,
+        0.9
+    );
+
+
+    current3DObject.add(
+        membrane
+    );
+
+
+    /* NUCLEUS */
+
+    const nucleus =
+        new THREE.Mesh(
+            new THREE.SphereGeometry(
+                0.75,
+                48,
+                48
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0x7c3aed,
+                roughness: 0.3,
+                metalness: 0.15,
+                emissive: 0x3b0764,
+                emissiveIntensity: 0.25
+            })
+        );
+
+
+    nucleus.position.set(
+        -0.25,
+        0.1,
+        0.2
+    );
+
+
+    nucleus.scale.set(
+        1.15,
+        0.9,
+        1
+    );
+
+
+    nucleus.castShadow = true;
+
+    current3DObject.add(
+        nucleus
+    );
+
+
+    /* NUCLEOLUS */
+
+    const nucleolus =
+        new THREE.Mesh(
+            new THREE.SphereGeometry(
+                0.23,
+                32,
+                32
+            ),
+
+            new THREE.MeshStandardMaterial({
+                color: 0xf0abfc,
+                roughness: 0.3
+            })
+        );
+
+
+    nucleolus.position.set(
+        -0.15,
+        0.18,
+        0.83
+    );
+
+
+    current3DObject.add(
+        nucleolus
+    );
+
+
+    /* MITOCHONDRIA */
+
+    const mitochondriaPositions = [
+
+        [0.9, 0.7, 0.4],
+        [0.9, -0.7, 0.2],
+        [-0.9, -0.7, 0.5],
+        [-1.0, 0.8, -0.4],
+        [0.1, 1.0, -0.7],
+        [0.2, -1.0, -0.5]
+
+    ];
+
+
+    mitochondriaPositions.forEach(
+        position => {
+
+            const mito =
+                new THREE.Mesh(
+                    new THREE.TorusGeometry(
+                        0.28,
+                        0.09,
+                        12,
+                        32
+                    ),
+
+                    new THREE.MeshStandardMaterial({
+                        color: 0xf97316,
+                        roughness: 0.3,
+                        emissive: 0x7c2d12,
+                        emissiveIntensity: 0.15
+                    })
+                );
+
+
+            mito.position.set(
+                position[0],
+                position[1],
+                position[2]
+            );
+
+
+            mito.rotation.x =
+                Math.random() * 2;
+
+            mito.rotation.y =
+                Math.random() * 2;
+
+
+            current3DObject.add(
+                mito
+            );
+
+        }
+    );
+
+
+    /* SMALL ORGANELLES */
+
+    for (
+        let i = 0;
+        i < 18;
+        i++
+    ) {
+
+        const organelle =
+            new THREE.Mesh(
+                new THREE.SphereGeometry(
+                    0.07 +
+                    Math.random() * 0.06,
+                    16,
+                    16
+                ),
+
+                new THREE.MeshStandardMaterial({
+                    color: 0xfde68a,
+                    roughness: 0.4
+                })
+            );
+
+
+        organelle.position.set(
+            (Math.random() - 0.5) * 2.8,
+            (Math.random() - 0.5) * 2.1,
+            (Math.random() - 0.5) * 1.7
+        );
+
+
+        current3DObject.add(
+            organelle
+        );
+
+    }
+
+
+    scene.add(
+        current3DObject
+    );
+
+
+    reset3D();
+
+}
+
+
+/* =========================================================
+   CLEAR 3D
+   ========================================================= */
+
+function clear3DObject() {
+
+    if (!current3DObject) {
+        return;
+    }
+
+
+    scene.remove(
+        current3DObject
+    );
+
+
+    current3DObject.traverse(
+        object => {
+
+            if (object.geometry) {
+
+                object.geometry.dispose();
+
+            }
+
+
+            if (object.material) {
+
+                if (
+                    Array.isArray(
+                        object.material
+                    )
+                ) {
+
+                    object.material.forEach(
+                        material =>
+                            material.dispose()
+                    );
+
+                } else {
+
+                    object.material.dispose();
+
+                }
+
+            }
+
+        }
+    );
+
+
+    current3DObject = null;
+}
+
+
+/* =========================================================
+   CHANGE MODEL
+   ========================================================= */
+
+function changeModel(type) {
+
+    if (!scene) {
+        return;
     }
 
 
     if (type === "cell") {
 
-        bioObject =
-            createCell();
+        createCell();
 
-        $("modelEmoji").textContent =
-            "🧫";
 
         $("modelTitle").textContent =
-            "Tế bào 3D";
+            "🧫 Tế bào";
 
         $("modelDescription").textContent =
             "Khám phá màng tế bào, nhân và các bào quan.";
 
-    }
+        showToast(
+            "🧫",
+            "Đã mở mô hình tế bào 3D!"
+        );
 
+    } else {
 
-    if (type === "dna") {
+        createMicroscope();
 
-        bioObject =
-            createDNA();
-
-        $("modelEmoji").textContent =
-            "🧬";
 
         $("modelTitle").textContent =
-            "ADN 3D";
+            "🔬 Kính hiển vi";
 
         $("modelDescription").textContent =
-            "Xoay mô hình ADN để quan sát cấu trúc xoắn.";
+            "Kéo chuột hoặc vuốt màn hình để xoay kính hiển vi.";
+
+        showToast(
+            "🔬",
+            "Đã mở kính hiển vi 3D!"
+        );
 
     }
 
-
-    scene.add(bioObject);
-
-
-    rotationX = .2;
-
-    rotationY = .5;
-
-    zoom = 1;
-
-
-    updateModelButtons();
 }
 
 
-function changeModel(type) {
-
-    load3DModel(type);
-
-    showToast(
-        "🔬",
-        "Đã đổi mô hình 3D!"
-    );
-}
-
-
-/* =====================================================
-   3D BUTTONS
-   ===================================================== */
-
-function updateModelButtons() {
-
-    $("microscopeBtn")
-        .classList.toggle(
-            "active",
-            currentModel === "microscope"
-        );
-
-    $("cellBtn")
-        .classList.toggle(
-            "active",
-            currentModel === "cell"
-        );
-
-    $("dnaBtn")
-        .classList.toggle(
-            "active",
-            currentModel === "dna"
-        );
-}
-
-
-/* =====================================================
+/* =========================================================
    3D CONTROLS
-   ===================================================== */
+   ========================================================= */
 
 function setup3DControls() {
 
     const canvas =
-        $("bio3dCanvas");
+        $("threeCanvas");
+
+
+    if (!canvas) {
+        return;
+    }
 
 
     canvas.addEventListener(
         "pointerdown",
         event => {
 
-            dragging = true;
+            isDragging = true;
 
-            lastPointerX =
+            previousPointerX =
                 event.clientX;
 
-            lastPointerY =
+            previousPointerY =
                 event.clientY;
 
             canvas.setPointerCapture(
                 event.pointerId
             );
+
         }
     );
 
@@ -2418,38 +2833,43 @@ function setup3DControls() {
         "pointermove",
         event => {
 
-            if (!dragging) return;
+            if (!isDragging) {
+                return;
+            }
 
 
             const dx =
                 event.clientX -
-                lastPointerX;
+                previousPointerX;
 
             const dy =
                 event.clientY -
-                lastPointerY;
+                previousPointerY;
 
 
-            rotationY += dx * .01;
+            targetRotationY +=
+                dx * 0.008;
 
-            rotationX += dy * .01;
+            targetRotationX +=
+                dy * 0.008;
 
 
-            rotationX =
+            targetRotationX =
                 Math.max(
-                    -1.5,
+                    -1.3,
                     Math.min(
-                        1.5,
-                        rotationX
+                        1.3,
+                        targetRotationX
                     )
                 );
 
 
-            lastPointerX =
+            previousPointerX =
                 event.clientX;
 
-            lastPointerY =
+            previousPointerY =
                 event.clientY;
+
         }
     );
 
@@ -2457,7 +2877,9 @@ function setup3DControls() {
     canvas.addEventListener(
         "pointerup",
         () => {
-            dragging = false;
+
+            isDragging = false;
+
         }
     );
 
@@ -2465,7 +2887,9 @@ function setup3DControls() {
     canvas.addEventListener(
         "pointercancel",
         () => {
-            dragging = false;
+
+            isDragging = false;
+
         }
     );
 
@@ -2476,67 +2900,63 @@ function setup3DControls() {
 
             event.preventDefault();
 
-            zoom +=
-                event.deltaY * -.001;
 
-            zoom =
+            cameraDistance +=
+                event.deltaY * 0.005;
+
+
+            cameraDistance =
                 Math.max(
-                    .65,
+                    4,
                     Math.min(
-                        1.7,
-                        zoom
+                        11,
+                        cameraDistance
                     )
                 );
 
         },
-        { passive: false }
+        {
+            passive: false
+        }
     );
+
 }
 
 
-/* =====================================================
-   3D ANIMATION
-   ===================================================== */
+function rotate3D(amount) {
 
-function animate3D() {
+    targetRotationY += amount;
 
-    requestAnimationFrame(
-        animate3D
-    );
-
-
-    if (!bioObject) return;
-
-
-    bioObject.rotation.x =
-        rotationX;
-
-    bioObject.rotation.y =
-        rotationY;
-
-
-    bioObject.scale.setScalar(
-        zoom
-    );
-
-
-    renderer.render(
-        scene,
-        camera
-    );
 }
 
 
-/* =====================================================
-   3D RESIZE
-   ===================================================== */
+function reset3D() {
+
+    targetRotationX = 0;
+
+    targetRotationY = 0;
+
+    rotationX = 0;
+
+    rotationY = 0;
+
+    cameraDistance = 7;
+
+}
+
 
 function resize3D() {
 
-    const canvas =
-        $("bio3dCanvas");
+    if (
+        !renderer ||
+        !camera
+    ) {
+        return;
+    }
 
-    if (!canvas || !renderer) return;
+
+    const canvas =
+        $("threeCanvas");
 
 
     const width =
@@ -2544,6 +2964,14 @@ function resize3D() {
 
     const height =
         canvas.clientHeight;
+
+
+    if (
+        width === 0 ||
+        height === 0
+    ) {
+        return;
+    }
 
 
     camera.aspect =
@@ -2557,17 +2985,83 @@ function resize3D() {
         height,
         false
     );
+
 }
 
 
-/* =====================================================
+function animate3D() {
+
+    requestAnimationFrame(
+        animate3D
+    );
+
+
+    if (
+        current3DObject
+    ) {
+
+        rotationX +=
+            (
+                targetRotationX -
+                rotationX
+            ) * 0.08;
+
+
+        rotationY +=
+            (
+                targetRotationY -
+                rotationY
+            ) * 0.08;
+
+
+        current3DObject.rotation.x =
+            rotationX;
+
+
+        current3DObject.rotation.y =
+            rotationY;
+
+    }
+
+
+    if (camera) {
+
+        camera.position.z +=
+            (
+                cameraDistance -
+                camera.position.z
+            ) * 0.08;
+
+        camera.lookAt(
+            0,
+            0,
+            0
+        );
+
+    }
+
+
+    if (renderer && scene && camera) {
+
+        renderer.render(
+            scene,
+            camera
+        );
+
+    }
+
+}
+
+
+/* =========================================================
    AI
-   ===================================================== */
+   ========================================================= */
 
 function askAI() {
 
     const input =
         $("aiInput");
+
 
     const question =
         input.value.trim();
@@ -2577,10 +3071,11 @@ function askAI() {
 
         showToast(
             "💬",
-            "Hãy nhập câu hỏi trước!"
+            "Hãy nhập câu hỏi trước nhé!"
         );
 
         return;
+
     }
 
 
@@ -2609,13 +3104,22 @@ function askAI() {
 
 
     input.value = "";
+
 }
 
 
-function generateAIAnswer(question) {
+function generateAIAnswer(
+    question
+) {
 
     const q =
-        question.toLowerCase();
+        question
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(
+                /[\u0300-\u036f]/g,
+                ""
+            );
 
 
     if (
@@ -2624,23 +3128,28 @@ function generateAIAnswer(question) {
     ) {
 
         return `
-            <b>🧬 ADN là gì?</b>
+
+            <strong>🧬 ADN là gì?</strong>
 
             <p>
-            ADN là vật chất di truyền chứa
-            thông tin di truyền của sinh vật.
+                ADN là vật chất di truyền
+                chứa thông tin di truyền của
+                sinh vật.
             </p>
 
             <p>
-            ADN có 4 loại nucleotide:
-            <b>A, T, G, X</b>.
+                ADN có 4 loại nucleotide:
+                <strong>A, T, G, X</strong>.
             </p>
 
             <p>
-            Quy tắc bổ sung:
-            <b>A - T</b> và <b>G - X</b>.
+                Quy tắc bổ sung:
+                <strong>A - T</strong> và
+                <strong>G - X</strong>.
             </p>
+
         `;
+
     }
 
 
@@ -2650,164 +3159,189 @@ function generateAIAnswer(question) {
     ) {
 
         return `
-            <b>🧬 ARN là gì?</b>
+
+            <strong>🧬 ARN là gì?</strong>
 
             <p>
-            ARN là axit ribonucleic.
-            ARN thường có một mạch.
+                ARN là axit ribonucleic.
+                ARN thường có một mạch.
             </p>
 
             <p>
-            ARN có các bazơ:
-            <b>A, U, G, X</b>.
+                ARN có các base:
+                <strong>A, U, G, X</strong>.
             </p>
 
             <p>
-            Trong ARN, <b>U</b> thay cho
-            <b>T</b> của ADN.
+                Trong ARN,
+                <strong>U</strong> thay cho
+                <strong>T</strong> của ADN.
             </p>
+
         `;
+
     }
 
 
     if (
         q.includes("tim") ||
-        q.includes("tuần hoàn")
+        q.includes("tuan hoan")
     ) {
 
         return `
-            <b>❤️ Tim hoạt động thế nào?</b>
+
+            <strong>❤️ Tim hoạt động thế nào?</strong>
 
             <p>
-            Tim là cơ quan trung tâm của
-            hệ tuần hoàn.
+                Tim là cơ quan trung tâm
+                của hệ tuần hoàn.
             </p>
 
             <p>
-            Tim co bóp để đẩy máu đi
-            khắp cơ thể.
+                Tim co bóp để đẩy máu đi
+                khắp cơ thể.
             </p>
+
         `;
+
     }
 
 
     if (
-        q.includes("phổi") ||
-        q.includes("hô hấp") ||
-        q.includes("thở")
+        q.includes("phoi") ||
+        q.includes("ho hap") ||
+        q.includes("tho")
     ) {
 
         return `
-            <b>🫁 Hô hấp là gì?</b>
+
+            <strong>🫁 Hô hấp là gì?</strong>
 
             <p>
-            Hệ hô hấp giúp cơ thể lấy
-            <b>oxygen</b> và thải
-            <b>carbon dioxide</b>.
+                Hệ hô hấp giúp cơ thể lấy
+                <strong>oxygen</strong> và
+                thải <strong>carbon dioxide</strong>.
             </p>
 
             <p>
-            Trao đổi khí chủ yếu diễn ra
-            tại <b>phế nang</b>.
+                Trao đổi khí chủ yếu diễn ra
+                tại <strong>phế nang</strong>.
             </p>
+
         `;
+
     }
 
 
     if (
-        q.includes("quang hợp")
+        q.includes("quang hop")
     ) {
 
         return `
-            <b>🌱 Quang hợp</b>
+
+            <strong>🌱 Quang hợp</strong>
 
             <p>
-            Quang hợp là quá trình thực vật
-            sử dụng năng lượng ánh sáng để
-            tổng hợp chất hữu cơ.
+                Quang hợp là quá trình thực vật
+                sử dụng năng lượng ánh sáng để
+                tổng hợp chất hữu cơ.
             </p>
 
             <p>
-            Quá trình diễn ra chủ yếu ở
-            <b>lục lạp</b>.
+                Quá trình này chủ yếu diễn ra
+                ở <strong>lục lạp</strong>.
             </p>
+
         `;
+
     }
 
 
     if (
-        q.includes("tế bào") ||
+        q.includes("te bao") ||
         q.includes("cell")
     ) {
 
         return `
-            <b>🔬 Tế bào</b>
+
+            <strong>🔬 Tế bào</strong>
 
             <p>
-            Tế bào là đơn vị cấu tạo và
-            chức năng cơ bản của cơ thể sống.
+                Tế bào là đơn vị cấu tạo và
+                chức năng cơ bản của cơ thể sống.
             </p>
 
             <p>
-            Tế bào nhân thực thường có
-            màng tế bào, tế bào chất và nhân.
+                Tế bào nhân thực thường có
+                màng tế bào, tế bào chất và nhân.
             </p>
+
         `;
+
     }
 
 
     if (
-        q.includes("nguyên phân")
+        q.includes("nguyen phan")
     ) {
 
         return `
-            <b>🧫 Nguyên phân</b>
+
+            <strong>🧫 Nguyên phân</strong>
 
             <p>
-            Nguyên phân là quá trình một
-            tế bào mẹ phân chia tạo thành
-            <b>2 tế bào con</b>.
+                Nguyên phân là quá trình một
+                tế bào mẹ phân chia tạo thành
+                <strong>2 tế bào con</strong>.
             </p>
 
             <p>
-            Các tế bào con thường có số
-            lượng nhiễm sắc thể giống tế bào mẹ.
+                Các tế bào con thường có bộ
+                nhiễm sắc thể giống tế bào mẹ.
             </p>
+
         `;
+
     }
 
 
     if (
-        q.includes("xương") ||
-        q.includes("cơ") ||
-        q.includes("vận động")
+        q.includes("xuong") ||
+        q.includes("co") ||
+        q.includes("van dong")
     ) {
 
         return `
-            <b>🦴 Hệ vận động</b>
+
+            <strong>🦴 Hệ vận động</strong>
 
             <p>
-            Hệ vận động gồm hệ xương
-            và hệ cơ.
+                Hệ vận động gồm hệ xương
+                và hệ cơ.
             </p>
 
             <p>
-            Sự phối hợp giữa xương và cơ
-            giúp cơ thể thực hiện vận động.
+                Sự phối hợp giữa xương và cơ
+                giúp cơ thể vận động.
             </p>
+
         `;
+
     }
 
 
     return `
-        <b>🤖 Trợ lý Sinh học</b>
+
+        <strong>🤖 Trợ lý Sinh học</strong>
 
         <p>
-        Mình chưa có câu trả lời phù hợp
-        trong dữ liệu hiện tại.
+            Mình chưa tìm thấy câu trả lời
+            phù hợp trong dữ liệu hiện tại.
         </p>
 
-        <p>Bạn thử hỏi:</p>
+        <p>
+            Bạn thử hỏi:
+        </p>
 
         <ul>
             <li>ADN là gì?</li>
@@ -2817,21 +3351,28 @@ function generateAIAnswer(question) {
             <li>Tim hoạt động thế nào?</li>
             <li>Nguyên phân là gì?</li>
         </ul>
+
     `;
+
 }
 
 
-/* =====================================================
+/* =========================================================
    CHAT
-   ===================================================== */
+   ========================================================= */
 
-function addUserMessage(text) {
+function addUserMessage(
+    text
+) {
 
     const box =
         $("aiMessages");
 
+
     const message =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     message.className =
@@ -2839,23 +3380,34 @@ function addUserMessage(text) {
 
 
     message.innerHTML =
-        escapeHTML(text);
+        `<div>
+            ${escapeHTML(text)}
+        </div>`;
 
 
-    box.appendChild(message);
+    box.appendChild(
+        message
+    );
+
 
     box.scrollTop =
         box.scrollHeight;
+
 }
 
 
-function addAIMessage(html) {
+function addAIMessage(
+    html
+) {
 
     const box =
         $("aiMessages");
 
+
     const message =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     message.className =
@@ -2863,24 +3415,32 @@ function addAIMessage(html) {
 
 
     message.innerHTML = `
-        <div class="message-avatar">🤖</div>
+
+        <div class="message-avatar">
+            🤖
+        </div>
 
         <div>
             ${html}
         </div>
+
     `;
 
 
-    box.appendChild(message);
+    box.appendChild(
+        message
+    );
+
 
     box.scrollTop =
         box.scrollHeight;
+
 }
 
 
-/* =====================================================
+/* =========================================================
    MICROPHONE
-   ===================================================== */
+   ========================================================= */
 
 function startVoiceInput() {
 
@@ -2893,10 +3453,11 @@ function startVoiceInput() {
 
         showToast(
             "⚠️",
-            "Trình duyệt không hỗ trợ nhận giọng nói."
+            "Chrome của bạn không hỗ trợ microphone."
         );
 
         return;
+
     }
 
 
@@ -2905,6 +3466,22 @@ function startVoiceInput() {
 
     const input =
         $("aiInput");
+
+
+    if (!button || !input) {
+        return;
+    }
+
+
+    if (
+        button.classList.contains(
+            "recording"
+        )
+    ) {
+
+        return;
+
+    }
 
 
     const recognition =
@@ -2922,6 +3499,9 @@ function startVoiceInput() {
 
     recognition.maxAlternatives =
         1;
+
+
+    let finalText = "";
 
 
     button.classList.add(
@@ -2945,27 +3525,58 @@ function startVoiceInput() {
 
 
             for (
-                let i = event.resultIndex;
-                i < event.results.length;
+                let i =
+                    event.resultIndex;
+
+                i <
+                event.results.length;
+
                 i++
             ) {
 
                 transcript +=
                     event.results[i][0]
                         .transcript;
+
             }
 
 
-            input.value =
+            transcript =
                 transcript.trim();
+
+
+            if (transcript) {
+
+                input.value =
+                    transcript;
+
+            }
+
+
+            const last =
+                event.results[
+                    event.results.length - 1
+                ];
+
+
+            if (
+                last &&
+                last.isFinal
+            ) {
+
+                finalText =
+                    transcript;
+
+            }
+
         };
 
 
     recognition.onerror =
         event => {
 
-            console.log(
-                "Speech error:",
+            console.error(
+                "Micro error:",
                 event.error
             );
 
@@ -2977,7 +3588,7 @@ function startVoiceInput() {
 
                 showToast(
                     "🔒",
-                    "Hãy cho phép microphone."
+                    "Bạn chưa cho phép microphone."
                 );
 
             } else if (
@@ -2994,9 +3605,12 @@ function startVoiceInput() {
 
                 showToast(
                     "❌",
-                    "Microphone gặp lỗi."
+                    "Micro lỗi: " +
+                    event.error
                 );
+
             }
+
         };
 
 
@@ -3007,13 +3621,23 @@ function startVoiceInput() {
                 "recording"
             );
 
+
             button.textContent =
                 "🎤";
 
-            showToast(
-                "✅",
-                "Đã nhận giọng nói!"
-            );
+
+            if (finalText) {
+
+                input.value =
+                    finalText;
+
+                showToast(
+                    "✅",
+                    "Đã nhận giọng nói!"
+                );
+
+            }
+
         };
 
 
@@ -3023,7 +3647,9 @@ function startVoiceInput() {
 
     } catch (error) {
 
-        console.log(error);
+        console.error(
+            error
+        );
 
         button.classList.remove(
             "recording"
@@ -3031,13 +3657,15 @@ function startVoiceInput() {
 
         button.textContent =
             "🎤";
+
     }
+
 }
 
 
-/* =====================================================
+/* =========================================================
    SPEECH
-   ===================================================== */
+   ========================================================= */
 
 function speak(html) {
 
@@ -3051,11 +3679,14 @@ function speak(html) {
         );
 
         return;
+
     }
 
 
     const temp =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     temp.innerHTML =
@@ -3079,7 +3710,7 @@ function speak(html) {
         "vi-VN";
 
     utterance.rate =
-        .95;
+        0.95;
 
     utterance.pitch =
         1;
@@ -3088,6 +3719,7 @@ function speak(html) {
     speechSynthesis.speak(
         utterance
     );
+
 }
 
 
@@ -3101,55 +3733,110 @@ function speakLastAnswer() {
         );
 
         return;
+
     }
 
 
     speak(
         lastAIAnswer
     );
+
 }
 
 
-/* =====================================================
+/* =========================================================
    AI → 3D
-   ===================================================== */
+   ========================================================= */
 
 function open3DFromAI() {
 
-    const q =
-        lastAIQuestion.toLowerCase();
+    if (!lastAIQuestion) {
 
+        showToast(
+            "💬",
+            "Hãy hỏi trợ lý trước nhé!"
+        );
 
-    if (
-        q.includes("adn") ||
-        q.includes("dna") ||
-        q.includes("arn")
-    ) {
+        return;
 
-        changeModel("dna");
-
-    } else if (
-        q.includes("tế bào") ||
-        q.includes("cell")
-    ) {
-
-        changeModel("cell");
-
-    } else {
-
-        changeModel("microscope");
     }
 
 
-    $("lab3d").scrollIntoView({
-        behavior: "smooth"
-    });
+    const q =
+        lastAIQuestion
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(
+                /[\u0300-\u036f]/g,
+                ""
+            );
+
+
+    if (
+        q.includes("te bao") ||
+        q.includes("cell")
+    ) {
+
+        changeModel(
+            "cell"
+        );
+
+    } else {
+
+        changeModel(
+            "microscope"
+        );
+
+    }
+
+
+    $("lab3d")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
 }
 
 
-/* =====================================================
+/* =========================================================
+   ENTER KEY
+   ========================================================= */
+
+function setupInput() {
+
+    const input =
+        $("aiInput");
+
+
+    if (!input) {
+        return;
+    }
+
+
+    input.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key ===
+                "Enter"
+            ) {
+
+                event.preventDefault();
+
+                askAI();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
    SHARE
-   ===================================================== */
+   ========================================================= */
 
 async function shareQuiz() {
 
@@ -3157,7 +3844,9 @@ async function shareQuiz() {
         window.location.href;
 
 
-    if (navigator.share) {
+    if (
+        navigator.share
+    ) {
 
         try {
 
@@ -3169,50 +3858,62 @@ async function shareQuiz() {
                 text:
                     "🧬 Thử Bio Quiz Sinh học nhé!",
 
-                url:
-                    url
+                url
+
             });
 
             return;
 
         } catch (error) {
 
-            console.log(error);
+            console.log(
+                error
+            );
+
         }
+
     }
 
 
     try {
 
-        await navigator.clipboard.writeText(
-            url
-        );
+        await navigator.clipboard
+            .writeText(url);
+
 
         showToast(
             "🔗",
             "Đã sao chép link!"
         );
 
-    } catch (error) {
+    } catch {
 
         showToast(
             "🔗",
             "Hãy sao chép link trên thanh địa chỉ."
         );
+
     }
+
 }
 
 
-/* =====================================================
+/* =========================================================
    TOAST
-   ===================================================== */
+   ========================================================= */
 
-function showToast(icon, message) {
+function showToast(
+    icon,
+    message
+) {
 
     const toast =
         $("toast");
 
-    if (!toast) return;
+
+    if (!toast) {
+        return;
+    }
 
 
     $("toastIcon").textContent =
@@ -3233,194 +3934,27 @@ function showToast(icon, message) {
 
 
     window.bioToastTimer =
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            toast.classList.remove(
-                "show"
-            );
+                toast.classList.remove(
+                    "show"
+                );
 
-        }, 3000);
+            },
+            3000
+        );
+
 }
 
 
-/* =====================================================
-   EVENT LISTENERS
-   ===================================================== */
-
-function setupEvents() {
-
-    $("startLearningBtn")
-        .addEventListener(
-            "click",
-            showClasses
-        );
-
-
-    $("grade7Btn")
-        .addEventListener(
-            "click",
-            () => selectClass(7)
-        );
-
-
-    $("grade8Btn")
-        .addEventListener(
-            "click",
-            () => selectClass(8)
-        );
-
-
-    $("grade9Btn")
-        .addEventListener(
-            "click",
-            () => selectClass(9)
-        );
-
-
-    $("backHomeBtn")
-        .addEventListener(
-            "click",
-            () => showScreen("homeScreen")
-        );
-
-
-    $("quitQuizBtn")
-        .addEventListener(
-            "click",
-            quitQuiz
-        );
-
-
-    $("nextButton")
-        .addEventListener(
-            "click",
-            nextQuestion
-        );
-
-
-    $("restartBtn")
-        .addEventListener(
-            "click",
-            restartQuiz
-        );
-
-
-    $("resultHomeBtn")
-        .addEventListener(
-            "click",
-            () => showScreen("homeScreen")
-        );
-
-
-    $("shareBtn")
-        .addEventListener(
-            "click",
-            shareQuiz
-        );
-
-
-    $("sendAIButton")
-        .addEventListener(
-            "click",
-            askAI
-        );
-
-
-    $("micButton")
-        .addEventListener(
-            "click",
-            startVoiceInput
-        );
-
-
-    $("readAnswerBtn")
-        .addEventListener(
-            "click",
-            speakLastAnswer
-        );
-
-
-    $("explain3DBtn")
-        .addEventListener(
-            "click",
-            open3DFromAI
-        );
-
-
-    $("microscopeBtn")
-        .addEventListener(
-            "click",
-            () => changeModel("microscope")
-        );
-
-
-    $("cellBtn")
-        .addEventListener(
-            "click",
-            () => changeModel("cell")
-        );
-
-
-    $("dnaBtn")
-        .addEventListener(
-            "click",
-            () => changeModel("dna")
-        );
-
-
-    $("rotateLeftBtn")
-        .addEventListener(
-            "click",
-            () => {
-                rotationY -= .4;
-            }
-        );
-
-
-    $("rotateRightBtn")
-        .addEventListener(
-            "click",
-            () => {
-                rotationY += .4;
-            }
-        );
-
-
-    $("reset3DBtn")
-        .addEventListener(
-            "click",
-            () => {
-
-                rotationX = .2;
-
-                rotationY = .5;
-
-                zoom = 1;
-            }
-        );
-
-
-    $("aiInput")
-        .addEventListener(
-            "keydown",
-            event => {
-
-                if (event.key === "Enter") {
-
-                    event.preventDefault();
-
-                    askAI();
-                }
-            }
-        );
-}
-
-
-/* =====================================================
+/* =========================================================
    INIT
-   ===================================================== */
+   ========================================================= */
 
 function init() {
+
+    /* Reset streak nếu bỏ học quá 1 ngày */
 
     if (
         lastStudyDate &&
@@ -3434,6 +3968,7 @@ function init() {
             "bioStreak",
             "0"
         );
+
     }
 
 
@@ -3441,7 +3976,7 @@ function init() {
 
     updateAchievements();
 
-    setupEvents();
+    setupInput();
 
     init3D();
 
@@ -3449,15 +3984,17 @@ function init() {
     console.log(
         "🧬 Bio Quiz loaded successfully!"
     );
+
 }
 
 
-/* =====================================================
+/* =========================================================
    START
-   ===================================================== */
+   ========================================================= */
 
 if (
-    document.readyState === "loading"
+    document.readyState ===
+    "loading"
 ) {
 
     document.addEventListener(
@@ -3468,4 +4005,5 @@ if (
 } else {
 
     init();
+
 }
