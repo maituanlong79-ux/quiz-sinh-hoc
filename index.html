@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Bio Quiz - Sinh học</title>
+    <title>Bio Quiz Sinh học</title>
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Three.js để dựng mô hình 3D -->
+    <!-- Three.js cho phần 3D -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
 
     <script src="script.js" defer></script>
@@ -16,225 +16,313 @@
 
 <body>
 
+<!-- ================= HEADER ================= -->
+
 <header class="header">
-    <div class="brand">
-        <div class="brand-icon">🧬</div>
-        <div>
-            <h1>Bio Quiz</h1>
-            <p>Khám phá thế giới Sinh học</p>
-        </div>
+
+    <div class="logo" onclick="goHome()">
+        🧬 <span>Bio Quiz</span>
     </div>
 
     <div class="header-stats">
-        <div>🔥 <span id="headerStreak">0</span></div>
-        <div>⭐ <span id="headerXP">0 XP</span></div>
+
+        <div class="mini-stat">
+            🔥 <span id="headerStreak">0</span>
+        </div>
+
+        <div class="mini-stat">
+            ⭐ <span id="headerXP">0 XP</span>
+        </div>
+
     </div>
+
 </header>
 
 
-<main>
+<!-- ================= APP ================= -->
+
+<main class="app">
+
 
 <!-- ================= HOME ================= -->
 
 <section id="homeScreen" class="screen active">
 
     <div class="hero">
-        <div class="hero-text">
-            <span class="badge">🧬 BIOLOGY LEARNING</span>
 
-            <h2>
+        <div class="hero-text">
+
+            <div class="badge">
+                🧬 SINH HỌC
+            </div>
+
+            <h1>
                 Học Sinh học<br>
-                <span>vui hơn mỗi ngày!</span>
-            </h2>
+                <span>thú vị hơn!</span>
+            </h1>
 
             <p>
-                Làm quiz, tích XP, giữ streak và khám phá
-                thế giới Sinh học qua mô hình 3D.
+                Quiz • 3D • XP • Thành tích • Trợ lý Sinh học
             </p>
 
-            <button class="primary-btn" id="startLearningBtn">
+            <button class="primary-btn" onclick="showClasses()">
                 🚀 Bắt đầu học
             </button>
+
         </div>
 
-        <div class="hero-emoji">
+        <div class="hero-icon">
             🧬
         </div>
+
     </div>
 
 
     <!-- DASHBOARD -->
 
-    <section class="dashboard">
+    <div class="section-title">
+        📊 Tiến trình của bạn
+    </div>
 
-        <div class="dash-card streak-card">
-            <div class="dash-icon">🔥</div>
+    <div class="dashboard-grid">
 
-            <div>
-                <h3 id="streakNumber">0</h3>
-                <p id="streakText">Bắt đầu học hôm nay!</p>
-            </div>
-        </div>
+        <div class="dashboard-card streak-card">
 
-        <div class="dash-card">
-            <div class="dash-icon">⭐</div>
+            <div class="dashboard-icon">🔥</div>
 
             <div>
-                <h3><span id="xpNumber">0</span> XP</h3>
-                <p>Điểm kinh nghiệm</p>
+                <div class="dashboard-number" id="streakNumber">
+                    0
+                </div>
+
+                <div class="dashboard-label">
+                    ngày liên tiếp
+                </div>
+
+                <small id="streakText">
+                    Bắt đầu học hôm nay!
+                </small>
             </div>
+
         </div>
 
-        <div class="dash-card">
-            <div class="dash-icon">🏆</div>
+
+        <div class="dashboard-card xp-card">
+
+            <div class="dashboard-icon">⭐</div>
 
             <div>
-                <h3 id="achievementNumber">0</h3>
-                <p>Thành tựu</p>
+                <div class="dashboard-number" id="xpNumber">
+                    0
+                </div>
+
+                <div class="dashboard-label">
+                    XP
+                </div>
+
+                <small>
+                    Điểm kinh nghiệm
+                </small>
             </div>
+
         </div>
 
-    </section>
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-icon">🏆</div>
+
+            <div>
+                <div class="dashboard-number" id="achievementNumber">
+                    0
+                </div>
+
+                <div class="dashboard-label">
+                    thành tích
+                </div>
+
+                <small>
+                    Đã mở khóa
+                </small>
+            </div>
+
+        </div>
+
+    </div>
 
 
     <!-- LEVEL -->
 
-    <section class="level-card">
+    <div class="level-card">
 
         <div class="level-top">
+
             <div>
-                <span class="small-label">CẤP ĐỘ</span>
-                <h3 id="levelName">Mầm non Sinh học</h3>
+                <strong id="levelText">
+                    Level 1
+                </strong>
+
+                <div id="levelName">
+                    Mầm non Sinh học
+                </div>
             </div>
 
-            <strong id="levelText">Level 1</strong>
+            <strong id="levelXP">
+                0 / 100 XP
+            </strong>
+
         </div>
 
         <div class="level-bar">
             <div id="levelProgress"></div>
         </div>
 
-        <p id="levelXP">0 / 100 XP</p>
-
-    </section>
+    </div>
 
 
-    <!-- CLASS -->
+    <!-- CLASSES -->
 
-    <section class="section">
+    <div class="section-title">
+        📚 Chọn lớp
+    </div>
 
-        <div class="section-title">
+    <div class="class-preview">
+
+        <button class="class-card grade7" onclick="selectClass(7)">
+
+            <div class="class-number">7</div>
+
             <div>
-                <span class="small-label">CHỌN LỚP</span>
-                <h2>Bạn muốn học gì?</h2>
-            </div>
-        </div>
-
-        <div class="class-grid">
-
-            <button class="class-card grade7" id="grade7Btn">
-                <span>🌱</span>
                 <h3>Sinh học 7</h3>
                 <p>Nền tảng Sinh học</p>
-                <b>Học ngay →</b>
-            </button>
+            </div>
 
-            <button class="class-card grade8" id="grade8Btn">
-                <span>🫀</span>
+            <span>→</span>
+
+        </button>
+
+
+        <button class="class-card grade8" onclick="selectClass(8)">
+
+            <div class="class-number">8</div>
+
+            <div>
                 <h3>Sinh học 8</h3>
                 <p>Cơ thể người</p>
-                <b>Học ngay →</b>
-            </button>
+            </div>
 
-            <button class="class-card grade9" id="grade9Btn">
-                <span>🧬</span>
+            <span>→</span>
+
+        </button>
+
+
+        <button class="class-card grade9" onclick="selectClass(9)">
+
+            <div class="class-number">9</div>
+
+            <div>
                 <h3>Sinh học 9</h3>
                 <p>Di truyền học</p>
-                <b>Học ngay →</b>
-            </button>
+            </div>
 
-        </div>
+            <span>→</span>
 
-    </section>
+        </button>
+
+    </div>
 
 
-    <!-- ================= 3D LAB ================= -->
+    <!-- 3D LAB -->
 
-    <section class="lab-section" id="lab3d">
+    <div class="section-title">
+        🔬 Phòng thí nghiệm 3D
+    </div>
+
+    <div id="lab3d" class="lab-card">
 
         <div class="lab-header">
 
             <div>
-                <span class="small-label">3D BIOLOGY LAB</span>
 
-                <h2>🔬 Phòng thí nghiệm 3D</h2>
+                <span class="lab-badge">
+                    3D LAB
+                </span>
+
+                <h2 id="modelTitle">
+                    🔬 Kính hiển vi
+                </h2>
 
                 <p id="modelDescription">
-                    Kéo chuột hoặc chạm vào mô hình để xoay.
+                    Kéo chuột hoặc vuốt màn hình để xoay mô hình.
                 </p>
+
             </div>
 
-            <div class="lab-buttons">
+            <div class="lab-controls">
 
-                <button class="model-btn active" id="microscopeBtn">
+                <button onclick="changeModel('microscope')">
                     🔬 Kính hiển vi
                 </button>
 
-                <button class="model-btn" id="cellBtn">
+                <button onclick="changeModel('cell')">
                     🧫 Tế bào
                 </button>
 
-                <button class="model-btn" id="dnaBtn">
-                    🧬 ADN
-                </button>
-
             </div>
 
         </div>
 
 
-        <div class="model-title">
-            <span id="modelEmoji">🔬</span>
+        <div class="model-view">
 
-            <h3 id="modelTitle">
-                Kính hiển vi 3D
-            </h3>
-        </div>
+            <canvas id="threeCanvas"></canvas>
 
-
-        <div class="canvas-wrapper">
-
-            <canvas id="bio3dCanvas"></canvas>
-
-            <div class="drag-hint">
-                🖱️ Kéo để xoay · 🖐️ Chạm để xoay · 🔍 Cuộn để zoom
+            <div class="model-help">
+                🖱️ Kéo để xoay • 🖲️ Lăn để zoom
             </div>
 
+            <button
+                class="rotate-btn left"
+                onclick="rotate3D(-0.4)"
+            >
+                ↶
+            </button>
+
+            <button
+                class="rotate-btn right"
+                onclick="rotate3D(0.4)"
+            >
+                ↷
+            </button>
+
+            <button
+                class="reset-3d"
+                onclick="reset3D()"
+            >
+                ⟳
+            </button>
+
         </div>
 
-
-        <div class="model-controls">
-
-            <button id="rotateLeftBtn">↶</button>
-            <button id="reset3DBtn">⟳</button>
-            <button id="rotateRightBtn">↷</button>
-
-        </div>
-
-    </section>
+    </div>
 
 
-    <!-- ================= AI ================= -->
+    <!-- AI -->
 
-    <section class="ai-section">
+    <div class="section-title">
+        🤖 Trợ lý Sinh học
+    </div>
+
+    <div class="ai-card">
 
         <div class="ai-header">
 
-            <div class="ai-avatar">🤖</div>
+            <div class="ai-avatar">
+                🤖
+            </div>
 
             <div>
-                <span class="small-label">BIO ASSISTANT</span>
-                <h2>Trợ lý Sinh học</h2>
+                <h2>Bio Assistant</h2>
                 <p>Hỏi mình về Sinh học nhé!</p>
             </div>
 
@@ -244,14 +332,17 @@
         <div id="aiMessages" class="ai-messages">
 
             <div class="ai-message assistant-message">
-                <div class="message-avatar">🤖</div>
+
+                <div class="message-avatar">
+                    🤖
+                </div>
 
                 <div>
-                    Xin chào! 👋<br>
-                    Mình có thể giúp bạn học Sinh học.
-                    Bạn có thể hỏi về ADN, tế bào, tim,
-                    quang hợp, hô hấp...
+                    Xin chào! 👋<br><br>
+                    Mình có thể giải thích về ADN, ARN,
+                    tế bào, quang hợp, tim, hô hấp...
                 </div>
+
             </div>
 
         </div>
@@ -259,18 +350,26 @@
 
         <div class="ai-input-area">
 
-            <button id="micButton" class="mic-btn">
+            <button
+                id="micButton"
+                class="mic-btn"
+                onclick="startVoiceInput()"
+                title="Nói"
+            >
                 🎤
             </button>
 
             <input
                 id="aiInput"
                 type="text"
-                placeholder="Ví dụ: ADN là gì?"
+                placeholder="Hỏi ví dụ: ADN là gì?"
                 autocomplete="off"
             >
 
-            <button id="sendAIButton" class="send-btn">
+            <button
+                class="send-btn"
+                onclick="askAI()"
+            >
                 ➤
             </button>
 
@@ -279,66 +378,92 @@
 
         <div class="ai-actions">
 
-            <button id="readAnswerBtn">
+            <button onclick="speakLastAnswer()">
                 🔊 Đọc câu trả lời
             </button>
 
-            <button id="explain3DBtn">
+            <button onclick="open3DFromAI()">
                 🔬 Giải thích bằng 3D
             </button>
 
         </div>
 
-    </section>
+    </div>
 
 
     <!-- ACHIEVEMENTS -->
 
-    <section class="section">
+    <div class="section-title">
+        🏆 Thành tích
+    </div>
 
-        <div class="section-title">
-            <div>
-                <span class="small-label">ACHIEVEMENTS</span>
-                <h2>🏆 Thành tựu</h2>
-            </div>
-        </div>
+    <div class="achievement-grid">
 
+        <div id="achievement-first" class="achievement-card">
 
-        <div class="achievement-grid">
+            <div>🚀</div>
 
-            <div class="achievement" id="achievement-first">
-                <span>🚀</span>
-                <h3>Khởi động</h3>
-                <p>Làm câu hỏi đầu tiên</p>
-            </div>
+            <strong>Khởi động</strong>
 
-            <div class="achievement" id="achievement-streak">
-                <span>🔥</span>
-                <h3>Không ngừng học</h3>
-                <p>Học 3 ngày liên tiếp</p>
-            </div>
-
-            <div class="achievement" id="achievement-dna">
-                <span>🧬</span>
-                <h3>Di truyền học</h3>
-                <p>Chinh phục ADN</p>
-            </div>
-
-            <div class="achievement" id="achievement-memory">
-                <span>🧠</span>
-                <h3>Siêu trí nhớ</h3>
-                <p>10 câu đúng liên tiếp</p>
-            </div>
-
-            <div class="achievement" id="achievement-perfect">
-                <span>🏆</span>
-                <h3>Hoàn hảo</h3>
-                <p>Đạt 100% một bài</p>
-            </div>
+            <small>
+                Trả lời đúng câu đầu tiên
+            </small>
 
         </div>
 
-    </section>
+
+        <div id="achievement-streak" class="achievement-card">
+
+            <div>🔥</div>
+
+            <strong>Không ngừng học</strong>
+
+            <small>
+                Học 3 ngày liên tiếp
+            </small>
+
+        </div>
+
+
+        <div id="achievement-dna" class="achievement-card">
+
+            <div>🧬</div>
+
+            <strong>Di truyền học</strong>
+
+            <small>
+                Chinh phục ADN
+            </small>
+
+        </div>
+
+
+        <div id="achievement-memory" class="achievement-card">
+
+            <div>🧠</div>
+
+            <strong>Siêu trí nhớ</strong>
+
+            <small>
+                10 câu đúng liên tiếp
+            </small>
+
+        </div>
+
+
+        <div id="achievement-grade9" class="achievement-card">
+
+            <div>🏆</div>
+
+            <strong>Xuất sắc</strong>
+
+            <small>
+                Hoàn thành quiz 100%
+            </small>
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -347,20 +472,77 @@
 
 <section id="classScreen" class="screen">
 
-    <button class="back-btn" id="backHomeBtn">
+    <button class="back-btn" onclick="goHome()">
         ← Trang chủ
     </button>
 
     <div class="page-heading">
 
-        <span class="small-label">BIOLOGY</span>
+        <div>
+            <span class="badge">📚 CHỌN LỚP</span>
+            <h1>Chọn lớp học</h1>
+            <p>Chọn chương trình Sinh học bạn muốn học.</p>
+        </div>
 
-        <h2 id="selectedClassTitle">
-            Sinh học
-        </h2>
+    </div>
+
+
+    <div class="class-list">
+
+        <button onclick="selectClass(7)" class="class-card grade7">
+            <div class="class-number">7</div>
+            <div>
+                <h3>Sinh học lớp 7</h3>
+                <p>Nền tảng Sinh học</p>
+            </div>
+            <span>→</span>
+        </button>
+
+
+        <button onclick="selectClass(8)" class="class-card grade8">
+            <div class="class-number">8</div>
+            <div>
+                <h3>Sinh học lớp 8</h3>
+                <p>Cơ thể người</p>
+            </div>
+            <span>→</span>
+        </button>
+
+
+        <button onclick="selectClass(9)" class="class-card grade9">
+            <div class="class-number">9</div>
+            <div>
+                <h3>Sinh học lớp 9</h3>
+                <p>Di truyền học</p>
+            </div>
+            <span>→</span>
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TOPIC SCREEN ================= -->
+
+<section id="topicScreen" class="screen">
+
+    <button class="back-btn" onclick="showClasses()">
+        ← Chọn lớp
+    </button>
+
+    <div class="page-heading">
+
+        <span id="selectedClassBadge" class="badge">
+            SINH HỌC
+        </span>
+
+        <h1 id="topicTitle">
+            Chủ đề
+        </h1>
 
         <p>
-            Chọn chủ đề bạn muốn học.
+            Chọn một chủ đề để bắt đầu quiz.
         </p>
 
     </div>
@@ -371,30 +553,30 @@
 </section>
 
 
-<!-- ================= QUIZ ================= -->
+<!-- ================= QUIZ SCREEN ================= -->
 
 <section id="quizScreen" class="screen">
 
-    <div class="quiz-header">
+    <div class="quiz-top">
 
-        <button class="back-btn" id="quitQuizBtn">
+        <button class="back-btn" onclick="quitQuiz()">
             ← Thoát
         </button>
 
-        <div class="quiz-topic" id="quizTopic">
+        <div id="quizTopic" class="quiz-topic">
             🧬 Quiz
         </div>
 
-        <div class="timer" id="timer">
+        <div id="timer" class="timer">
             ⏱️ 30s
         </div>
 
     </div>
 
 
-    <div class="quiz-card">
+    <div class="quiz-progress-wrap">
 
-        <div class="quiz-meta">
+        <div class="quiz-info">
 
             <span id="questionNumber">
                 Câu 1/5
@@ -406,26 +588,31 @@
 
         </div>
 
-
-        <div class="progress-container">
+        <div class="quiz-progress-bg">
             <div id="quizProgress"></div>
         </div>
 
+    </div>
 
-        <div class="question-category" id="questionCategory">
-            Sinh học
+
+    <div class="question-card">
+
+        <div id="questionCategory" class="question-category">
+            🧬 Sinh học
         </div>
-
 
         <h2 id="questionText">
             Câu hỏi
         </h2>
 
+        <div id="answers" class="answers"></div>
 
-        <div id="answers"></div>
-
-
-        <button id="nextButton" class="next-btn">
+        <button
+            id="nextButton"
+            class="primary-btn next-btn"
+            onclick="nextQuestion()"
+            style="display:none"
+        >
             Câu tiếp theo →
         </button>
 
@@ -434,7 +621,7 @@
 </section>
 
 
-<!-- ================= RESULT ================= -->
+<!-- ================= RESULT SCREEN ================= -->
 
 <section id="resultScreen" class="screen">
 
@@ -444,14 +631,16 @@
             🏆
         </div>
 
-        <h2>Hoàn thành!</h2>
+        <h1>
+            Hoàn thành!
+        </h1>
 
-        <div class="final-score" id="finalScore">
+        <div id="finalScore" class="final-score">
             0/0
         </div>
 
         <p id="resultMessage">
-            Làm tốt lắm!
+            Tuyệt vời!
         </p>
 
 
@@ -469,7 +658,7 @@
 
             <div>
                 <strong id="earnedXP">+0 XP</strong>
-                <span>XP</span>
+                <span>Nhận được</span>
             </div>
 
         </div>
@@ -477,15 +666,24 @@
 
         <div class="result-actions">
 
-            <button class="primary-btn" id="restartBtn">
+            <button
+                class="primary-btn"
+                onclick="restartQuiz()"
+            >
                 🔄 Làm lại
             </button>
 
-            <button class="secondary-btn" id="resultHomeBtn">
-                🏠 Trang chủ
+            <button
+                class="secondary-btn"
+                onclick="quitQuiz()"
+            >
+                📚 Chủ đề
             </button>
 
-            <button class="secondary-btn" id="shareBtn">
+            <button
+                class="secondary-btn"
+                onclick="shareQuiz()"
+            >
                 🔗 Chia sẻ
             </button>
 
@@ -498,21 +696,21 @@
 </main>
 
 
-<!-- TOAST -->
+<!-- ================= TOAST ================= -->
 
 <div id="toast" class="toast">
 
     <span id="toastIcon">🎉</span>
 
     <span id="toastText">
-        Thành công!
+        Thông báo
     </span>
 
 </div>
 
 
 <footer>
-    🧬 Bio Quiz · Học Sinh học mỗi ngày
+    🧬 Bio Quiz • Học Sinh học mỗi ngày
 </footer>
 
 </body>
