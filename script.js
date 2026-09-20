@@ -1,1347 +1,1873 @@
-/* =========================================
-   QUIZ SINH HỌC
-   ========================================= */
+```javascript
+/* =========================================================
+   QUIZ SINH HỌC 7–8–9
+   SCRIPT HOÀN CHỈNH
+   ========================================================= */
 
 
-/* =========================
+/* =========================================================
    DỮ LIỆU QUIZ
-   ========================= */
+   ========================================================= */
 
 const quizData = {
 
-    7: {
-
-        "Tế bào": [
-            {
-                question: "Đơn vị cấu tạo cơ bản của cơ thể sống là gì?",
-                answers: [
-                    "Tế bào",
-                    "Mô",
-                    "Cơ quan",
-                    "Hệ cơ quan"
-                ],
-                correct: 0,
-                explanation: "Tế bào là đơn vị cấu tạo và chức năng cơ bản của cơ thể sống."
-            },
-
-            {
-                question: "Bộ phận nào điều khiển các hoạt động của tế bào nhân thực?",
-                answers: [
-                    "Màng tế bào",
-                    "Nhân",
-                    "Ribosome",
-                    "Không bào"
-                ],
-                correct: 1,
-                explanation: "Nhân chứa vật chất di truyền và điều khiển nhiều hoạt động của tế bào."
-            },
-
-            {
-                question: "Tế bào thực vật có bào quan nào mà tế bào động vật thường không có?",
-                answers: [
-                    "Nhân",
-                    "Ti thể",
-                    "Lục lạp",
-                    "Ribosome"
-                ],
-                correct: 2,
-                explanation: "Lục lạp chứa diệp lục và là nơi diễn ra quá trình quang hợp."
-            },
-
-            {
-                question: "Màng tế bào có vai trò chính nào?",
-                answers: [
-                    "Điều khiển trao đổi chất với môi trường",
-                    "Tạo ADN",
-                    "Tạo xương",
-                    "Tiêu hóa thức ăn"
-                ],
-                correct: 0,
-                explanation: "Màng tế bào giúp kiểm soát sự trao đổi chất giữa tế bào và môi trường."
-            },
-
-            {
-                question: "Nhiều tế bào có cấu tạo và chức năng giống nhau tập hợp thành?",
-                answers: [
-                    "Cơ quan",
-                    "Mô",
-                    "Hệ cơ quan",
-                    "Cơ thể"
-                ],
-                correct: 1,
-                explanation: "Các tế bào giống nhau về cấu tạo và chức năng thường tạo thành mô."
-            }
-        ],
-
-
-        "Thực vật": [
-            {
-                question: "Cơ quan chủ yếu thực hiện quang hợp ở cây là?",
-                answers: [
-                    "Rễ",
-                    "Thân",
-                    "Lá",
-                    "Hoa"
-                ],
-                correct: 2,
-                explanation: "Lá chứa nhiều lục lạp nên là cơ quan quang hợp chủ yếu."
-            },
-
-            {
-                question: "Rễ cây có chức năng chủ yếu nào?",
-                answers: [
-                    "Hấp thụ nước và muối khoáng",
-                    "Tạo hạt",
-                    "Quang hợp",
-                    "Thụ phấn"
-                ],
-                correct: 0,
-                explanation: "Rễ giúp cây hút nước và muối khoáng từ đất."
-            },
-
-            {
-                question: "Quang hợp sử dụng khí nào từ môi trường?",
-                answers: [
-                    "Oxygen",
-                    "Nitrogen",
-                    "Carbon dioxide",
-                    "Hydrogen"
-                ],
-                correct: 2,
-                explanation: "Cây sử dụng carbon dioxide (CO₂), nước và năng lượng ánh sáng để quang hợp."
-            },
-
-            {
-                question: "Sản phẩm quan trọng của quang hợp là?",
-                answers: [
-                    "Glucose và oxygen",
-                    "Protein và nitrogen",
-                    "Nước và nitrogen",
-                    "Carbon dioxide"
-                ],
-                correct: 0,
-                explanation: "Quang hợp tạo chất hữu cơ như glucose và giải phóng oxygen."
-            },
-
-            {
-                question: "Thoát hơi nước ở cây chủ yếu diễn ra qua?",
-                answers: [
-                    "Rễ",
-                    "Khí khổng",
-                    "Hạt",
-                    "Hoa"
-                ],
-                correct: 1,
-                explanation: "Phần lớn nước thoát ra ngoài qua khí khổng trên lá."
-            }
-        ]
-
+  7: [
+    {
+      topic: "Tế bào",
+      icon: "🔬",
+      description: "Khám phá đơn vị cơ bản của sự sống.",
+      questions: [
+        {
+          question: "Tế bào được xem là gì của cơ thể sống?",
+          answers: [
+            "Đơn vị cấu trúc và chức năng cơ bản",
+            "Một cơ quan",
+            "Một hệ cơ quan",
+            "Một mô"
+          ],
+          correct: 0,
+          explanation: "Tế bào là đơn vị cấu trúc và chức năng cơ bản của cơ thể sống."
+        },
+        {
+          question: "Bộ phận nào điều khiển nhiều hoạt động của tế bào nhân thực?",
+          answers: [
+            "Màng tế bào",
+            "Nhân",
+            "Không bào",
+            "Thành tế bào"
+          ],
+          correct: 1,
+          explanation: "Nhân chứa vật chất di truyền và điều khiển nhiều hoạt động của tế bào."
+        },
+        {
+          question: "Bào quan thực hiện phần lớn quá trình hô hấp tế bào là?",
+          answers: [
+            "Ribosome",
+            "Lục lạp",
+            "Ti thể",
+            "Không bào"
+          ],
+          correct: 2,
+          explanation: "Ti thể là nơi diễn ra phần lớn quá trình hô hấp tế bào."
+        }
+      ]
     },
 
-
-    8: {
-
-        "Cơ thể người": [
-            {
-                question: "Bộ phận nào bơm máu đi khắp cơ thể?",
-                answers: [
-                    "Phổi",
-                    "Tim",
-                    "Gan",
-                    "Thận"
-                ],
-                correct: 1,
-                explanation: "Tim co bóp để đẩy máu lưu thông trong hệ tuần hoàn."
-            },
-
-            {
-                question: "Cơ quan trao đổi khí chủ yếu ở người là?",
-                answers: [
-                    "Tim",
-                    "Phổi",
-                    "Dạ dày",
-                    "Gan"
-                ],
-                correct: 1,
-                explanation: "Phổi là cơ quan chính thực hiện trao đổi khí ở người."
-            },
-
-            {
-                question: "Xương và cơ phối hợp với nhau chủ yếu giúp?",
-                answers: [
-                    "Vận động",
-                    "Tiêu hóa",
-                    "Hô hấp tế bào",
-                    "Lọc máu"
-                ],
-                correct: 0,
-                explanation: "Hệ vận động gồm xương và cơ, giúp cơ thể thực hiện các hoạt động vận động."
-            },
-
-            {
-                question: "Máu thuộc loại mô nào?",
-                answers: [
-                    "Mô biểu bì",
-                    "Mô cơ",
-                    "Mô liên kết",
-                    "Mô thần kinh"
-                ],
-                correct: 2,
-                explanation: "Máu được xếp vào mô liên kết vì các tế bào nằm trong chất nền lỏng là huyết tương."
-            },
-
-            {
-                question: "Hệ thần kinh có vai trò quan trọng nào?",
-                answers: [
-                    "Điều khiển và phối hợp hoạt động cơ thể",
-                    "Tạo xương",
-                    "Tiêu hóa thức ăn",
-                    "Hấp thụ nước"
-                ],
-                correct: 0,
-                explanation: "Hệ thần kinh tiếp nhận thông tin và điều khiển, phối hợp nhiều hoạt động của cơ thể."
-            }
-        ]
-
+    {
+      topic: "Quang hợp",
+      icon: "🌱",
+      description: "Tìm hiểu cách cây xanh tạo chất hữu cơ.",
+      questions: [
+        {
+          question: "Quang hợp ở cây xanh cần yếu tố nào?",
+          answers: [
+            "Ánh sáng",
+            "Oxi duy nhất",
+            "Nitơ duy nhất",
+            "Không cần nước"
+          ],
+          correct: 0,
+          explanation: "Quang hợp cần ánh sáng, nước, carbon dioxide và hệ sắc tố quang hợp."
+        },
+        {
+          question: "Khí nào được cây sử dụng trong quang hợp?",
+          answers: [
+            "Oxi",
+            "Carbon dioxide",
+            "Nitơ",
+            "Hydrogen"
+          ],
+          correct: 1,
+          explanation: "Cây sử dụng carbon dioxide (CO₂) trong quá trình quang hợp."
+        },
+        {
+          question: "Sản phẩm hữu cơ chủ yếu của quang hợp là?",
+          answers: [
+            "Glucose",
+            "Oxi",
+            "Nước",
+            "Nitơ"
+          ],
+          correct: 0,
+          explanation: "Quang hợp tạo chất hữu cơ, điển hình là glucose, đồng thời giải phóng oxygen."
+        }
+      ]
     },
 
-
-    9: {
-
-        "Di truyền": [
-            {
-                question: "ADN là viết tắt của?",
-                answers: [
-                    "Axit đêoxiribônuclêic",
-                    "Axit amin",
-                    "Axit ribônuclêic",
-                    "Protein"
-                ],
-                correct: 0,
-                explanation: "ADN là axit đêoxiribônuclêic, phân tử mang thông tin di truyền."
-            },
-
-            {
-                question: "Trong ADN, A liên kết bổ sung với?",
-                answers: [
-                    "G",
-                    "C",
-                    "T",
-                    "U"
-                ],
-                correct: 2,
-                explanation: "Trong ADN: A liên kết với T, G liên kết với C."
-            },
-
-            {
-                question: "Gen là một đoạn của?",
-                answers: [
-                    "Protein",
-                    "ADN",
-                    "Lipid",
-                    "Tinh bột"
-                ],
-                correct: 1,
-                explanation: "Gen là một đoạn của phân tử ADN mang thông tin quy định sản phẩm nhất định."
-            },
-
-            {
-                question: "ARN khác ADN ở loại base nào?",
-                answers: [
-                    "A",
-                    "G",
-                    "C",
-                    "U"
-                ],
-                correct: 3,
-                explanation: "ARN sử dụng U (uracil) thay cho T (thymine) của ADN."
-            },
-
-            {
-                question: "Quá trình tạo ARN dựa trên khuôn ADN được gọi là?",
-                answers: [
-                    "Dịch mã",
-                    "Phiên mã",
-                    "Nguyên phân",
-                    "Thụ tinh"
-                ],
-                correct: 1,
-                explanation: "Phiên mã là quá trình tổng hợp ARN dựa trên một mạch khuôn của ADN."
-            }
-        ]
-
+    {
+      topic: "Sinh thái",
+      icon: "🌍",
+      description: "Khám phá quần thể, quần xã và chuỗi thức ăn.",
+      questions: [
+        {
+          question: "Một nhóm cá thể cùng loài sống trong một khu vực xác định được gọi là?",
+          answers: [
+            "Quần thể",
+            "Quần xã",
+            "Hệ sinh thái",
+            "Sinh quyển"
+          ],
+          correct: 0,
+          explanation: "Quần thể gồm các cá thể cùng loài sống trong một khu vực xác định."
+        },
+        {
+          question: "Cỏ → châu chấu → ếch là ví dụ về?",
+          answers: [
+            "Chuỗi thức ăn",
+            "Quần thể",
+            "Mô",
+            "Cơ quan"
+          ],
+          correct: 0,
+          explanation: "Đây là một chuỗi thức ăn đơn giản."
+        }
+      ]
     }
+  ],
+
+
+  8: [
+    {
+      topic: "Hệ vận động",
+      icon: "🦴",
+      description: "Tìm hiểu xương, khớp và cơ.",
+      questions: [
+        {
+          question: "Hệ vận động của người gồm những thành phần chính nào?",
+          answers: [
+            "Xương và cơ",
+            "Tim và máu",
+            "Não và tủy sống",
+            "Phổi và khí quản"
+          ],
+          correct: 0,
+          explanation: "Hệ vận động gồm bộ xương và hệ cơ, phối hợp tạo ra vận động."
+        },
+        {
+          question: "Cơ bám vào xương nhờ?",
+          answers: [
+            "Gân",
+            "Dây thần kinh",
+            "Mạch máu",
+            "Sụn"
+          ],
+          correct: 0,
+          explanation: "Gân nối cơ với xương."
+        }
+      ]
+    },
+
+    {
+      topic: "Tuần hoàn",
+      icon: "🫀",
+      description: "Khám phá tim và hệ mạch.",
+      questions: [
+        {
+          question: "Cơ quan trung tâm của hệ tuần hoàn là?",
+          answers: [
+            "Tim",
+            "Phổi",
+            "Gan",
+            "Thận"
+          ],
+          correct: 0,
+          explanation: "Tim co bóp để tạo lực đẩy máu trong hệ mạch."
+        },
+        {
+          question: "Động mạch có chức năng chủ yếu là?",
+          answers: [
+            "Đưa máu từ tim đi",
+            "Đưa máu về tim",
+            "Tạo tế bào máu",
+            "Tiêu hóa thức ăn"
+          ],
+          correct: 0,
+          explanation: "Động mạch đưa máu từ tim đến các cơ quan."
+        }
+      ]
+    },
+
+    {
+      topic: "Hô hấp",
+      icon: "🫁",
+      description: "Tìm hiểu quá trình trao đổi khí.",
+      questions: [
+        {
+          question: "Cơ quan chính thực hiện trao đổi khí ở người là?",
+          answers: [
+            "Phổi",
+            "Tim",
+            "Dạ dày",
+            "Thận"
+          ],
+          correct: 0,
+          explanation: "Phổi là cơ quan chính thực hiện trao đổi khí."
+        },
+        {
+          question: "Khí nào cần thiết cho hô hấp tế bào?",
+          answers: [
+            "Oxi",
+            "Carbon dioxide",
+            "Nitơ",
+            "Methane"
+          ],
+          correct: 0,
+          explanation: "Oxi được sử dụng trong hô hấp tế bào để giải phóng năng lượng."
+        }
+      ]
+    }
+  ],
+
+
+  9: [
+    {
+      topic: "ADN",
+      icon: "🧬",
+      description: "Khám phá vật chất di truyền.",
+      questions: [
+        {
+          question: "ADN là viết tắt của?",
+          answers: [
+            "Axit deoxyribonucleic",
+            "Axit ribonucleic",
+            "Protein",
+            "Glucose"
+          ],
+          correct: 0,
+          explanation: "ADN là axit deoxyribonucleic, một loại vật chất di truyền quan trọng."
+        },
+        {
+          question: "Trong ADN, A liên kết bổ sung với?",
+          answers: [
+            "G",
+            "C",
+            "T",
+            "U"
+          ],
+          correct: 2,
+          explanation: "Trong ADN: A liên kết với T, G liên kết với C."
+        },
+        {
+          question: "Trong ADN, G liên kết bổ sung với?",
+          answers: [
+            "A",
+            "T",
+            "C",
+            "U"
+          ],
+          correct: 2,
+          explanation: "G liên kết bổ sung với C."
+        }
+      ]
+    },
+
+    {
+      topic: "ARN",
+      icon: "🧪",
+      description: "Tìm hiểu RNA và vai trò của nó.",
+      questions: [
+        {
+          question: "ARN thường chứa loại base nào thay cho T?",
+          answers: [
+            "A",
+            "U",
+            "G",
+            "C"
+          ],
+          correct: 1,
+          explanation: "ARN sử dụng uracil (U) thay cho thymine (T)."
+        },
+        {
+          question: "mARN có vai trò gì?",
+          answers: [
+            "Mang thông tin di truyền tham gia tổng hợp protein",
+            "Tạo xương",
+            "Vận chuyển oxi",
+            "Tiêu hóa thức ăn"
+          ],
+          correct: 0,
+          explanation: "mARN mang thông tin mã hóa từ ADN đến ribosome để tổng hợp protein."
+        }
+      ]
+    },
+
+    {
+      topic: "Nguyên phân",
+      icon: "🧬",
+      description: "Khám phá quá trình phân chia tế bào.",
+      questions: [
+        {
+          question: "Kết quả của một lần nguyên phân từ một tế bào mẹ thường là?",
+          answers: [
+            "2 tế bào con",
+            "3 tế bào con",
+            "4 tế bào con",
+            "8 tế bào con"
+          ],
+          correct: 0,
+          explanation: "Một tế bào mẹ nguyên phân tạo ra hai tế bào con."
+        },
+        {
+          question: "Nguyên phân có vai trò quan trọng trong?",
+          answers: [
+            "Sinh trưởng và sửa chữa mô",
+            "Chỉ tạo giao tử",
+            "Chỉ tạo hormone",
+            "Chỉ tiêu hóa thức ăn"
+          ],
+          correct: 0,
+          explanation: "Nguyên phân giúp cơ thể sinh trưởng và thay thế, sửa chữa tế bào."
+        }
+      ]
+    }
+  ]
 
 };
 
 
-/* =========================
-   BIẾN QUIZ
-   ========================= */
+/* =========================================================
+   TRẠNG THÁI ỨNG DỤNG
+   ========================================================= */
 
-let currentClass = null;
-let currentTopic = null;
+let selectedClass = null;
+let selectedTopic = null;
 
+let currentQuestions = [];
 let currentQuestion = 0;
 let score = 0;
-
-let quizQuestions = [];
+let correctAnswers = 0;
+let wrongAnswers = 0;
 
 let timerInterval = null;
-let timeLeft = 0;
+let timeLeft = 60;
+
+let lastAIAnswer = "";
+
+let streak = Number(localStorage.getItem("bioStreak") || 0);
+let xp = Number(localStorage.getItem("bioXP") || 0);
+
+let lastStudyDate =
+  localStorage.getItem("bioLastStudyDate") || "";
+
+let achievements =
+  JSON.parse(
+    localStorage.getItem("bioAchievements") || "{}"
+  );
 
 
-/* =========================
+/* =========================================================
+   KHỞI TẠO
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  updateDashboard();
+  updateAchievements();
+
+  showScreen("homeScreen");
+
+});
+
+
+/* =========================================================
+   CHUYỂN SCREEN
+   ========================================================= */
+
+function showScreen(id) {
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen => {
+      screen.classList.remove("active");
+    });
+
+  const target =
+    document.getElementById(id);
+
+  if (target) {
+    target.classList.add("active");
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+/* =========================================================
+   TRANG CHỦ
+   ========================================================= */
+
+function goHome() {
+  showScreen("homeScreen");
+}
+
+function showClasses() {
+  showScreen("classScreen");
+}
+
+
+/* =========================================================
    CHỌN LỚP
-   ========================= */
+   ========================================================= */
 
 function selectClass(classNumber) {
 
-    currentClass = classNumber;
+  selectedClass = classNumber;
 
-    document
-        .getElementById("classSelection")
-        .classList.add("hidden");
+  const title =
+    document.getElementById("topicTitle");
 
-    document
-        .getElementById("topicSelection")
-        .classList.remove("hidden");
+  const badge =
+    document.getElementById("selectedClassBadge");
 
-    document
-        .getElementById("topicTitle")
-        .textContent =
-        "🔬 Sinh học " + classNumber + " – Chọn chủ đề";
+  if (title) {
+    title.textContent =
+      `Sinh học ${classNumber} — Chọn chủ đề`;
+  }
 
-    const grid =
-        document.getElementById("topicGrid");
+  if (badge) {
+    badge.textContent =
+      `📚 SINH HỌC ${classNumber}`;
+  }
 
-    grid.innerHTML = "";
+  renderTopics();
 
-    const topics =
-        quizData[classNumber];
-
-    Object.keys(topics).forEach((topic, index) => {
-
-        const icons = [
-            "🧬",
-            "🌱",
-            "🫀",
-            "🔬",
-            "🌿",
-            "🧠"
-        ];
-
-        const button =
-            document.createElement("button");
-
-        button.className = "topic-card";
-
-        button.innerHTML = `
-            <span class="topic-icon">
-                ${icons[index % icons.length]}
-            </span>
-
-            <strong>${topic}</strong>
-
-            <small>
-                ${topics[topic].length} câu hỏi
-            </small>
-        `;
-
-        button.onclick = () =>
-            startQuiz(topic);
-
-        grid.appendChild(button);
-
-    });
-
-    document
-        .getElementById("quizSection")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+  showScreen("topicScreen");
 }
 
 
-/* =========================
+/* =========================================================
+   HIỂN THỊ CHỦ ĐỀ
+   ========================================================= */
+
+function renderTopics() {
+
+  const grid =
+    document.getElementById("topicGrid");
+
+  if (!grid) return;
+
+  grid.innerHTML = "";
+
+  const topics =
+    quizData[selectedClass] || [];
+
+  topics.forEach((topic, index) => {
+
+    const button =
+      document.createElement("button");
+
+    button.className = "topic-card";
+
+    button.innerHTML = `
+      <div class="topic-icon">
+        ${topic.icon}
+      </div>
+
+      <h3>${escapeHTML(topic.topic)}</h3>
+
+      <p>
+        ${escapeHTML(topic.description)}
+      </p>
+
+      <br>
+
+      <small>
+        📝 ${topic.questions.length} câu hỏi
+      </small>
+    `;
+
+    button.onclick = () => {
+      startQuiz(index);
+    };
+
+    grid.appendChild(button);
+
+  });
+
+}
+
+
+/* =========================================================
    BẮT ĐẦU QUIZ
-   ========================= */
+   ========================================================= */
 
-function startQuiz(topic) {
+function startQuiz(topicIndex) {
 
-    currentTopic = topic;
+  selectedTopic = topicIndex;
 
-    quizQuestions =
-        [...quizData[currentClass][topic]];
+  const topic =
+    quizData[selectedClass][topicIndex];
 
-    currentQuestion = 0;
-    score = 0;
+  currentQuestions =
+    [...topic.questions];
 
-    clearInterval(timerInterval);
+  currentQuestion = 0;
+  score = 0;
+  correctAnswers = 0;
+  wrongAnswers = 0;
 
-    timeLeft = quizQuestions.length * 30;
+  document.getElementById("quizTopic")
+    .textContent =
+      `Sinh học ${selectedClass} • ${topic.topic}`;
 
-    document
-        .getElementById("topicSelection")
-        .classList.add("hidden");
+  showScreen("quizScreen");
 
-    document
-        .getElementById("quizArea")
-        .classList.remove("hidden");
+  loadQuestion();
 
-    document
-        .getElementById("resultArea")
-        .classList.add("hidden");
-
-    document
-        .getElementById("currentTopic")
-        .textContent =
-        "🧬 " + topic;
-
-    startTimer();
-
-    loadQuestion();
 }
 
 
-/* =========================
+/* =========================================================
    LOAD QUESTION
-   ========================= */
+   ========================================================= */
 
 function loadQuestion() {
 
-    const q =
-        quizQuestions[currentQuestion];
+  clearInterval(timerInterval);
 
-    document
-        .getElementById("questionNumber")
-        .textContent =
-        `Câu ${currentQuestion + 1}/${quizQuestions.length}`;
+  const question =
+    currentQuestions[currentQuestion];
 
-    document
-        .getElementById("questionBadge")
-        .textContent =
-        `Câu ${currentQuestion + 1}`;
+  const questionText =
+    document.getElementById("questionText");
 
-    document
-        .getElementById("questionText")
-        .textContent =
-        q.question;
+  const number =
+    document.getElementById("questionNumber");
 
-    document
-        .getElementById("scoreText")
-        .textContent =
-        `Điểm: ${score}`;
+  const progress =
+    document.getElementById("quizProgress");
 
-    const progress =
-        ((currentQuestion) / quizQuestions.length) * 100;
+  const answers =
+    document.getElementById("answers");
 
-    document
-        .getElementById("progress")
-        .style.width =
-        progress + "%";
+  const nextButton =
+    document.getElementById("nextButton");
 
+  if (!question) return;
 
-    const answers =
-        document.getElementById("answers");
+  questionText.textContent =
+    question.question;
 
-    answers.innerHTML = "";
+  number.textContent =
+    `Câu ${currentQuestion + 1} / ${currentQuestions.length}`;
 
+  progress.style.width =
+    `${((currentQuestion) / currentQuestions.length) * 100}%`;
 
-    q.answers.forEach((answer, index) => {
+  answers.innerHTML = "";
 
-        const button =
-            document.createElement("button");
+  nextButton.disabled = true;
 
-        button.className = "answer";
+  question.answers.forEach((answer, index) => {
 
-        button.textContent =
-            `${String.fromCharCode(65 + index)}. ${answer}`;
+    const button =
+      document.createElement("button");
 
-        button.onclick = () =>
-            checkAnswer(index, button);
+    button.className = "answer-btn";
 
-        answers.appendChild(button);
+    button.textContent =
+      `${String.fromCharCode(65 + index)}. ${answer}`;
 
-    });
+    button.onclick =
+      () => checkAnswer(index, button);
 
+    answers.appendChild(button);
 
-    document
-        .getElementById("explanation")
-        .classList.add("hidden");
+  });
 
-    document
-        .getElementById("nextButton")
-        .classList.add("hidden");
+  timeLeft = 60;
+
+  document.getElementById("timer")
+    .textContent = timeLeft;
+
+  startTimer();
 
 }
 
 
-/* =========================
-   KIỂM TRA ĐÁP ÁN
-   ========================= */
-
-function checkAnswer(index, clickedButton) {
-
-    const q =
-        quizQuestions[currentQuestion];
-
-    const buttons =
-        document.querySelectorAll(".answer");
-
-
-    buttons.forEach(button => {
-        button.disabled = true;
-    });
-
-
-    if (index === q.correct) {
-
-        clickedButton.classList.add("correct");
-
-        score++;
-
-    } else {
-
-        clickedButton.classList.add("wrong");
-
-        buttons[q.correct]
-            .classList.add("correct");
-
-    }
-
-
-    document
-        .getElementById("scoreText")
-        .textContent =
-        `Điểm: ${score}`;
-
-
-    const explanation =
-        document.getElementById("explanation");
-
-    explanation.innerHTML =
-        `<strong>💡 Giải thích:</strong><br>${q.explanation}`;
-
-    explanation.classList.remove("hidden");
-
-
-    document
-        .getElementById("nextButton")
-        .classList.remove("hidden");
-
-}
-
-
-/* =========================
-   CÂU TIẾP
-   ========================= */
-
-function nextQuestion() {
-
-    currentQuestion++;
-
-    if (
-        currentQuestion >=
-        quizQuestions.length
-    ) {
-
-        finishQuiz();
-
-        return;
-    }
-
-    loadQuestion();
-}
-
-
-/* =========================
+/* =========================================================
    TIMER
-   ========================= */
+   ========================================================= */
 
 function startTimer() {
 
-    updateTimer();
+  timerInterval =
+    setInterval(() => {
 
-    timerInterval =
-        setInterval(() => {
+      timeLeft--;
 
-            timeLeft--;
+      document.getElementById("timer")
+        .textContent = timeLeft;
 
-            updateTimer();
+      if (timeLeft <= 0) {
 
-            if (timeLeft <= 0) {
+        clearInterval(timerInterval);
 
-                clearInterval(timerInterval);
+        autoNextAfterTimeout();
 
-                finishQuiz();
+      }
 
-            }
-
-        }, 1000);
-
-}
-
-
-function updateTimer() {
-
-    const minutes =
-        Math.floor(timeLeft / 60);
-
-    const seconds =
-        timeLeft % 60;
-
-    document
-        .getElementById("timer")
-        .textContent =
-        `⏱️ ${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    }, 1000);
 
 }
 
 
-/* =========================
-   KẾT QUẢ
-   ========================= */
+function autoNextAfterTimeout() {
+
+  const question =
+    currentQuestions[currentQuestion];
+
+  const buttons =
+    document.querySelectorAll(".answer-btn");
+
+  buttons.forEach((button, index) => {
+
+    button.disabled = true;
+
+    if (index === question.correct) {
+      button.classList.add("correct");
+    }
+
+  });
+
+  wrongAnswers++;
+
+  document.getElementById("nextButton")
+    .disabled = false;
+
+  showToast(
+    "⏰",
+    "Hết giờ! Đáp án đúng đã được đánh dấu."
+  );
+
+}
+
+
+/* =========================================================
+   CHECK ANSWER
+   ========================================================= */
+
+function checkAnswer(index, clickedButton) {
+
+  clearInterval(timerInterval);
+
+  const question =
+    currentQuestions[currentQuestion];
+
+  const buttons =
+    document.querySelectorAll(".answer-btn");
+
+  buttons.forEach(button => {
+    button.disabled = true;
+  });
+
+  if (index === question.correct) {
+
+    clickedButton.classList.add("correct");
+
+    score++;
+
+    correctAnswers++;
+
+    addXP(20);
+
+    showToast(
+      "✅",
+      "+20 XP — Chính xác!"
+    );
+
+  } else {
+
+    clickedButton.classList.add("wrong");
+
+    buttons[question.correct]
+      .classList.add("correct");
+
+    wrongAnswers++;
+
+    showToast(
+      "💡",
+      "Chưa đúng, xem lại đáp án nhé!"
+    );
+
+  }
+
+  const nextButton =
+    document.getElementById("nextButton");
+
+  nextButton.disabled = false;
+
+  const progress =
+    document.getElementById("quizProgress");
+
+  progress.style.width =
+    `${((currentQuestion + 1) / currentQuestions.length) * 100}%`;
+
+}
+
+
+/* =========================================================
+   NEXT QUESTION
+   ========================================================= */
+
+function nextQuestion() {
+
+  currentQuestion++;
+
+  if (
+    currentQuestion >=
+    currentQuestions.length
+  ) {
+
+    finishQuiz();
+
+    return;
+
+  }
+
+  loadQuestion();
+
+}
+
+
+/* =========================================================
+   FINISH QUIZ
+   ========================================================= */
 
 function finishQuiz() {
 
-    clearInterval(timerInterval);
+  clearInterval(timerInterval);
 
-    document
-        .getElementById("quizArea")
-        .classList.add("hidden");
+  updateStreak();
 
-    document
-        .getElementById("resultArea")
-        .classList.remove("hidden");
+  if (
+    currentQuestions.length > 0 &&
+    score / currentQuestions.length >= 0.8
+  ) {
 
+    addXP(30);
 
-    const total =
-        quizQuestions.length;
+  }
 
-    document
-        .getElementById("resultScore")
-        .textContent =
-        `${score}/${total}`;
+  unlockAchievement("start");
 
+  if (score >= 10) {
+    unlockAchievement("memory");
+  }
 
-    let message = "";
+  if (
+    selectedClass === 9
+  ) {
+    unlockAchievement("grade9");
+  }
 
-    const percent =
-        score / total;
+  if (
+    quizData[selectedClass][selectedTopic]
+      .topic
+      .toLowerCase()
+      .includes("adn")
+  ) {
 
+    unlockAchievement("dna");
 
-    if (percent === 1) {
+  }
 
-        message =
-            "🎉 Xuất sắc! Bạn trả lời đúng tất cả!";
+  const finalScore =
+    document.getElementById("finalScore");
 
-    } else if (percent >= 0.8) {
+  const correct =
+    document.getElementById("correctCount");
 
-        message =
-            "🌟 Rất tốt! Bạn nắm kiến thức khá chắc.";
+  const wrong =
+    document.getElementById("wrongCount");
 
-    } else if (percent >= 0.5) {
+  const earned =
+    document.getElementById("earnedXP");
 
-        message =
-            "👍 Khá tốt! Hãy luyện thêm một chút nhé.";
+  finalScore.textContent =
+    score;
 
-    } else {
+  correct.textContent =
+    correctAnswers;
 
-        message =
-            "💪 Đừng nản! Làm lại một lần nữa và bạn sẽ tiến bộ.";
+  wrong.textContent =
+    wrongAnswers;
 
-    }
+  earned.textContent =
+    score * 20;
 
+  const percent =
+    (score / currentQuestions.length) * 100;
 
-    document
-        .getElementById("resultMessage")
-        .textContent =
-        message;
+  const message =
+    document.getElementById("resultMessage");
 
+  if (percent === 100) {
+    message.textContent =
+      "🌟 Tuyệt vời! Bạn đã trả lời đúng tất cả!";
+  }
+  else if (percent >= 80) {
+    message.textContent =
+      "🔥 Rất tốt! Kiến thức của bạn đang tiến bộ!";
+  }
+  else if (percent >= 50) {
+    message.textContent =
+      "🌱 Khá tốt! Hãy ôn lại những câu sai nhé!";
+  }
+  else {
+    message.textContent =
+      "💪 Đừng nản! Làm lại một lần nữa và bạn sẽ tiến bộ.";
+  }
 
-    document
-        .getElementById("resultArea")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+  updateDashboard();
+  updateAchievements();
+
+  showScreen("resultScreen");
 
 }
 
 
-/* =========================
-   LÀM LẠI
-   ========================= */
+/* =========================================================
+   RESTART
+   ========================================================= */
 
 function restartQuiz() {
 
-    startQuiz(currentTopic);
+  if (
+    selectedClass === null ||
+    selectedTopic === null
+  ) {
+    showClasses();
+    return;
+  }
+
+  startQuiz(selectedTopic);
 
 }
 
 
-/* =========================
-   QUAY LẠI
-   ========================= */
+/* =========================================================
+   QUIT
+   ========================================================= */
 
-function backToClasses() {
+function quitQuiz() {
 
-    clearInterval(timerInterval);
+  clearInterval(timerInterval);
 
-    document
-        .getElementById("quizArea")
-        .classList.add("hidden");
-
-    document
-        .getElementById("topicSelection")
-        .classList.add("hidden");
-
-    document
-        .getElementById("resultArea")
-        .classList.add("hidden");
-
-    document
-        .getElementById("classSelection")
-        .classList.remove("hidden");
-
-    document
-        .getElementById("quizSection")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+  showClasses();
 
 }
 
 
-function backToTopics() {
+/* =========================================================
+   STREAK
+   ========================================================= */
 
-    clearInterval(timerInterval);
+function updateStreak() {
 
-    document
-        .getElementById("quizArea")
-        .classList.add("hidden");
+  const today =
+    new Date()
+      .toISOString()
+      .slice(0, 10);
 
-    document
-        .getElementById("resultArea")
-        .classList.add("hidden");
+  if (lastStudyDate === today) {
+    return;
+  }
 
-    document
-        .getElementById("topicSelection")
-        .classList.remove("hidden");
+  if (!lastStudyDate) {
+
+    streak = 1;
+
+  } else {
+
+    const previous =
+      new Date(lastStudyDate);
+
+    const current =
+      new Date(today);
+
+    const difference =
+      Math.floor(
+        (
+          current - previous
+        ) /
+        (1000 * 60 * 60 * 24)
+      );
+
+    if (difference === 1) {
+
+      streak++;
+
+    } else {
+
+      streak = 1;
+
+    }
+
+  }
+
+  lastStudyDate = today;
+
+  localStorage.setItem(
+    "bioStreak",
+    streak
+  );
+
+  localStorage.setItem(
+    "bioLastStudyDate",
+    lastStudyDate
+  );
+
+  if (streak >= 7) {
+
+    unlockAchievement("streak");
+
+  }
+
+  if (streak >= 3) {
+
+    addXP(50);
+
+  }
+
+  updateDashboard();
 
 }
 
 
-/* =========================
-   ĐIỀU HƯỚNG
-   ========================= */
+/* =========================================================
+   XP
+   ========================================================= */
 
-function scrollToQuiz() {
+function addXP(amount) {
 
-    document
-        .getElementById("quizSection")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+  xp += amount;
 
-}
+  localStorage.setItem(
+    "bioXP",
+    xp
+  );
 
-
-function showAI() {
-
-    document
-        .getElementById("aiSection")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+  updateDashboard();
 
 }
 
 
-function showHome() {
+/* =========================================================
+   LEVEL
+   ========================================================= */
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+function getLevelData() {
+
+  const levels = [
+    {
+      level: 1,
+      name: "Người mới",
+      min: 0,
+      max: 100
+    },
+    {
+      level: 2,
+      name: "Nhà khám phá",
+      min: 100,
+      max: 300
+    },
+    {
+      level: 3,
+      name: "Học sinh Sinh học",
+      min: 300,
+      max: 600
+    },
+    {
+      level: 4,
+      name: "Nhà nghiên cứu",
+      min: 600,
+      max: 1000
+    },
+    {
+      level: 5,
+      name: "Chuyên gia Sinh học",
+      min: 1000,
+      max: 1500
+    },
+    {
+      level: 6,
+      name: "Bậc thầy Sinh học",
+      min: 1500,
+      max: 2500
+    }
+  ];
+
+  for (let i = 0; i < levels.length; i++) {
+
+    if (
+      xp >= levels[i].min &&
+      xp < levels[i].max
+    ) {
+      return levels[i];
+    }
+
+  }
+
+  return levels[levels.length - 1];
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+function updateDashboard() {
+
+  const level =
+    getLevelData();
+
+  const levelProgress =
+    Math.min(
+      100,
+      (
+        (xp - level.min) /
+        (level.max - level.min)
+      ) * 100
+    );
+
+  const streakNumber =
+    document.getElementById("streakNumber");
+
+  const streakText =
+    document.getElementById("streakText");
+
+  const xpNumber =
+    document.getElementById("xpNumber");
+
+  const levelText =
+    document.getElementById("levelText");
+
+  const levelName =
+    document.getElementById("levelName");
+
+  const levelXP =
+    document.getElementById("levelXP");
+
+  const progress =
+    document.getElementById("levelProgress");
+
+  const headerStreak =
+    document.getElementById("headerStreak");
+
+  const headerXP =
+    document.getElementById("headerXP");
+
+  if (streakNumber)
+    streakNumber.textContent = streak;
+
+  if (headerStreak)
+    headerStreak.textContent = streak;
+
+  if (xpNumber)
+    xpNumber.textContent = `${xp} XP`;
+
+  if (headerXP)
+    headerXP.textContent = xp;
+
+  if (levelText)
+    levelText.textContent =
+      `Cấp ${level.level} — ${level.name}`;
+
+  if (levelName)
+    levelName.textContent =
+      `Cấp ${level.level} — ${level.name}`;
+
+  if (levelXP)
+    levelXP.textContent =
+      `${xp - level.min} / ${level.max - level.min} XP`;
+
+  if (progress)
+    progress.style.width =
+      `${levelProgress}%`;
+
+  if (streakText) {
+
+    if (streak === 0) {
+      streakText.textContent =
+        "Bắt đầu chuỗi học hôm nay!";
+    }
+    else if (streak === 1) {
+      streakText.textContent =
+        "Ngày đầu tiên! Cố lên 🔥";
+    }
+    else {
+      streakText.textContent =
+        `${streak} ngày liên tiếp 🔥`;
+    }
+
+  }
+
+  const achievementNumber =
+    document.getElementById(
+      "achievementNumber"
+    );
+
+  if (achievementNumber) {
+
+    achievementNumber.textContent =
+      Object.values(achievements)
+        .filter(Boolean)
+        .length;
+
+  }
+
+}
+
+
+/* =========================================================
+   ACHIEVEMENTS
+   ========================================================= */
+
+function unlockAchievement(id) {
+
+  if (achievements[id]) {
+    return;
+  }
+
+  achievements[id] = true;
+
+  localStorage.setItem(
+    "bioAchievements",
+    JSON.stringify(achievements)
+  );
+
+  updateAchievements();
+
+  const names = {
+    start: "🌱 Khởi đầu",
+    streak: "🔥 7 ngày",
+    dna: "🧬 DNA Master",
+    memory: "🧠 Siêu trí nhớ",
+    grade9: "🏆 Sinh học 9"
+  };
+
+  showToast(
+    "🏆",
+    `Mở khóa: ${names[id] || "Thành tích"}`
+  );
+
+}
+
+
+function updateAchievements() {
+
+  const map = {
+    start: "achievement-start",
+    streak: "achievement-streak",
+    dna: "achievement-dna",
+    memory: "achievement-memory",
+    grade9: "achievement-grade9"
+  };
+
+  Object.keys(map).forEach(id => {
+
+    const element =
+      document.getElementById(map[id]);
+
+    if (!element) return;
+
+    if (achievements[id]) {
+
+      element.classList.remove("locked");
+      element.classList.add("unlocked");
+
+    }
+
+  });
+
+  const achievementNumber =
+    document.getElementById(
+      "achievementNumber"
+    );
+
+  if (achievementNumber) {
+
+    achievementNumber.textContent =
+      Object.values(achievements)
+        .filter(Boolean)
+        .length;
+
+  }
+
+}
+
+
+/* =========================================================
+   3D MODEL
+   ========================================================= */
+
+const modelInfo = {
+
+  dna: {
+    title: "🧬 ADN",
+    description:
+      "Mô hình ADN giúp quan sát cấu trúc xoắn kép."
+  },
+
+  heart: {
+    title: "🫀 Tim",
+    description:
+      "Mô hình tim dùng để quan sát cấu trúc bên ngoài."
+  },
+
+  brain: {
+    title: "🧠 Não",
+    description:
+      "Mô hình não giúp khám phá cơ quan điều khiển hệ thần kinh."
+  },
+
+  cell: {
+    title: "🌱 Tế bào",
+    description:
+      "Mô hình tế bào giúp hình dung các thành phần bên trong tế bào."
+  }
+
+};
+
+
+/*
+   Các file GLB thật có thể thay vào đây.
+   Hiện tại dùng model mẫu để đảm bảo khu 3D hoạt động.
+*/
+
+const modelFiles = {
+
+  dna:
+    "https://modelviewer.dev/shared-assets/models/Astronaut.glb",
+
+  heart:
+    "https://modelviewer.dev/shared-assets/models/RobotExpressive.glb",
+
+  brain:
+    "https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb",
+
+  cell:
+    "https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+
+};
+
+
+function changeModel(type) {
+
+  const viewer =
+    document.getElementById("bioModel");
+
+  if (!viewer) return;
+
+  viewer.src =
+    modelFiles[type];
+
+  document.getElementById(
+    "modelTitle"
+  ).textContent =
+    modelInfo[type].title;
+
+  document.getElementById(
+    "modelDescription"
+  ).textContent =
+    modelInfo[type].description;
+
+}
+
+
+/* =========================================================
+   AI TRỢ LÝ
+   ========================================================= */
+
+function askAI() {
+
+  const input =
+    document.getElementById("aiInput");
+
+  if (!input) return;
+
+  const question =
+    input.value.trim();
+
+  if (!question) return;
+
+  addUserMessage(question);
+
+  const answer =
+    generateAIAnswer(question);
+
+  lastAIAnswer =
+    answer;
+
+  addAIMessage(answer);
+
+  input.value = "";
+
+  speak(answer);
+
+}
+
+
+function generateAIAnswer(question) {
+
+  const q =
+    question
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+
+  if (
+    q.includes("adn")
+  ) {
+
+    return `
+      🧬 <b>ADN</b> là axit deoxyribonucleic,
+      một loại vật chất di truyền.
+      <br><br>
+      ADN có cấu trúc xoắn kép và gồm
+      bốn loại nucleotide: A, T, G và C.
+      <br><br>
+      🔬 Trong ADN:
+      <b>A liên kết với T</b>,
+      <b>G liên kết với C</b>.
+    `;
+
+  }
+
+
+  if (
+    q.includes("gen")
+  ) {
+
+    return `
+      🧬 <b>Gen</b> là một đoạn của phân tử ADN
+      mang thông tin quy định một sản phẩm
+      nhất định hoặc góp phần quy định một tính trạng.
+    `;
+
+  }
+
+
+  if (
+    q.includes("quang hop")
+  ) {
+
+    return `
+      🌱 <b>Quang hợp</b> là quá trình cây xanh
+      sử dụng năng lượng ánh sáng để tổng hợp
+      chất hữu cơ từ CO₂ và nước,
+      đồng thời giải phóng O₂.
+    `;
+
+  }
+
+
+  if (
+    q.includes("nguyen phan")
+  ) {
+
+    return `
+      🧬 <b>Nguyên phân</b> là quá trình phân chia
+      tế bào giúp tạo ra các tế bào con.
+      <br><br>
+      Quá trình này có vai trò quan trọng
+      trong sinh trưởng và thay thế tế bào.
+    `;
+
+  }
+
+
+  if (
+    q.includes("tuan hoan") ||
+    q.includes("tim")
+  ) {
+
+    return `
+      🫀 <b>Hệ tuần hoàn</b> gồm tim và hệ mạch,
+      có vai trò vận chuyển máu,
+      chất dinh dưỡng, khí và nhiều chất khác
+      trong cơ thể.
+      <br><br>
+      Nếu bạn muốn, hãy bấm
+      <b>“Giải thích bằng 3D”</b>
+      để mở phòng thí nghiệm.
+    `;
+
+  }
+
+
+  if (
+    q.includes("arn") ||
+    q.includes("rna")
+  ) {
+
+    return `
+      🧪 <b>ARN</b> là một loại axit nucleic.
+      ARN thường có các base A, U, G và C;
+      trong đó U thay cho T của ADN.
+    `;
+
+  }
+
+
+  if (
+    q.includes("ti the") ||
+    q.includes("mitochondria")
+  ) {
+
+    return `
+      🔬 <b>Ti thể</b> là bào quan tham gia
+      chủ yếu vào quá trình hô hấp tế bào
+      và cung cấp năng lượng cho hoạt động tế bào.
+    `;
+
+  }
+
+
+  if (
+    q.includes("te bao")
+  ) {
+
+    return `
+      🔬 <b>Tế bào</b> là đơn vị cấu trúc
+      và chức năng cơ bản của cơ thể sống.
+      <br><br>
+      Có thể tìm hiểu tế bào động vật
+      và tế bào thực vật để thấy những điểm
+      giống và khác nhau.
+    `;
+
+  }
+
+
+  return `
+    🤖 Mình chưa có câu trả lời phù hợp
+    cho câu hỏi này trong thư viện Sinh học hiện tại.
+    <br><br>
+    Bạn thử hỏi về:
+    <b>ADN, Gen, ARN, quang hợp,
+    nguyên phân, tế bào, tim hoặc tuần hoàn</b> nhé! 🌿
+  `;
+
+}
+
+
+/* =========================================================
+   CHAT
+   ========================================================= */
+
+function addUserMessage(text) {
+
+  const box =
+    document.getElementById("aiMessages");
+
+  const message =
+    document.createElement("div");
+
+  message.className =
+    "ai-message user";
+
+  message.textContent =
+    "🧑 " + text;
+
+  box.appendChild(message);
+
+  box.scrollTop =
+    box.scrollHeight;
+
+}
+
+
+function addAIMessage(html) {
+
+  const box =
+    document.getElementById("aiMessages");
+
+  const message =
+    document.createElement("div");
+
+  message.className =
+    "ai-message bot";
+
+  message.innerHTML =
+    "🤖 " + html;
+
+  box.appendChild(message);
+
+  box.scrollTop =
+    box.scrollHeight;
+
+}
+
+
+/* =========================================================
+   GIỌNG NÓI
+   ========================================================= */
+
+function startVoiceInput() {
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+
+    showToast(
+      "🎤",
+      "Trình duyệt này chưa hỗ trợ nhận dạng giọng nói."
+    );
+
+    return;
+
+  }
+
+  const recognition =
+    new SpeechRecognition();
+
+  recognition.lang =
+    "vi-VN";
+
+  recognition.interimResults =
+    false;
+
+  recognition.continuous =
+    false;
+
+  const mic =
+    document.getElementById(
+      "micButton"
+    );
+
+  if (mic) {
+    mic.textContent = "🔴";
+  }
+
+  showToast(
+    "🎤",
+    "Mình đang nghe..."
+  );
+
+  recognition.start();
+
+  recognition.onresult =
+    event => {
+
+      const text =
+        event
+          .results[0][0]
+          .transcript;
+
+      const input =
+        document.getElementById(
+          "aiInput"
+        );
+
+      input.value =
+        text;
+
+      askAI();
+
+    };
+
+  recognition.onerror =
+    () => {
+
+      showToast(
+        "⚠️",
+        "Không nhận được giọng nói. Bạn thử lại nhé!"
+      );
+
+    };
+
+  recognition.onend =
+    () => {
+
+      if (mic) {
+        mic.textContent = "🎤";
+      }
+
+    };
+
+}
+
+
+/* =========================================================
+   ĐỌC CÂU TRẢ LỜI
+   ========================================================= */
+
+function speak(html) {
+
+  if (!("speechSynthesis" in window)) {
+    return;
+  }
+
+  const temp =
+    document.createElement("div");
+
+  temp.innerHTML =
+    html;
+
+  const text =
+    temp.textContent;
+
+  speechSynthesis.cancel();
+
+  const utterance =
+    new SpeechSynthesisUtterance(
+      text
+    );
+
+  utterance.lang =
+    "vi-VN";
+
+  utterance.rate =
+    0.95;
+
+  utterance.pitch =
+    1;
+
+  speechSynthesis.speak(
+    utterance
+  );
+
+}
+
+
+function speakLastAnswer() {
+
+  if (!lastAIAnswer) {
+
+    showToast(
+      "🔊",
+      "Hãy hỏi trợ lý trước nhé!"
+    );
+
+    return;
+
+  }
+
+  speak(lastAIAnswer);
+
+}
+
+
+/* =========================================================
+   AI → 3D
+   ========================================================= */
+
+function open3DFromAI() {
+
+  const input =
+    document.getElementById("aiInput");
+
+  const question =
+    input
+      ? input.value.toLowerCase()
+      : "";
+
+  if (
+    question.includes("tim")
+  ) {
+
+    changeModel("heart");
+
+  }
+  else if (
+    question.includes("nao")
+  ) {
+
+    changeModel("brain");
+
+  }
+  else if (
+    question.includes("te bao")
+  ) {
+
+    changeModel("cell");
+
+  }
+  else {
+
+    changeModel("dna");
+
+  }
+
+  document
+    .querySelector(".lab-card")
+    ?.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
     });
 
 }
 
 
-/* ==================================================
+/* =========================================================
    CHIA SẺ
-   ================================================== */
+   ========================================================= */
 
 async function shareQuiz() {
 
-    const url =
-        window.location.href;
+  const url =
+    window.location.href;
 
-    const text =
-        "🧬 Mình vừa làm Quiz Sinh Học! Bạn thử làm xem nhé 🌿";
+  const text =
+    "🧬 Mình vừa làm Quiz Sinh Học! Bạn thử làm xem nhé 🌿";
 
-
-    /*
-       📱 Nếu trình duyệt hỗ trợ Web Share
-       thì sử dụng bảng chia sẻ của thiết bị.
-    */
-
-    if (navigator.share) {
-
-        try {
-
-            await navigator.share({
-
-                title: "Quiz Sinh Học",
-
-                text: text,
-
-                url: url
-
-            });
-
-            return;
-
-        } catch (error) {
-
-            /*
-               Người dùng bấm Hủy thì không cần
-               hiện lỗi.
-            */
-
-            console.log(
-                "Share cancelled:",
-                error
-            );
-
-        }
-
-    }
-
-
-    /*
-       💻 Edge trên máy tính:
-       sao chép link.
-    */
+  if (navigator.share) {
 
     try {
 
-        await navigator.clipboard.writeText(url);
+      await navigator.share({
+        title: "Quiz Sinh Học",
+        text: text,
+        url: url
+      });
 
-        alert(
-            "📋 Đã sao chép link Quiz Sinh Học!\n\n" +
-            "Bạn có thể dán link vào Messenger, Zalo, Facebook hoặc gửi cho bạn bè."
-        );
+      return;
 
-    } catch (error) {
+    }
+    catch (error) {
 
-        /*
-           Cách dự phòng nếu clipboard bị chặn.
-        */
-
-        const input =
-            document.createElement("input");
-
-        input.value = url;
-
-        document.body.appendChild(input);
-
-        input.select();
-
-        document.execCommand("copy");
-
-        document.body.removeChild(input);
-
-        alert(
-            "📋 Đã sao chép link website!"
-        );
+      console.log(
+        "Share cancelled:",
+        error
+      );
 
     }
 
-}
+  }
 
+  try {
 
-/* ==================================================
-   TRỢ LÝ SINH HỌC
-   ================================================== */
-
-
-/* =========================
-   VOICE RECOGNITION
-   ========================= */
-
-let recognition = null;
-
-const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
-
-
-if (SpeechRecognition) {
-
-    recognition =
-        new SpeechRecognition();
-
-    recognition.lang =
-        "vi-VN";
-
-    recognition.continuous =
-        false;
-
-    recognition.interimResults =
-        false;
-
-
-    recognition.onstart = function () {
-
-        document
-            .getElementById("micButton")
-            .classList.add("listening");
-
-        document
-            .getElementById("voiceStatus")
-            .textContent =
-            "🎙️ Đang nghe... Hãy nói câu hỏi của bạn";
-
-    };
-
-
-    recognition.onresult = function (event) {
-
-        const text =
-            event.results[0][0].transcript;
-
-        document
-            .getElementById("voiceStatus")
-            .textContent =
-            "✅ Đã nhận: " + text;
-
-        addUserMessage(text);
-
-        const answer =
-            generateAIAnswer(text);
-
-        addAIMessage(answer);
-
-        speak(answer);
-
-    };
-
-
-    recognition.onerror = function (event) {
-
-        console.log(
-            "Speech error:",
-            event.error
-        );
-
-        document
-            .getElementById("voiceStatus")
-            .textContent =
-            "❌ Không nhận được giọng nói. Bạn thử lại nhé.";
-
-        document
-            .getElementById("micButton")
-            .classList.remove("listening");
-
-    };
-
-
-    recognition.onend = function () {
-
-        document
-            .getElementById("micButton")
-            .classList.remove("listening");
-
-    };
-
-}
-
-
-/* =========================
-   BẮT ĐẦU NGHE
-   ========================= */
-
-function startListening() {
-
-    if (!recognition) {
-
-        alert(
-            "⚠️ Trình duyệt này chưa hỗ trợ nhận diện giọng nói.\n\n" +
-            "Bạn có thể nhập câu hỏi bằng bàn phím."
-        );
-
-        return;
-    }
-
-
-    try {
-
-        recognition.start();
-
-    } catch (error) {
-
-        console.log(error);
-
-    }
-
-}
-
-
-/* =========================
-   GỬI TEXT
-   ========================= */
-
-function sendText() {
-
-    const input =
-        document.getElementById("userInput");
-
-    const text =
-        input.value.trim();
-
-
-    if (!text) return;
-
-
-    addUserMessage(text);
-
-    const answer =
-        generateAIAnswer(text);
-
-    addAIMessage(answer);
-
-    speak(answer);
-
-    input.value = "";
-
-}
-
-
-function handleEnter(event) {
-
-    if (event.key === "Enter") {
-
-        sendText();
-
-    }
-
-}
-
-
-/* =========================
-   QUICK QUESTION
-   ========================= */
-
-function quickAsk(text) {
-
-    document
-        .getElementById("userInput")
-        .value = text;
-
-    sendText();
-
-}
-
-
-/* =========================
-   CHAT USER
-   ========================= */
-
-function addUserMessage(text) {
-
-    const chat =
-        document.getElementById("chatBox");
-
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        "chat-message user-message";
-
-
-    message.innerHTML = `
-
-        <div class="bubble">
-            ${escapeHTML(text)}
-        </div>
-
-    `;
-
-
-    chat.appendChild(message);
-
-    chat.scrollTop =
-        chat.scrollHeight;
-
-}
-
-
-/* =========================
-   CHAT AI
-   ========================= */
-
-function addAIMessage(html) {
-
-    const chat =
-        document.getElementById("chatBox");
-
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        "chat-message ai-message";
-
-
-    message.innerHTML = `
-
-        <div class="message-avatar">
-            🤖
-        </div>
-
-        <div class="bubble">
-            ${html}
-        </div>
-
-    `;
-
-
-    chat.appendChild(message);
-
-    chat.scrollTop =
-        chat.scrollHeight;
-
-}
-
-
-/* =========================
-   AI SINH HỌC
-   ========================= */
-
-function generateAIAnswer(question) {
-
-    const q =
-        question
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
-
-
-    if (
-        q.includes("adn") ||
-        q.includes("dna")
-    ) {
-
-        return `
-            🧬 <b>ADN</b> là phân tử mang thông tin di truyền
-            của sinh vật.<br><br>
-
-            ADN gồm các nucleotide với 4 loại base:
-            <b>A, T, G, C</b>.<br><br>
-
-            Nguyên tắc bổ sung:
-            <b>A liên kết với T</b>,
-            <b>G liên kết với C</b>.
-        `;
-
-    }
-
-
-    if (
-        q.includes("gen")
-    ) {
-
-        return `
-            🧬 <b>Gen</b> là một đoạn của ADN
-            mang thông tin quy định một sản phẩm
-            nhất định.<br><br>
-
-            Có thể hiểu đơn giản:
-            <b>ADN là vật chất di truyền,
-            còn gen là một đoạn thông tin trên ADN.</b>
-        `;
-
-    }
-
-
-    if (
-        q.includes("quang hop")
-    ) {
-
-        return `
-            🌱 <b>Quang hợp</b> là quá trình cây xanh
-            sử dụng năng lượng ánh sáng để tổng hợp
-            chất hữu cơ từ CO₂ và nước.<br><br>
-
-            Quá trình này đồng thời giải phóng
-            <b>oxygen (O₂)</b>.
-        `;
-
-    }
-
-
-    if (
-        q.includes("nguyen phan")
-    ) {
-
-        return `
-            🔬 <b>Nguyên phân</b> là hình thức phân chia
-            tế bào tạo ra các tế bào con có bộ nhiễm sắc thể
-            giống tế bào mẹ về cơ bản.<br><br>
-
-            Nguyên phân giúp cơ thể
-            <b>sinh trưởng và thay thế tế bào</b>.
-        `;
-
-    }
-
-
-    if (
-        q.includes("tuan hoan") ||
-        q.includes("tim") ||
-        q.includes("mau")
-    ) {
-
-        return `
-            🫀 <b>Hệ tuần hoàn</b> gồm tim và hệ mạch,
-            có vai trò vận chuyển máu và các chất
-            cần thiết trong cơ thể.<br><br>
-
-            <b>Tim</b> co bóp để tạo lực đẩy giúp máu
-            lưu thông.
-        `;
-
-    }
-
-
-    if (
-        q.includes("arn") ||
-        q.includes("rna")
-    ) {
-
-        return `
-            🧬 <b>ARN</b> là axit ribonucleic.
-            ARN thường có cấu trúc một mạch.<br><br>
-
-            ARN có các loại base:
-            <b>A, U, G, C</b>.<br><br>
-
-            Điểm dễ nhớ:
-            <b>ARN dùng U thay cho T của ADN.</b>
-        `;
-
-    }
-
-
-    if (
-        q.includes("ti the") ||
-        q.includes("mitochondria")
-    ) {
-
-        return `
-            ⚡ <b>Ti thể</b> là bào quan tham gia
-            quá trình hô hấp tế bào và tạo năng lượng
-            cho hoạt động của tế bào.
-        `;
-
-    }
-
-
-    if (
-        q.includes("te bao")
-    ) {
-
-        return `
-            🔬 <b>Tế bào</b> là đơn vị cấu tạo và chức năng
-            cơ bản của cơ thể sống.<br><br>
-
-            Cơ thể đa bào được tạo thành từ rất nhiều tế bào
-            phối hợp với nhau.
-        `;
-
-    }
-
-
-    return `
-        🤔 Câu hỏi này hơi ngoài phần kiến thức
-        mình đang có trong trợ lý.<br><br>
-
-        Bạn thử hỏi mình về:
-        <br>🧬 ADN
-        <br>🧬 Gen
-        <br>🧬 ARN
-        <br>🌱 Quang hợp
-        <br>🔬 Nguyên phân
-        <br>🫀 Hệ tuần hoàn
-        <br>⚡ Ti thể
-    `;
-
-}
-
-
-/* =========================
-   ĐỌC CÂU TRẢ LỜI
-   ========================= */
-
-function speak(htmlText) {
-
-    if (!("speechSynthesis" in window)) {
-
-        return;
-    }
-
-
-    const temp =
-        document.createElement("div");
-
-    temp.innerHTML =
-        htmlText;
-
-
-    const text =
-        temp.textContent ||
-        temp.innerText ||
-        "";
-
-
-    speechSynthesis.cancel();
-
-
-    const utterance =
-        new SpeechSynthesisUtterance(text);
-
-
-    utterance.lang =
-        "vi-VN";
-
-    utterance.rate =
-        0.95;
-
-    utterance.pitch =
-        1;
-
-
-    speechSynthesis.speak(
-        utterance
+    await navigator.clipboard.writeText(
+      url
     );
 
+    showToast(
+      "📋",
+      "Đã sao chép link Quiz Sinh Học!"
+    );
+
+  }
+  catch (error) {
+
+    const input =
+      document.createElement(
+        "input"
+      );
+
+    input.value =
+      url;
+
+    document.body.appendChild(
+      input
+    );
+
+    input.select();
+
+    document.execCommand(
+      "copy"
+    );
+
+    document.body.removeChild(
+      input
+    );
+
+    showToast(
+      "📋",
+      "Đã sao chép link website!"
+    );
+
+  }
+
 }
 
 
-/* =========================
-   BẢO VỆ HTML
-   ========================= */
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+function showToast(
+  icon,
+  message
+) {
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+  const toastIcon =
+    document.getElementById(
+      "toastIcon"
+    );
+
+  const toastText =
+    document.getElementById(
+      "toastText"
+    );
+
+  if (!toast) return;
+
+  toastIcon.textContent =
+    icon;
+
+  toastText.textContent =
+    message;
+
+  toast.classList.add(
+    "show"
+  );
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+  window.toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove(
+        "show"
+      );
+
+    }, 2600);
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
 
 function escapeHTML(text) {
 
-    const div =
-        document.createElement("div");
-
-    div.textContent =
-        text;
-
-    return div.innerHTML;
+  return String(text)
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
+```
